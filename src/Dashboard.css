@@ -1,0 +1,33 @@
+body {
+    min-height: 100vh;
+    background-color: #4869B2;
+}
+
+h3 {
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+#logout-btn {
+    color: #FFFFFF;
+    background-color: #FF5E43;
+    border-style: none;
+    border-radius: 10px;
+    width: 147px;
+    height: 26px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    padding-top: 0px;
+}
+
+ul {
+    font-style: normal;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 30px;
+    float: left;
+    color: #000;
+}

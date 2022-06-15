@@ -1,9 +1,11 @@
 import {React, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import logo1 from '../images/app_icon.png';
 import '../forgetPassword.css';
 
 function ForgetPassword () {
+    let navigate = useNavigate();
+
     const [email, setEmail] = useState('');
 
     const onChange = e => {
@@ -30,8 +32,8 @@ function ForgetPassword () {
                             value={email}
                             onChange={onChange}
                         />
-                        <button id='reset-password'><a href="Login">Reset Your Password</a></button>
-                        <button id='return-to-login'><a href="Login">Go back</a></button>
+                        <button id='reset-password'>Reset Your Password</button>
+                        <button id='return-to-login' onClick = {() => {navigate("/Login")}}> Go back</button>
                     </form>
                    </main>
                 </div>

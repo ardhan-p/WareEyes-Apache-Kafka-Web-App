@@ -4,8 +4,10 @@ import { useRef, useState, useEffect, useContext, React } from "react";
 import logo1 from "../images/app_icon.png";
 import logo2 from "../images/login_img.png";
 // const LOGIN_URL = "/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    let navigate = useNavigate();
     // const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
@@ -105,7 +107,7 @@ const Login = () => {
                                 {/*put router link here*/}
                                 <a href="ForgetPassword">Forgot password?</a>
                             </p>
-                            <button id = "login-btn"> Login</button>
+                            <button id = "login-btn" onClick = {() => {navigate("/DashBoard")}}> Login</button>
                         </form>
                     </section>
                 </div>
