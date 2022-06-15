@@ -1,8 +1,8 @@
-import { useRef, useState, useEffect, useContext } from "react"
+import { useRef, useState, useEffect, useContext, React } from "react";
 // import AuthContext from "./context/AuthPrvoider";
 // import axios from "./api/axios";
-import logo1 from "./images/app_icon.png";
-import logo2 from "./images/login_img.png";
+import logo1 from "../images/app_icon.png";
+import logo2 from "../images/login_img.png";
 // const LOGIN_URL = "/auth";
 
 const Login = () => {
@@ -103,9 +103,9 @@ const Login = () => {
                             />
                             <p>
                                 {/*put router link here*/}
-                                <a href="#">Forgot password?</a>
+                                <a href="ForgetPassword">Forgot password?</a>
                             </p>
-                            <button>Login</button>
+                            <button id = "login-btn"> Login</button>
                         </form>
                     </section>
                 </div>
