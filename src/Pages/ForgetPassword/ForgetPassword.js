@@ -1,7 +1,7 @@
-import {React, useState } from 'react'
+import { React, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import logo1 from '../images/app_icon.png';
-import '../forgetPassword.css';
+import logo1 from '../../Images/app_icon.png';
+import './ForgetPassword.css';
 
 function ForgetPassword () {
     let navigate = useNavigate();
@@ -20,9 +20,9 @@ function ForgetPassword () {
         <div id = "forget-password-page"> 
             <div id = "forget-password-box">
                 <img src={logo1} alt="Application Logo" id="app-logo1"/>
-                   <p id="reset-password-title"> Reset Password </p>
-                   <main>
-                   <p id='email-address'> Email Address </p>
+                <p id="reset-password-title"> Reset Password </p>
+                <main>
+                    <p id='email-address'> Email Address </p>
                     <form onSubmit={onSubmit}>
                         <input 
                             type='email' 
@@ -35,9 +35,9 @@ function ForgetPassword () {
                         <button id='reset-password'>Reset Your Password</button>
                         <button id='return-to-login' onClick = {() => {navigate("/Login")}}> Go back</button>
                     </form>
-                   </main>
-                </div>
+                </main>
             </div>
+        </div>
     )
 }
 

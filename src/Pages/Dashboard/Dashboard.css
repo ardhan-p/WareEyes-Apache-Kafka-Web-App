@@ -1,6 +1,5 @@
 .main-dashboard {
-    min-height: 100vh;
-
+    min-height: auto;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;   
@@ -11,10 +10,10 @@ label.logo {
     color:#FFFFFF;
     font-size: 38px;
     background: #4869B2;  
-    height: 50px;
-    width: 100%;
+    /* height: 50px; */
+    /* width: 100%; */
     display: flex;
-    margin-top: 0px;
+    padding: 10px;
 }
 
 #logout-btn {
@@ -24,20 +23,20 @@ label.logo {
     border-radius: 5px;
     width: 147px;
     height: 26px;
-
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
     cursor: pointer;
-    position:absolute;
+    position: absolute;
     bottom: 10px;
     text-align: left;
     margin-left: 10px;
 }
+
 nav {
     background: #4869B280;
-    height: 93.5vh;
+    height: 90vh;
     width: 180px;
     padding-top: 10px;
 }
@@ -62,6 +61,10 @@ nav ul li a {
 
 .hover:hover, .hover:active{
     background: #4869B2CC;
+}
+
+#topbar {
+    color: #000000;
 }
 
 #time {
@@ -112,7 +115,7 @@ div.dashboard {
     margin: 0px;
 }
 
-#edit-dashboard {
+/* #edit-dashboard {
     float: right;
     color: #F4F4F4;
     background-color: #4869B2CC;
@@ -131,4 +134,4 @@ div.dashboard {
     font-size: 14px;
     cursor: pointer;
 }
-
+ */

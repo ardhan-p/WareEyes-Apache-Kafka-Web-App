@@ -1,0 +1,130 @@
+#login-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10rem;
+  }
+  
+  #left-box {
+    background-color: #71B6FA;
+    border-radius: 25px 0px 0px 25px;
+  }
+  
+  #right-box {
+    background-color: #FFF;
+    border-radius: 0px 25px 25px 0px;
+  }
+  
+  section {
+    width: 100%;
+    height: auto;
+    max-width: 420px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    float: left;
+    background-color: rgba(0,0,0,0.4);
+    padding-bottom: 50px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  
+  #forgetpassword {
+    font-size: 15px;
+    text-align: left;
+    color: #000;
+    float: right;
+    text-decoration: none;
+    font-family: 'Poppins';
+    opacity: 0.8;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  button,
+  textarea {
+    font-family: 'Poppins';
+    font-size: 14px;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    display: inline-block;
+  }
+  
+  label, h1 {
+    font-family: 'Poppins';
+    margin-top: 1rem;
+    color: #000;
+    text-align: left;
+    font-size: 20px;
+  }
+  
+  #login-title {
+    margin-bottom: 1rem;
+    font-size: 48px;
+    padding-bottom: 20px;
+  }
+  
+  h2 {
+    font-family: 'Poppins';
+    margin-bottom: 1rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 34px;
+    text-align: left;
+    color: #000;
+  }
+  
+  #app-logo {
+    width: 50%;
+    height: 50%;
+  }
+  
+  #login-btn {
+    margin-top: 2rem;
+    padding: 0.5rem;
+    background-color: #FF5E43;
+    color: #FFF;
+    cursor: pointer;
+  }
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  .offscreen {
+    position: absolute;
+    left: -9999px;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+  }
+  
+  .invalid {
+    color: red;
+    margin-left: 0.25rem;
+  }
+  
+  .errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .line {
+    display: inline-block;
+  }

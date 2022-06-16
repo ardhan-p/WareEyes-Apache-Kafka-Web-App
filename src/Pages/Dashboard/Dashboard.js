@@ -1,5 +1,5 @@
 import React from 'react'
-import "../Dashboard.css"
+import "./Dashboard.css"
 import { getCustomDayNameFull, getCustomDayNameShort, getCustomMonthNameFull, getCustomMonthNameShort,
   getCustomDate, getCustomHour, getCustomMinute, getCustomSecond, getCustomAmPm,
   getCustomFullDateAndTimeWithAmPm, getCustomFullDateAndTimeWithAmPmIncludingSeconds
@@ -12,19 +12,20 @@ import { BsBell } from 'react-icons/bs';
 import { VscGear } from 'react-icons/vsc';
 import { FaUserCircle } from 'react-icons/fa';
 
-
-function DashBoard() {
+function Dashboard() {
   const timestampLower = getCustomFullDateAndTimeWithAmPm();
 
   let navigate = useNavigate();
   return (
     <div className='main-dashboard'>
-      <label className="logo">WareEyes</label>
-      <p id="time">{timestampLower}</p>
-      <p id="date"></p>
-      <p id="profile"><FaUserCircle /></p>
-      <p id="user">user</p>
-        <nav>
+      <div id='topbar'>
+        <label className="logo">WareEyes</label>
+        <p id="time">{timestampLower}</p>
+        <p id="date"></p>
+        <p id="profile"><FaUserCircle /></p>
+        <p id="user">user</p>
+      </div>
+      <nav id='sidebar'>
           <ul>
             <li><a class="hover" href="DashBoard"><MdHouse /> &nbsp;&nbsp;&nbsp;&nbsp; Dashboard</a></li>
             <li><a class="hover" href="MonitorData"><GoGraph /> &nbsp;&nbsp;&nbsp;&nbsp; Monitor data</a></li>
@@ -33,12 +34,12 @@ function DashBoard() {
           </ul>
           <button id= 'logout-btn' onClick = {() => {navigate("/Login")}}><FiLogOut />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Logout</button>
         </nav>
-        <div className='dashboard'>
+        {/* <div className='dashboard'> */}
           {/* <p id="welcome-user"> Welcome user!</p> */}
-          <button id= 'edit-dashboard' onClick = {() => {navigate("/dashboard")}}>Edit dashboard</button>
-        </div>
+          {/* <button id= 'edit-dashboard' onClick = {() => {navigate("/dashboard")}}>Edit dashboard</button> */}
+        {/* </div> */}
     </div>
   )
 }
 
-export default DashBoard
+export default Dashboard
