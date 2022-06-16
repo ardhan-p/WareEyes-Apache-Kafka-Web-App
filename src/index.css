@@ -16,11 +16,17 @@ code {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 html {
-  font-family: 'Nunito', sans-serif;
-  font-size: 22px;
+  font-family: 'Poppins';
   color: #fff;
 }
 
@@ -75,14 +81,13 @@ form {
   justify-content: space-evenly;
 }
 
-a, a:visited {
+#forgetpassword {
   font-size: 15px;
   text-align: left;
   color: #000;
   float: right;
   text-decoration: none;
   font-family: 'Poppins';
-  padding-top: 10px;
   opacity: 0.8;
 }
 

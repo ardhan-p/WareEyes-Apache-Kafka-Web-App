@@ -1,36 +1,42 @@
 import React from 'react'
 import "../Dashboard.css"
+import { getCustomDayNameFull, getCustomDayNameShort, getCustomMonthNameFull, getCustomMonthNameShort,
+  getCustomDate, getCustomHour, getCustomMinute, getCustomSecond, getCustomAmPm,
+  getCustomFullDateAndTimeWithAmPm, getCustomFullDateAndTimeWithAmPmIncludingSeconds
+} from "@hirishu10/simple-date-time";
 import { useNavigate } from "react-router-dom";
-import { MdLogout } from 'react-icons/md';
-var timeDisplay = document.getElementById("time");
-var dateDisplay = document.getElementById("date");
+import { MdHouse } from 'react-icons/md';
+import { FiLogOut } from 'react-icons/fi';
+import { GoGraph } from 'react-icons/go';
+import { BsBell } from 'react-icons/bs';
+import { VscGear } from 'react-icons/vsc';
+import { FaUserCircle } from 'react-icons/fa';
 
-function refreshTime() { 
-  var dateString = new Date().toLocaleString("en-US", {timeZone: "Singapore"});
-  var formattedString = dateString.replace(", ", " - ");
-  var dt=dateString.toDateString();
-  timeDisplay.innerHTML = formattedString;
-  dateDisplay.innerHTML = dt;
-}
-
-setInterval(refreshTime, 1000);
 
 function DashBoard() {
+  const timestampLower = getCustomFullDateAndTimeWithAmPm();
+
   let navigate = useNavigate();
   return (
-    <div id='main-dashboard'>
-      <h3>WareEyes</h3> <br></br>
-      <p id="time"></p>
+    <div className='main-dashboard'>
+      <label className="logo">WareEyes</label>
+      <p id="time">{timestampLower}</p>
       <p id="date"></p>
-      <div>
-      <ul>
-        <li><a href="DashBoard">Dashboard</a></li>
-        <li><a href="DashBoard">Monitor data</a></li>
-        <li><a href="DashBoard">Notifications</a></li>
-        <li><a href="DashBoard">Settings</a></li>
-      </ul>
-        <button id= 'logout-btn' onClick = {() => {navigate("/Login")}}><MdLogout /> Logout</button>
-      </div>
+      <p id="profile"><FaUserCircle /></p>
+      <p id="user">user</p>
+        <nav>
+          <ul>
+            <li><a class="hover" href="DashBoard"><MdHouse /> &nbsp;&nbsp;&nbsp;&nbsp; Dashboard</a></li>
+            <li><a class="hover" href="MonitorData"><GoGraph /> &nbsp;&nbsp;&nbsp;&nbsp; Monitor data</a></li>
+            <li><a class="hover" href="Notifications"><BsBell /> &nbsp;&nbsp;&nbsp;&nbsp; Notifications</a></li>
+            <li><a class="hover" href="Settings"><VscGear /> &nbsp;&nbsp;&nbsp;&nbsp; Settings</a></li>
+          </ul>
+          <button id= 'logout-btn' onClick = {() => {navigate("/Login")}}><FiLogOut />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Logout</button>
+        </nav>
+        <div className='dashboard'>
+          {/* <p id="welcome-user"> Welcome user!</p> */}
+          <button id= 'edit-dashboard' onClick = {() => {navigate("/dashboard")}}>Edit dashboard</button>
+        </div>
     </div>
   )
 }

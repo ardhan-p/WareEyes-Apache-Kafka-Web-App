@@ -105,7 +105,7 @@ const Login = () => {
                             />
                             <p>
                                 {/*put router link here*/}
-                                <a href="ForgetPassword">Forgot password?</a>
+                                <a id="forgetpassword" href="ForgetPassword">Forgot password?</a>
                             </p>
                             <button id = "login-btn" onClick = {() => {navigate("/DashBoard")}}> Login</button>
                         </form>
