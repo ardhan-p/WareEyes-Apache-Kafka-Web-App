@@ -1,130 +1,128 @@
-#login-box {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 10rem;
-  }
-  
-  #left-box {
-    background-color: #71B6FA;
-    border-radius: 25px 0px 0px 25px;
-  }
-  
-  #right-box {
-    background-color: #FFF;
-    border-radius: 0px 25px 25px 0px;
-  }
-  
-  section {
-    width: 100%;
-    height: auto;
-    max-width: 420px;
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 1rem;
-    float: left;
-    background-color: rgba(0,0,0,0.4);
-    padding-bottom: 50px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-  }
-  
-  #forgetpassword {
-    font-size: 15px;
-    text-align: left;
-    color: #000;
-    float: right;
-    text-decoration: none;
-    font-family: 'Poppins';
-    opacity: 0.8;
-  }
-  
-  input[type="text"],
-  input[type="password"],
-  button,
-  textarea {
-    font-family: 'Poppins';
-    font-size: 14px;
-    padding: 0.25rem;
-    border-radius: 0.5rem;
-    display: inline-block;
-  }
-  
-  label, h1 {
-    font-family: 'Poppins';
-    margin-top: 1rem;
-    color: #000;
-    text-align: left;
-    font-size: 20px;
-  }
-  
-  #login-title {
-    margin-bottom: 1rem;
-    font-size: 48px;
-    padding-bottom: 20px;
-  }
-  
-  h2 {
-    font-family: 'Poppins';
-    margin-bottom: 1rem;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 34px;
-    text-align: left;
-    color: #000;
-  }
-  
-  #app-logo {
-    width: 50%;
-    height: 50%;
-  }
-  
-  #login-btn {
-    margin-top: 2rem;
-    padding: 0.5rem;
-    background-color: #FF5E43;
-    color: #FFF;
-    cursor: pointer;
-  }
-  
-  /* Add a hover effect for buttons */
-  button:hover {
-    opacity: 0.8;
-  }
-  
-  .offscreen {
-    position: absolute;
-    left: -9999px;
-  }
-  
-  .hide {
-    display: none;
-  }
-  
-  .valid {
-    color: limegreen;
-    margin-left: 0.25rem;
-  }
-  
-  .invalid {
-    color: red;
-    margin-left: 0.25rem;
-  }
-  
-  .errmsg {
-    background-color: lightpink;
-    color: firebrick;
-    font-weight: bold;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .line {
-    display: inline-block;
-  }
+.login-container {
+  display: flex;
+  width: 100%;
+  height: auto;
+  max-width: 640px;
+  min-height: 430px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius:25px;
+}
+
+#left-box {
+  background-color: #71B6FA;
+  border-radius: 25px 0px 0px 25px;
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+}
+
+#right-box {
+  background-color: #FFF;
+  border-radius: 0px 25px 25px 0px;
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+}
+
+#app-logo {
+  width: 40%;
+  height: 7%;
+  margin-top: 5%;
+  margin-left: 7%;
+}
+
+#example-img {
+  width: 90%;
+  height: 60%;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  margin: auto;
+}
+
+#login-display-text {
+  font-family: 'Poppins';
+  font-style: normal;
+  margin-bottom: 1rem;
+  padding-left: 45px;
+  font-size: 22px;
+  line-height: 95%;
+  text-align: left;
+  letter-spacing: -0.045em;
+  color: #000;
+  max-width: 295px;
+}
+
+#login-title {
+  font-family: 'Poppins';
+  font-style: normal;
+  margin-bottom: 1rem;
+  font-size: 38px;
+  color:#000;
+  letter-spacing: -0.045em;
+  line-height: 95%;
+  padding: 10%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+}
+
+#password, #username,
+textarea {
+  font-family: 'Poppins';
+  font-size: 14px;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+  max-width:250px;
+  margin-left: 10%;
+  border: 1px solid #002F94;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 11px;
+}
+
+#user-pwd {
+  color:#000;
+  padding-left: 11%; 
+  padding-top: 3%;
+}
+
+#login-btn {
+  margin-top: 2rem;
+  background-color: #FF5E43;
+  color: #FFF;
+  cursor: pointer;
+  max-width: 250px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 11px;
+  border-style: none;
+  padding: 0.5rem;
+  margin-left: 10%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+
+#forgetpassword {
+  font-size: 10px;
+  font-weight: 300;
+  color: #555555;
+  float: right;
+  font-family: 'Poppins';
+  opacity: 0.8;
+  padding-right: 12%;
+}
+
+.eye-main {
+  position: absolute;
+  color: #000;
+  margin-left: 40%;
+  margin-top: 3.5%;
+}

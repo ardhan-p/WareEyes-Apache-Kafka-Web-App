@@ -7,7 +7,23 @@ import logo2 from "../../Images/login_img.png";
 // const LOGIN_URL = "/auth";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+function togglePassword () {
+    var x = document.getElementById('password');
+    var y = document.getElementById('eye-open');
+    var z = document.getElementById('eye-close');
+
+    if(x.type === 'password') {
+        x.type = "text";
+        y.style.display = "block";
+        z.style.display = "none";
+    } else {
+        x.type = "password";
+        y.style.display = "none";
+        z.style.display = "block";
+    }
+}
+
+function Login() {
     let navigate = useNavigate();
     // const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
@@ -62,20 +78,22 @@ const Login = () => {
     }
 
     return (
-        <div id="login-box">
+        <div className="login-container">
             <section id="left-box">
                 <img src={logo1} alt="Application Logo" id="app-logo"/>
-                <img src={logo2} alt="Example Image"id="example-img"/>
-                <h2>Monitor your business with our software.</h2>
-                <h2>Powered by Apache Kafka.</h2>
+                <img src={logo2} alt="Example Img"id="example-img"/>
+                <h2 id="login-display-text">Monitor your business with our software.</h2>
+                <h2 id="login-display-text">Powered by Apache Kafka.</h2>
             </section>
 
             <section id="right-box">
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                 <h1 id="login-title">Log in to WareEyes</h1>
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username</label>
-                    <input type="text" 
+                    <label id='user-pwd' htmlFor="username">Username</label>
+                    <input 
+                        autocomplete="off"
+                        type="text" 
                         id="username"
                         placeholder="Enter username..."
                         ref={userRef}
@@ -84,8 +102,9 @@ const Login = () => {
                         value={user}
                         required
                     />
-                    <label htmlFor="password">Password</label>
+                    <label id='user-pwd' htmlFor="password">Password</label>
                     <input
+                        autocomplete="off"
                         type="password"
                         id="password"
                         placeholder="Enter password..."
@@ -93,11 +112,14 @@ const Login = () => {
                         value={pwd}
                         required
                     />
+                    <span className = "eye-main" onClick = {togglePassword}>
+                        <i id="eye-open" className="fa fa-eye"></i>
+                        <i id="eye-close" className="fa fa-eye-slash" ></i>
+                    </span>
                     <p>
-                        {/*put router link here*/}
                         <a id="forgetpassword" href="ForgetPassword">Forgot password?</a>
                     </p>
-                    <button id = "login-btn" onClick = {() => {navigate("/DashBoard")}}> Login</button>
+                    <button id = "login-btn" onClick = {() => {navigate("/DashBoard")}}> Log in</button>
                 </form>
             </section>
         </div>

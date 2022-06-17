@@ -27,12 +27,12 @@ function ForgetPassword () {
                         <input 
                             type='email' 
                             className='emailInput' 
-                            placeholder='Enter your email'
+                            placeholder='Enter your email...'
                             id='email'
                             value={email}
-                            onChange={onChange}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
-                        <button id='reset-password'>Reset Your Password</button>
+                        <button id='reset-password' onClick = {() => {navigate("/ResetPassword")}}>Reset Your Password</button>
                         <button id='return-to-login' onClick = {() => {navigate("/Login")}}> Go back</button>
                     </form>
                 </main>
