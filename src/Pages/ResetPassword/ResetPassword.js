@@ -4,7 +4,7 @@ import { Formik, useFormik } from 'formik'
 import * as Yup from 'yup'
 import logo1 from '../../Images/app_icon.png';
 import './ResetPassword.css';
-//import { HiOutlineLockClosed } from 'react-icons/hi'
+import { HiOutlineLockClosed } from 'react-icons/hi'
 import axios from 'axios'
 
 function togglePassword() {
@@ -101,8 +101,8 @@ function ResetPassword() {
             <div id="reset-password-container">
                 <img src={logo1} alt="Application Logo" id="app-logo1" />
                 <label id="create-new-password-title"> Create New Password </label>
-                <main>
-                    <label id='password-text' htmlFor="password"> Password </label>
+                <div>
+                    <label id='new-password-text' htmlFor="password"> Password </label>
                     <Formik>
                         <form onSubmit={handleSubmit}>
                             {/* <label id='lock'><HiOutlineLockClosed /></label> */}
@@ -116,10 +116,11 @@ function ResetPassword() {
                                 onBlur={handleBlur}
                                 autoComplete="off"
                                 className={errors.newPassword && touched.newPassword && "error"}
+                                icon={<HiOutlineLockClosed />}
                             />
                             {errors.newPassword && touched.newPassword && (
                                 console.log(errors.newPassword),
-                                <div className="input-feedback">{errors.newPassword}</div>
+                                <div className="newPassword-error">{errors.newPassword}</div>
                             )}
                             <span className="eye" onClick={togglePassword}>
                                 <i id="eye-open" className="fa fa-eye"></i>
@@ -139,10 +140,10 @@ function ResetPassword() {
                             />
                             {errors.confirmPassword && touched.confirmPassword && (
                                 console.log(errors.confirmPassword),
-                                <div className="input-feedback">{errors.confirmPassword}</div>
+                                <div className="input-confirmPassword-error">{errors.confirmPassword}</div>
                             )}
-                            <span 
-                                className="eye1" 
+                            <span
+                                className="eye1"
                                 onClick={toggleConfirmPassword}
                             >
                                 <i id="eye-open1" className="fa fa-eye"></i>
@@ -152,16 +153,16 @@ function ResetPassword() {
                                 id='confirm-btn'
                                 type='submit'
                                 disabled={isSubmitting}
-                            > {isSubmitting ? "Loading" : "Confirm"} 
+                            > {isSubmitting ? "Loading" : "Confirm"}
                             </button>
-                            <button 
-                                id='return-to-login' 
+                            <button
+                                id='return-to-login'
                                 onClick={() => { navigate("/Login") }}
-                            > Go back 
+                            > Go back
                             </button>
                         </form>
                     </Formik>
-                </main>
+                </div>
             </div>
         </div>
     )

@@ -5,7 +5,7 @@ import { Formik, useFormik } from 'formik';
 import * as Yup from 'yup';
 import './ForgetPassword.css';
 
-function ForgetPassword(){
+function ForgetPassword() {
     const {
         values,
         handleSubmit,
@@ -17,7 +17,7 @@ function ForgetPassword(){
         isSubmitting
     } = useFormik({
         initialValues: {
-            email: "", 
+            email: "",
         },
 
         validationSchema: Yup.object().shape({
@@ -59,14 +59,14 @@ function ForgetPassword(){
 
     return (
         <div id="forget-password-page">
-                     <div id="forget-password-container">
-                         <img src={logo1} alt="Application Logo" id="app-logo1" />
-                         <label id="reset-password-title"> Reset Password </label>
-                         <main>
-                             <label id='email-address'> Email Address </label>
-                             <Formik>
-                             <form onSubmit={handleSubmit}>
-                             <input
+            <div id="forget-password-container">
+                <img src={logo1} alt="Application Logo" id="app-logo1" />
+                <label id="reset-password-title"> Reset Password </label>
+                <main>
+                    <label id='email-address'> Email Address </label>
+                    <Formik>
+                        <form onSubmit={handleSubmit}>
+                            <input
                                 name="email"
                                 type="email"
                                 id="email"
@@ -77,16 +77,26 @@ function ForgetPassword(){
                                 autoComplete="off"
                                 className={errors.email && touched.email && "error"}
                             />
-                                 {errors.email && touched.email && (
-                                     <div className="input-error">{errors.email}</div>
-                                 )}
-                                 <button id='reset-password' type="submit" disabled={isSubmitting}>{isSubmitting ? "Loading" : "Reset Your Password"}</button>
-                                 <button id='return-to-login' type="button" > Go back</button>
-                             </form>
-                             </Formik>
-                         </main>
-                     </div>
-                 </div>
+                            {errors.email && touched.email && (
+                                <div className="input-error">{errors.email}</div>
+                            )}
+                            <button
+                                id='reset-password'
+                                type="submit"
+                                disabled={isSubmitting}>
+                                {isSubmitting ? "Loading" : "Reset Your Password"}
+                            </button>
+                            <button
+                                id='return-to-login'
+                                type="button"
+                                onClick={() => { navigate("/Login") }}
+                            >
+                                Go back</button>
+                        </form>
+                    </Formik>
+                </main>
+            </div>
+        </div>
     )
 }
 
