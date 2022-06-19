@@ -27,10 +27,10 @@ function Dashboard() {
       </div>
       <nav id='sidebar'>
           <ul>
-            <li><a class="hover" href="DashBoard"><MdHouse /> &nbsp;&nbsp;&nbsp;&nbsp; Dashboard</a></li>
-            <li><a class="hover" href="MonitorData"><GoGraph /> &nbsp;&nbsp;&nbsp;&nbsp; Monitor data</a></li>
-            <li><a class="hover" href="Notifications"><BsBell /> &nbsp;&nbsp;&nbsp;&nbsp; Notifications</a></li>
-            <li><a class="hover" href="Settings"><VscGear /> &nbsp;&nbsp;&nbsp;&nbsp; Settings</a></li>
+            <li><a className="hover" href="DashBoard"><MdHouse /> &nbsp;&nbsp;&nbsp;&nbsp; Dashboard</a></li>
+            <li><a className="hover" href="MonitorData"><GoGraph /> &nbsp;&nbsp;&nbsp;&nbsp; Monitor data</a></li>
+            <li><a className="hover" href="Notifications"><BsBell /> &nbsp;&nbsp;&nbsp;&nbsp; Notifications</a></li>
+            <li><a className="hover" href="Settings"><VscGear /> &nbsp;&nbsp;&nbsp;&nbsp; Settings</a></li>
           </ul>
           <button id= 'logout-btn' onClick = {() => {navigate("/Login")}}><FiLogOut />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Logout</button>
         </nav>

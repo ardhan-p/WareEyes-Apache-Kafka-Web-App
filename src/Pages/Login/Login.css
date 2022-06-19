@@ -8,7 +8,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius:25px;
+  border-radius: 25px;
 }
 
 #left-box {
@@ -28,15 +28,15 @@
 }
 
 #app-logo {
-  width: 40%;
-  height: 7%;
+  max-width: 40%;
+  max-height: 7%;
   margin-top: 5%;
   margin-left: 7%;
 }
 
 #example-img {
-  width: 90%;
-  height: 60%;
+  max-width: 90%;
+  max-height: 60%;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   margin: auto;
 }
@@ -59,7 +59,7 @@
   font-style: normal;
   margin-bottom: 1rem;
   font-size: 38px;
-  color:#000;
+  color: #000;
   letter-spacing: -0.045em;
   line-height: 95%;
   padding: 10%;
@@ -72,23 +72,25 @@ form {
 
 }
 
-#password, #username,
+#password,
+#username,
 textarea {
   font-family: 'Poppins';
   font-size: 14px;
   padding: 0.4rem;
   border-radius: 0.5rem;
   display: inline-block;
-  max-width:250px;
+  max-width: 250px;
   margin-left: 10%;
+  margin-bottom: 5%;
   border: 1px solid #002F94;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 11px;
 }
 
 #user-pwd {
-  color:#000;
-  padding-left: 11%; 
+  color: #000;
+  padding-left: 11%;
   padding-top: 3%;
 }
 
@@ -125,4 +127,12 @@ button:hover {
   color: #000;
   margin-left: 40%;
   margin-top: 3.5%;
+}
+
+.input-feedback {
+  color: #FF0000;
+  margin-left: 13%;
+  font-style: italic;
+  font-size: 12px;
+  margin-top: -5%;
 }
