@@ -1,0 +1,24 @@
+.navbar {
+    height: 80px;
+    background-color: #111;
+    background: #4869B2;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding-right: 2%;
+    border-bottom: 0.5px solid black;
+}
+
+.warpper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 15%;
+    color: #FFF;
+}
+
+.profile {
+    display: block;
+    width: 15%;
+    font-size: 14px;
+}

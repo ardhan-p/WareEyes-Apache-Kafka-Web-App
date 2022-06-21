@@ -1,118 +1,34 @@
-.main-dashboard {
+/* .main-dashboard {
     min-height: auto;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;   
     background-color: #FFFFFF;
-}
+} */
 
-label.logo {
-    color:#FFFFFF;
-    font-size: 38px;
-    background: #4869B2;  
-    /* height: 50px; */
-    /* width: 100%; */
+.main-dashboard {
     display: flex;
-    padding: 10px;
+    background-color: #FFFFFF;
 }
 
-#logout-btn {
-    color: #FFFFFF;
-    background-color: #FF5E43;
-    border-style: none;
-    border-radius: 5px;
-    width: 147px;
-    height: 26px;
-    font-family: 'Poppins';
-    font-style: normal;
+.dashboard-container {
+    flex: 7;
+}
+
+.welcome-msg {
+    font-size: 20px;
+    padding: 20px;
     font-weight: 500;
-    font-size: 18px;
-    cursor: pointer;
-    position: absolute;
-    bottom: 10px;
-    text-align: left;
-    margin-left: 10px;
+    font-size: 38px;
+    line-height: 57px;
 }
 
-nav {
-    background: #4869B280;
-    height: 90vh;
-    width: 180px;
-    padding-top: 10px;
-}
-
-nav ul {
-    font-style: normal;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 3em;
-}
-
-nav ul li {
-    display: block;
-    padding: 3px;
-}
-
-nav ul li a {
-    color: #000000;  
-    display: block;
-    padding-left: 15px;
-}
-
-.hover:hover, .hover:active{
-    background: #4869B2CC;
-}
-
-#topbar {
-    color: #000000;
-}
-
-#time {
-    float: right;
-    margin-right: 60px;
-    margin-top: -40px;
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 26px;
-    color:#FFFFFF;
-}
-
-#date {
-    float: right;
-    margin-right: 70px;
-    margin-top: -40px;
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20x;
-    color:#FFFFFF;
-}
-
-#user {
-    float: right;
-    margin-right: 20px;
-    margin-top: -40px;
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 48px;
-    color:#FFFFFF;
-
-}
-
-#profile {
-    float: right;
-    margin-right: 24px;
-    margin-top: -40px;
-    color: #FFFFFF;
-}
-
-div.dashboard {
-    margin: 0px;
+.charts {
+    display:flex;
+    margin-top: 100px;
+    padding: 20px;
+    gap: 20px;
+    height: 240px;
 }
 
 /* #edit-dashboard {

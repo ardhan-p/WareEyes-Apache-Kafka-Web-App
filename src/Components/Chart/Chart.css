@@ -1,0 +1,11 @@
+.chart-background {
+    border-radius: 30px;
+    -webkit-box-shadow: 2px -5px 18px -8px #000000; 
+    box-shadow: 2px 5px 18px -8px #000000;
+    padding: 10px;
+}
+
+.chart {
+    min-width: 600px;
+    min-height: 300px;
+}

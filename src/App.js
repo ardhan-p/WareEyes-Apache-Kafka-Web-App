@@ -8,6 +8,7 @@ import Dashboard from './Pages/Dashboard/Dashboard';
 import MonitorData from './Pages/MonitorData/MonitorData';
 import Notifications from './Pages/Notifications/Notifications';
 import Settings from './Pages/Settings/Settings';
+import React from 'react'
 
 function App() {
   return (

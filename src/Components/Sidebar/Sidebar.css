@@ -1,0 +1,86 @@
+.sidebar {
+    background-color: #4869B280;
+    flex: 1;
+    min-height: 100vh;
+}
+
+.top {
+    height: 80px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4869B2;
+    border-bottom: 0.1px solid black;
+}
+
+.logo {
+    color:#FFFFFF;
+    font-size: 38px;
+}
+
+a {
+    color: inherit;
+}
+
+.icon {
+    margin-left:10px;
+}
+
+.counter {
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    color: #FFFFFF;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    font-size: 10px;
+    font-weight: bold;
+    position: absolute;
+    left: 24px;
+    top: 209px;
+}
+
+li {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+}
+
+li:hover, li:active{
+    background: #4869B2CC;
+}
+
+.title {
+    padding-left: 20%;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 10px;
+}
+
+.logout-btn {
+    color: #FFFFFF;
+    background-color: #FF5E43;
+    border-style: none;
+    border-radius: 5px;
+    width: 147px;
+    height: 26px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 27%;
+}
+
+.logout-icon {
+    margin-right: 20px;
+    margin-left: 10px;
+}

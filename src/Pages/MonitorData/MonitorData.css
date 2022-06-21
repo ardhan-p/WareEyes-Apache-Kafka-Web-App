@@ -1,0 +1,8 @@
+.monitor-data {
+    background-color: #FFF;
+    display:flex;
+}
+
+.monitor-container {
+    flex: 7;
+}
