@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
-import Sidebar from '../../Components/Sidebar/Sidebar'
-import Navbar from '../../Components/Navbar/Navbar'
-import Widget from '../../Components/Widget/Widget'
-import Chart from '../../Components/Chart/Chart'
+import React, { useState } from "react";
+import Sidebar from "../../Components/Sidebar/Sidebar";
+import Navbar from "../../Components/Navbar/Navbar";
+import AlertNotifcation from "../../Components/Widget/AlertNotifcation";
+import Chart from "../../Components/Chart/Chart";
 import { Topic1, Topic2, Topic3, Topic4 } from "../../Components/Data/Data";
-import './Dashboard.css'
+import "./Dashboard.css";
 
 function Dashboard() {
   const [topic1, topic2, setUserData] = useState({
-    labels: Topic1.map((data) => data.month,
-            ),
+    labels: Topic1.map((data) => data.month),
     datasets: [
       {
         label: "Data 1",
@@ -38,16 +37,17 @@ function Dashboard() {
         borderWidth: 2,
       },
     ],
-    options:{
+    options: {
       responsive: true,
       scales: {
-          y: {
-              beginAtZero: true,
-          }
-      }} 
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
   });
 
-  const [ topic3 ] = useState({
+  const [topic3] = useState({
     labels: Topic3.map((data) => data.month),
     datasets: [
       {
@@ -66,7 +66,7 @@ function Dashboard() {
     ],
   });
 
-  const [ topic4 ] = useState({
+  const [topic4] = useState({
     labels: Topic4.map((data) => data.year),
     datasets: [
       {
@@ -85,7 +85,7 @@ function Dashboard() {
     ],
   });
 
-  const [ topic5 ] = useState({
+  const [topic5] = useState({
     labels: Topic4.map((data) => data.year),
     datasets: [
       {
@@ -109,26 +109,38 @@ function Dashboard() {
       <Sidebar />
       <div className="dashboard-container">
         <Navbar />
-        <div className="welcome-msg">Welcome user!</div>
+        <div className="welcome-msg">
+          Welcome user!
+          <div className="edit-dashboard">
+            <button className="edit-dashboard-btn"> Edit dashboard </button>
+          </div>
+        </div>
+        <div className="notification-dashboard">
+          <AlertNotifcation />
+          <AlertNotifcation />
+        </div>
         <div className="charts">
           <div className="charts-col1">
-          <Chart chartData={topic1} />
+            <Chart chartData={topic1} />
           </div>
           <div className="charts-col2">
-          <Chart chartData={topic3} />
+            <Chart chartData={topic3} />
           </div>
         </div>
         <div className="charts">
           <div className="charts-col1">
-          <Chart chartData={topic4} />
+            <Chart chartData={topic4} />
           </div>
           <div className="charts-col2">
-          <Chart chartData={topic5} />
+            <Chart chartData={topic5} />
+          </div>
+          <div className="dashboard-right">
+            <div className="notification">{/* <Widget /> */}</div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

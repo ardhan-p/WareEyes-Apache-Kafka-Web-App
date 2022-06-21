@@ -1,0 +1,8 @@
+.notification-log {
+    background-color: #FFF;
+    display:flex;
+}
+
+.notification-container {
+    flex: 7;
+}

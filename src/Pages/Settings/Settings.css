@@ -1,0 +1,8 @@
+.setting-page {
+    background-color: #FFF;
+    display:flex;
+}
+
+.setting-container {
+    flex: 7;
+}

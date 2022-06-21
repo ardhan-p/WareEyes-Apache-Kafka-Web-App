@@ -1,0 +1,37 @@
+.alertnotifcation {
+    border: 1px solid #FF6A6A;
+    width: 763px;
+    height: 50px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+
+}
+
+.alert-icon {
+    border-right: 1px solid #FF6A6A;
+    height: 48px;
+    background-color: #FF6A6A;
+    ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    color: #FFFFFF;
+}
+
+.alert-message {
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.cancel-icon {
+    margin-left: 10%;
+    color: #D9D9D9;
+}
+
+.alert-time {
+    padding-left: 20%;
+}
