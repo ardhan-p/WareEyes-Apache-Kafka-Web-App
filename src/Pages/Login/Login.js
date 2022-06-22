@@ -5,6 +5,7 @@ import logo1 from "../../Images/app_icon.png";
 import logo2 from "../../Images/login_img.png";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function togglePassword() {
   var x = document.getElementById("password");
@@ -55,7 +56,30 @@ function Login() {
       }, 2000);
       // alert('SUCCESS!! :-)\n\n' + JSON.stringify(values, null, 2));
 
-      navigate("/DashBoard");
+      // navigate("/DashBoard");
+
+      const data = {
+        email: values.email,
+        password: values.password
+    };
+
+
+    axios.post('http://localhost:8080/api/v1/login/validate', data, {
+      auth: {
+        username: 'user',
+        password: 'password'
+      },
+    }).then(
+        res => {
+            console.log(res)
+            navigate("/DashBoard");
+        }
+    ).catch(
+        err => {
+            alert("Login failed!")
+            console.log(err);
+        }
+    )
 
       // const data = {
       //     newPassword: values.newPassword,
