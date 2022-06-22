@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import logo1 from "../../Images/app_icon.png";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 import "./ForgetPassword.css";
 
 function ForgetPassword() {
@@ -33,22 +34,27 @@ function ForgetPassword() {
       }, 2000);
       // alert('SUCCESS!! :-)\n\n' + JSON.stringify(values, null, 1));
 
-      navigate("/ResetPassword");
+      //navigate("/ResetPassword");
 
-      // const data = {
-      //     newPassword: values.newPassword,
-      //     confirmPassword: values.confirmPassword
-      // };
+      const data = {
+          email: values.email
+      };
 
-      // axios.post('resetpassword', data).then(
-      //     res => {
-      //         console.log(res)
-      //     }
-      // ).catch(
-      //     err => {
-      //         console.log(err);
-      //     }
-      // )
+      axios
+        .post("http://localhost:8080/api/v1/login/validateEmail", data, {
+          auth: {
+            username: "user",
+            password: "password",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          navigate("/ResetPassword");
+        })
+        .catch((err) => {
+          alert("Login failed!");
+          console.log(err);
+        });
     },
   });
 

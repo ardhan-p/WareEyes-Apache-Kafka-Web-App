@@ -60,41 +60,24 @@ function Login() {
 
       const data = {
         email: values.email,
-        password: values.password
-    };
+        password: values.password,
+      };
 
-
-    axios.post('http://localhost:8080/api/v1/login/validate', data, {
-      auth: {
-        username: 'user',
-        password: 'password'
-      },
-    }).then(
-        res => {
-            console.log(res)
-            navigate("/DashBoard");
-        }
-    ).catch(
-        err => {
-            alert("Login failed!")
-            console.log(err);
-        }
-    )
-
-      // const data = {
-      //     newPassword: values.newPassword,
-      //     confirmPassword: values.confirmPassword
-      // };
-
-      // axios.post('resetpassword', data).then(
-      //     res => {
-      //         console.log(res)
-      //     }
-      // ).catch(
-      //     err => {
-      //         console.log(err);
-      //     }
-      // )
+      axios
+        .post("http://localhost:8080/api/v1/login/validateLogin", data, {
+          auth: {
+            username: "user",
+            password: "password",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          navigate("/DashBoard");
+        })
+        .catch((err) => {
+          alert("Login failed!");
+          console.log(err);
+        });
     },
   });
 

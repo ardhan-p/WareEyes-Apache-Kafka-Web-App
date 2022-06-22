@@ -14,7 +14,7 @@ export default function AlertNotifcation() {
       <div className="alert-message">
         Dataset 1 passed threshold “50”
         <div className="alert-time">{timestampLower}</div>
-        <CancelOutlinedIcon className="cancel-icon" />
+        <button type="button" className="cancel-icon"><CancelOutlinedIcon /></ button>
       </div>
     </div>
   );

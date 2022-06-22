@@ -12,7 +12,6 @@
     border-right: 1px solid #FF6A6A;
     height: 48px;
     background-color: #FF6A6A;
-    ;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,17 +20,22 @@
 }
 
 .alert-message {
-    padding-left: 20px;
+    padding-left: 3%;
     display: flex;
     align-items: center;
     width: 100%;
 }
 
 .cancel-icon {
-    margin-left: 10%;
+    margin-left: 5%;
     color: #D9D9D9;
+    border-style: none;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .alert-time {
-    padding-left: 20%;
+    padding-left: 28%;
+    font-size: 12px;
+    width:55%;
 }

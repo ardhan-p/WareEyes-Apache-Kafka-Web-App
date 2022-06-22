@@ -13,12 +13,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 15%;
+    width: 20%;
     color: #FFF;
 }
 
 .profile {
     display: block;
-    width: 15%;
+    width: 10%;
     font-size: 14px;
 }
