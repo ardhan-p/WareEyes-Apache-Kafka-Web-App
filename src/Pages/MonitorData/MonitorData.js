@@ -84,8 +84,22 @@ function MonitorData() {
           </div>
           <div className="right">
             <div className="monitor-graph-container">
-              <label className="graph-label">Topic 1 graph</label>
-              <div className="graph-displayed"><Chart chartData={topic1} /></div>
+              <div classNam="monitor-top">
+                <label className="graph-label">Topic 1 graph</label>
+              </div>
+              <div classNam="monitor-center">
+                <div className="graph-displayed">
+                  <Chart chartData={topic1} />
+                </div>
+              </div>
+              <div classNam="monitor-bottom">
+                <div>
+                  <label className="event-display">
+                    ThresHold Limit(events)
+                    <text className="event-counter">50</text>
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
         </div>

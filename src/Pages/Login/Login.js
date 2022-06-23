@@ -1,11 +1,12 @@
 import React from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import logo1 from "../../Images/app_icon.png";
 import logo2 from "../../Images/login_img.png";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 
 function togglePassword() {
   var x = document.getElementById("password");
@@ -39,6 +40,7 @@ function Login() {
       password: "",
     },
 
+    // validation for email and password
     validationSchema: Yup.object().shape({
       email: Yup.string().email().required("Email is required"),
       password: Yup.string()
@@ -63,6 +65,7 @@ function Login() {
         password: values.password,
       };
 
+      // to validate user login
       axios
         .post("http://localhost:8080/api/v1/login/validateLogin", data, {
           auth: {
@@ -72,15 +75,22 @@ function Login() {
         })
         .then((res) => {
           console.log(res);
-          navigate("/DashBoard");
+
+          // check if the data return from data base
+          if (res.data === true) {
+            navigate("/DashBoard");
+          } else {
+            alert("Wrong Password, Please try again!");
+          }
         })
         .catch((err) => {
-          alert("Login failed!");
+          alert("Account does not exist. Please try again!");
           console.log(err);
         });
     },
   });
 
+  // use for redirecting
   let navigate = useNavigate();
 
   return (
@@ -93,7 +103,6 @@ function Login() {
         </h2>
         <h2 id="login-display-text">Powered by Apache Kafka.</h2>
       </section>
-
       <section id="right-box">
         <h1 id="login-title">Log in to WareEyes</h1>
         <Formik>

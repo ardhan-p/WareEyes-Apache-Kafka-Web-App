@@ -9,7 +9,7 @@ function Navbar() {
   return (
     <div className="navbar">
       <div className="warpper">
-        <div classname="date-time">{timestampLower}</div>
+        <div className="date-time">{timestampLower}</div>
         <div className="profile">
           <AccountCircleIcon className="profile-icon" />
           user

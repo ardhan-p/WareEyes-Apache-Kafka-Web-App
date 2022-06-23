@@ -7,6 +7,7 @@ import axios from "axios";
 import "./ForgetPassword.css";
 
 function ForgetPassword() {
+
   const {
     values,
     handleSubmit,
@@ -37,7 +38,7 @@ function ForgetPassword() {
       //navigate("/ResetPassword");
 
       const data = {
-          email: values.email
+        email: values.email,
       };
 
       axios
@@ -49,10 +50,10 @@ function ForgetPassword() {
         })
         .then((res) => {
           console.log(res);
-          navigate("/ResetPassword");
+          navigate("/ResetPassword", {state:{email:values.email}});
         })
         .catch((err) => {
-          alert("Login failed!");
+          alert("Email doesn't exist!");
           console.log(err);
         });
     },

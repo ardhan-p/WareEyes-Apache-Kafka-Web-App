@@ -1,5 +1,5 @@
 import { React, useState, useContext } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import logo1 from "../../Images/app_icon.png";
@@ -40,6 +40,9 @@ function toggleConfirmPassword() {
 }
 
 function ResetPassword() {
+
+  const location = useLocation();
+
   const {
     values,
     handleSubmit,
@@ -53,6 +56,8 @@ function ResetPassword() {
     initialValues: {
       newPassword: "",
       confirmPassword: "",
+      password:"",
+      email: location.state.email,
     },
 
     validationSchema: Yup.object().shape({
@@ -68,28 +73,40 @@ function ResetPassword() {
     }),
 
     onSubmit(values, { resetForm, setSubmitting }) {
-      console.log(values);
+      //console.log(values);
       setTimeout(() => {
         resetForm();
         setSubmitting(false);
       }, 2000);
 
-      navigate("/Login");
+      const data = {
+        email: location.state.email,
+        password: values.confirmPassword,
+      };
 
-      // const data = {
-      //     newPassword: values.newPassword,
-      //     confirmPassword: values.confirmPassword
-      // };
+      console.log(data)
 
-      // axios.post('resetpassword', data).then(
-      //     res => {
-      //         console.log(res)
-      //     }
-      // ).catch(
-      //     err => {
-      //         console.log(err);
-      //     }
-      // )
+      axios
+        .post("http://localhost:8080/api/v1/login/updatePassword", data, {
+          auth: {
+            username: "user",
+            password: "password",
+          },
+        })
+        .then((res) => {
+          if(res.data === 1){
+          alert("Password succefully changed!");
+          navigate("/Login");
+          console.log(res);
+          } else {
+            alert("Failed to reset password!");
+            console.log(res);
+          }
+        })
+        .catch((err) => {
+          alert("Failed to reset password!");
+          console.log(err);
+        });
     },
   });
 
@@ -102,12 +119,10 @@ function ResetPassword() {
         <label id="create-new-password-title"> Create New Password </label>
         <div>
           <label id="new-password-text" htmlFor="password">
-            {" "}
-            Password{" "}
+            Password
           </label>
           <Formik>
             <form onSubmit={handleSubmit}>
-              {/* <label id='lock'><HiOutlineLockClosed /></label> */}
               <input
                 name="new-password"
                 type="password"
@@ -120,19 +135,15 @@ function ResetPassword() {
                 className={errors.newPassword && touched.newPassword && "error"}
                 icon={<HiOutlineLockClosed />}
               />
-              {errors.newPassword &&
-                touched.newPassword &&
-                (console.log(errors.newPassword),
-                (
-                  <div className="newPassword-error">{errors.newPassword}</div>
-                ))}
+              {errors.newPassword && touched.newPassword && (
+                <div className="newPassword-error">{errors.newPassword}</div>
+              )}
               <span className="eye" onClick={togglePassword}>
                 <i id="eye-open" className="fa fa-eye"></i>
                 <i id="eye-close" className="fa fa-eye-slash"></i>
               </span>
               <label id="confirm-password-text" htmlFor="password">
-                {" "}
-                Confirm Password{" "}
+                Confirm Password
               </label>
               <input
                 name="confirm-password"
@@ -147,14 +158,11 @@ function ResetPassword() {
                   errors.confirmPassword && touched.confirmPassword && "error"
                 }
               />
-              {errors.confirmPassword &&
-                touched.confirmPassword &&
-                (console.log(errors.confirmPassword),
-                (
-                  <div className="input-confirmPassword-error">
-                    {errors.confirmPassword}
-                  </div>
-                ))}
+              {errors.confirmPassword && touched.confirmPassword && (
+                <div className="input-confirmPassword-error">
+                  {errors.confirmPassword}
+                </div>
+              )}
               <span className="eye1" onClick={toggleConfirmPassword}>
                 <i id="eye-open1" className="fa fa-eye"></i>
                 <i id="eye-close1" className="fa fa-eye-slash"></i>
