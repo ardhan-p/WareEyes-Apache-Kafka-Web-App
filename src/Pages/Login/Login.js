@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import logo1 from "../../Images/app_icon.png";
@@ -145,11 +145,11 @@ function Login() {
               <i id="eye-open" className="fa fa-eye"></i>
               <i id="eye-close" className="fa fa-eye-slash"></i>
             </span>
-            <p>
-              <a id="forgetpassword" href="/#/ForgetPassword">
+            <Link to={"/ForgetPassword"}>
+              <p id="forgetpassword">
                 Forgot password?
-              </a>
-            </p>
+              </p>
+            </Link>
             <button id="login-btn" type="submit" disabled={isSubmitting}>
               {" "}
               {isSubmitting ? "Loading" : "Log in"}
