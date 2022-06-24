@@ -145,11 +145,13 @@ function Login() {
               <i id="eye-open" className="fa fa-eye"></i>
               <i id="eye-close" className="fa fa-eye-slash"></i>
             </span>
-            <Link to={"/ForgetPassword"}>
-              <p id="forgetpassword">
-                Forgot password?
-              </p>
-            </Link>
+            <p>
+              <Link to={"/ForgetPassword"}>
+                <p id="forgetpassword">
+                  Forgot password?
+                </p>
+              </Link>
+            </p>
             <button id="login-btn" type="submit" disabled={isSubmitting}>
               {" "}
               {isSubmitting ? "Loading" : "Log in"}
