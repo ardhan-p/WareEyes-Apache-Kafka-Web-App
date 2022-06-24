@@ -96,7 +96,7 @@ function ResetPassword() {
         .then((res) => {
           if(res.data === 1){
           alert("Password successfully changed!");
-          navigate("/wareeyes-reactjs-frontend/Login");
+          navigate("/Login");
           console.log(res);
           } else {
             alert("Failed to reset password!");
@@ -174,7 +174,7 @@ function ResetPassword() {
               <button
                 id="return-to-login"
                 onClick={() => {
-                  navigate("/wareeyes-reactjs-frontend/Login");
+                  navigate("/Login");
                 }}
               >
                 {" "}

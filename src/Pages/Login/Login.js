@@ -78,7 +78,7 @@ function Login() {
 
           // check if the data return from data base
           if (res.data === true) {
-            navigate("/wareeyes-reactjs-frontend/DashBoard");
+            navigate("/DashBoard");
           } else {
             alert("Wrong Password, Please try again!");
           }
