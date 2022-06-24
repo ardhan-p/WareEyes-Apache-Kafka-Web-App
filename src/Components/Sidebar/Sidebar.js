@@ -21,26 +21,26 @@ function Sidebar() {
       </Link>
       <div className="center">
         <ul>
-          <Link to="/DashBoard">
+          <Link to="/wareeyes-reactjs-frontend/DashBoard">
             <li>
               <HouseIcon className="icon" />
               <span className="title"> Dashboard </span>
             </li>
           </Link>
-          <Link to="/MonitorData">
+          <Link to="/wareeyes-reactjs-frontend/MonitorData">
             <li>
               <BarChartIcon className="icon" />
               <span className="title"> Monitor Data </span>
             </li>
           </Link>
-          <Link to="/Notifications">
+          <Link to="/wareeyes-reactjs-frontend/Notifications">
             <li>
               <NotificationsNoneIcon className="icon" />
               <div className="counter">1</div>
               <span className="title"> Notification </span>
             </li>
           </Link>
-          <Link to="/Settings">
+          <Link to="/wareeyes-reactjs-frontend/Settings">
             <li>
               <SettingsIcon className="icon" />
               <span className="title"> Settings</span>
@@ -53,7 +53,7 @@ function Sidebar() {
           className="logout-btn"
           type="button"
           onClick={() => {
-            navigate("/Login");
+            navigate("/wareeyes-reactjs-frontend/Login");
           }}
         >
           {" "}

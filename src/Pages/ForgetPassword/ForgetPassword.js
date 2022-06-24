@@ -50,7 +50,7 @@ function ForgetPassword() {
         })
         .then((res) => {
           console.log(res);
-          navigate("/ResetPassword", {state:{email:values.email}});
+          navigate("/wareeyes-reactjs-frontend/ResetPassword", {state:{email:values.email}});
         })
         .catch((err) => {
           alert("Email doesn't exist!");
@@ -91,7 +91,7 @@ function ForgetPassword() {
                 id="return-to-login"
                 type="button"
                 onClick={() => {
-                  navigate("/Login");
+                  navigate("/wareeyes-reactjs-frontend/Login");
                 }}
               >
                 Go back
