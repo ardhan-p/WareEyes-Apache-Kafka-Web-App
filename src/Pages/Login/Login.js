@@ -146,7 +146,7 @@ function Login() {
               <i id="eye-close" className="fa fa-eye-slash"></i>
             </span>
             <p>
-              <a id="forgetpassword" href="ForgetPassword">
+              <a id="forgetpassword" href="/#/ForgetPassword">
                 Forgot password?
               </a>
             </p>
