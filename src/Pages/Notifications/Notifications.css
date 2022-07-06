@@ -1,8 +1,25 @@
 .notification-log {
     background-color: #FFF;
-    display:flex;
+    display: flex;
 }
 
 .notification-container {
     flex: 7;
+}
+
+.notification-title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 57px;
+    margin: 40px;
+}
+
+.notification-logs {
+    -webkit-box-shadow: 0px 0px 6px 0px #000000;
+    box-shadow: 0px 0px 6px 0px #000000;
+    margin: 40px;
+    padding: 20px;
+    background: rgba(72, 105, 178, 0.2);
 }

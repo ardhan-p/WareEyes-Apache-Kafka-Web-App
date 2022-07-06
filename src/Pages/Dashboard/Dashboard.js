@@ -70,7 +70,7 @@ function Dashboard() {
     labels: Topic4.map((data) => data.year),
     datasets: [
       {
-        label: "Data 3",
+        label: "Data 4",
         data: Topic4.map((data) => data.userGain),
         backgroundColor: [
           "rgba(75,192,192,1)",
@@ -89,7 +89,7 @@ function Dashboard() {
     labels: Topic4.map((data) => data.year),
     datasets: [
       {
-        label: "Data 3",
+        label: "Data 5",
         data: Topic4.map((data) => data.userLost),
         backgroundColor: [
           "rgba(75,192,192,1)",

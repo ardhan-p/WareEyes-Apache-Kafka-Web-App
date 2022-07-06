@@ -96,7 +96,7 @@ function MonitorData() {
                 <div>
                   <label className="event-display">
                     ThresHold Limit(events)
-                    <text className="event-counter">50</text>
+                    <text className="event-counter"></text>
                   </label>
                 </div>
               </div>
