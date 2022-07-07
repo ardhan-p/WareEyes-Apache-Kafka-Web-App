@@ -8,8 +8,7 @@
 
 }
 
-.alert-icon {
-    border-right: 1px solid #FF6A6A;
+.alert-icon {   
     height: 48px;
     background-color: #FF6A6A;
     display: flex;

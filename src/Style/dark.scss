@@ -1,0 +1,76 @@
+.app.dark {
+    color: rgb(156, 156, 156);
+
+    .main-dashboard,
+    .monitor-data,
+    .notification-log,
+    .setting-page {
+        background-color: #111;
+        color: rgb(156, 156, 156);
+
+        .go-back {
+            background-color: #999;
+            color: grey;
+        }
+
+        .monitor-graph-container,
+        .notification-logs {
+            background-color: grey;
+        }
+
+        .event-display {
+            color: #999;
+            background-color: grey;
+        }
+
+        .search-bar {
+            color: #999;
+            background-color: grey;
+            border-color: #333;
+        }
+
+    }
+
+    .chart-background {
+        background-color: #111;
+        -webkit-box-shadow: 2px -5px 18px -8px grey; 
+        box-shadow: 2px 3px 18px -8px grey;
+    }
+
+
+
+
+    .sidebar,
+    .top,
+    .logo,
+    .profile,
+    .warpper,
+    .light-dark,
+    .navbar,
+    .log-box {
+        background-color: #111;
+        color: #999;
+        border-color: #333;
+
+        li:hover,
+        li:active {
+            background: grey;
+        }
+    }
+
+    .logout-icon,
+    .logout-btn,
+    .edit-dashboard-btn {
+        color: #999;
+        background-color: grey;
+    }
+
+    .alertnotifcation {
+        border: 1px solid grey;
+
+        .alert-icon {
+            color: #999;
+            background-color: grey;
+        }
+    }
+}

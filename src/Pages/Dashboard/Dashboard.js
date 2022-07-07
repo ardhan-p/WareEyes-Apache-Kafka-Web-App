@@ -15,23 +15,16 @@ function Dashboard() {
         data: Topic1.map((data) => data.topicGain),
         backgroundColor: [
           "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
         ],
         borderColor: "blue",
         borderWidth: 2,
+        
       },
       {
         label: "Data 2",
         data: Topic2.map((data) => data.userGain),
         backgroundColor: [
           "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
         ],
         borderColor: "red",
         borderWidth: 2,
@@ -55,10 +48,6 @@ function Dashboard() {
         data: Topic3.map((data) => data.Topic3),
         backgroundColor: [
           "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
         ],
         borderColor: "black",
         borderWidth: 2,
@@ -74,12 +63,9 @@ function Dashboard() {
         data: Topic4.map((data) => data.userGain),
         backgroundColor: [
           "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
+
         ],
-        borderColor: "orange",
+        borderColor: "yellow",
         borderWidth: 2,
       },
     ],
@@ -93,10 +79,6 @@ function Dashboard() {
         data: Topic4.map((data) => data.userLost),
         backgroundColor: [
           "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
         ],
         borderColor: "purple",
         borderWidth: 2,

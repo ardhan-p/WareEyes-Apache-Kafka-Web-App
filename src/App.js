@@ -1,5 +1,4 @@
-import './App.css';
-import { HashRouter, Router, Routes, Route, BrowserRouter } from "react-router-dom";
+import { HashRouter, Routes, Route, } from "react-router-dom";
 import Login from './Pages/Login/Login';
 import ForgetPassword from './Pages/ForgetPassword/ForgetPassword';
 import ResetPassword from './Pages/ResetPassword/ResetPassword';
@@ -8,10 +7,15 @@ import Dashboard from './Pages/Dashboard/Dashboard';
 import MonitorData from './Pages/MonitorData/MonitorData';
 import Notifications from './Pages/Notifications/Notifications';
 import Settings from './Pages/Settings/Settings';
-import React from 'react'
+import React, { useContext } from 'react'
+import "./Style/dark.scss"
+import { DarkModeContext } from './Context/darkModeContext';
 
 function App() {
+  const{darkMode} = useContext(DarkModeContext);
+
   return (
+    <div className={darkMode ? "app dark" : "app"}>
     <HashRouter>
       <Routes>
         <Route exact path="/" element={<Login />} />
@@ -25,6 +29,7 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </HashRouter>
+   </div>
   );
 }
 

@@ -16,6 +16,11 @@
     width: 20%;
     color: #FFF;
 }
+.light-dark {
+    color: #FFF;
+    display: flex;
+    align-items: center;
+}
 
 .profile {
     display: block;
