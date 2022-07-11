@@ -6,9 +6,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import Chart from "../../Components/Chart/Chart";
 import { Topic1, Topic2 } from "../../Components/Data/Data";
 import "./MonitorData.css";
+import JSONDATA from "./MockData.json";
 
 function MonitorData() {
   let navigate = useNavigate();
+
+  const [searchTerm, setSearchTerm] = useState("");
+
   const [topic1, topic2, setUserData] = useState({
     labels: Topic1.map((data) => data.month),
     datasets: [
@@ -78,7 +82,23 @@ function MonitorData() {
                   onkeyup="myFunction()"
                   placeholder="Search Topic..."
                   title="Type in a topic"
+                  onChange={(event) => {
+                    setSearchTerm(event.target.value);
+                  }}
                 ></input>
+                {JSONDATA.filter((val) => {
+                  if (searchTerm === "") {
+                    return val
+                  } else if (val.labels.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    return val
+                  }
+                }).map((val, key) => {
+                  return (
+                    <div className="graph_searched" key={key}>
+                      {val.labels}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
