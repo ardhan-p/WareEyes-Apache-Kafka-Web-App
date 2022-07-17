@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import Navbar from "../../Components/Navbar/Navbar";
 import AlertNotifcation from "../../Components/Widget/AlertNotifcation";
-import Chart from "../../Components/Chart/Chart";
+import Graph from "../../Components/Chart/Chart";
+import RealTimeChart from "../../Components/Chart/RealTimeChart";
 import { Topic1, Topic2, Topic3, Topic4 } from "../../Components/Data/Data";
 import "./Dashboard.css";
 
@@ -103,18 +104,18 @@ function Dashboard() {
         </div>
         <div className="charts">
           <div className="charts-col1">
-            <Chart chartData={topic1} />
+            <Graph chartData={topic1} />
           </div>
           <div className="charts-col2">
-            <Chart chartData={topic3} />
+            <Graph chartData={topic3} />
           </div>
         </div>
         <div className="charts">
           <div className="charts-col1">
-            <Chart chartData={topic4} />
+            <Graph chartData={topic4} />
           </div>
           <div className="charts-col2">
-            <Chart chartData={topic5} />
+            <Graph chartData={topic5} />
           </div>
           <div className="dashboard-right">
             <div className="notification">{/* <Widget /> */}</div>

@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import Navbar from "../../Components/Navbar/Navbar";
 import SearchIcon from "@mui/icons-material/Search";
-import Chart from "../../Components/Chart/Chart";
+import Graph from "../../Components/Chart/Chart";
 import { Topic1, Topic2 } from "../../Components/Data/Data";
 import "./MonitorData.css";
 import JSONDATA from "./MockData.json";
+import RealTimeChart from "../../Components/Chart/RealTimeChart";
 
 function MonitorData() {
   let navigate = useNavigate();
@@ -105,18 +106,18 @@ function MonitorData() {
           <div className="right">
             <div className="monitor-graph-container">
               <div classNam="monitor-top">
-                <label className="graph-label">Topic 1 graph</label>
+                <label className="graph-label">Topic 1 Graph</label>
               </div>
               <div classNam="monitor-center">
                 <div className="graph-displayed">
-                  <Chart chartData={topic1} />
+                  <RealTimeChart></RealTimeChart>
                 </div>
               </div>
               <div classNam="monitor-bottom">
                 <div>
                   <label className="event-display">
-                    ThresHold Limit(events)
-                    <text className="event-counter"></text>
+                    Threshold Limit (Events)
+                    <text className="event-counter">TBD</text>
                   </label>
                 </div>
               </div>
