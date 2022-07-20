@@ -49,7 +49,7 @@ function RealTimeChart({ topicTitle }) {
         type: 'realtime',
         realtime: {
           duration: 30000,
-          refresh: 2000,
+          refresh: 1000,
           onRefresh: onRefresh
         }
       }
