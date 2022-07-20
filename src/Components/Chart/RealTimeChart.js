@@ -12,25 +12,22 @@ function RealTimeChart({ topicTitle }) {
   // TODO: change url to point to specific topic from props
   const socketURL = 'http://localhost:8080/test-topic';
 
-  // TODO: 
-  const currentChart = useRef();
-  const [myChart, setMyChart] = useState(null);
-  const [number, setNumber] = useState('0');
+  let consumerNumber = 0;
 
   const onConnected = () => {
     console.log("Connected to Websocket");
   };
 
   const onMessageReceive = (msg) => {
-    setNumber(msg);
-    console.log(msg);
+    consumerNumber = msg;
+    console.log("Data received: " + msg);
   };
 
   const onRefresh = (chart) => {
     chart.data.datasets.forEach(dataset => {
       dataset.data.push({
         x: Date.now(),
-        y: number
+        y: consumerNumber
       });
     }); 
   };
@@ -71,7 +68,6 @@ function RealTimeChart({ topicTitle }) {
       <Line
         data={data}
         options={options}
-        ref={currentChart}
       />
     </div>
   );
