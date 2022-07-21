@@ -14,9 +14,18 @@ function RealTimeChart({ topicTitle }) {
 
   let consumerNumber = 0;
 
+  const authHeaders = {
+    login: "user",
+    passcode: "password",
+  };
+
   const onConnected = () => {
     console.log("Connected to Websocket");
   };
+
+  const onDisconnected = () => {
+    console.log("Disconnected from Websocket");
+  }
 
   const onMessageReceive = (msg) => {
     consumerNumber = msg;
@@ -61,7 +70,10 @@ function RealTimeChart({ topicTitle }) {
       <SockJsClient 
         url={socketURL}
         topics={['/topic/test']}
+        headers={authHeaders}
+        subscribeHeaders={authHeaders}
         onConnect={onConnected}
+        onDisconnect={onDisconnected}
         onMessage={msg => onMessageReceive(msg)}
         debug={false}
       />
