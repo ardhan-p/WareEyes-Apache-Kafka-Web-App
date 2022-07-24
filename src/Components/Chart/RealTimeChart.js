@@ -10,7 +10,7 @@ ChartJS.register(StreamingPlugin);
 
 function RealTimeChart({ topicTitle }) {
   // TODO: change url to point to specific topic from props
-  const socketURL = 'http://localhost:8080/test-topic';
+  const socketURL = 'http://localhost:8080/topic-endpoint';
 
   let consumerNumber = 0;
 
