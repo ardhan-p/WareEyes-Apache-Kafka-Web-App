@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import Navbar from "../../Components/Navbar/Navbar";
 import "./Notifications.css";
@@ -22,46 +22,7 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
-
-function createData(msg, date, time) {
-  return {
-    msg,
-    date,
-    time,
-  };
-}
-
-const rows = [
-  createData('Dataset B passed threshold "550"', "2022-04-01", "16:23:17"),
-  createData('Dataset E passed threshold "240"', "2022-04-21", "14:55:13"),
-  createData('Dataset D passed threshold "150"', "2022-04-31", "14:34:14"),
-  createData('Dataset C passed threshold "120"', "2022-04-01", "13:23:06"),
-  createData('Dataset G passed threshold "100"', "2022-11-01", "01:26:16"),
-  createData('Dataset A passed threshold "90"', "2022-12-05", "13:20:67"),
-  createData('Dataset A passed threshold "30"', "2022-03-14", "13:59:46"),
-  createData('Dataset Z passed threshold "180"', "2022-07-21", "12:40:06"),
-  createData('Dataset Z passed threshold "230"', "2022-02-01", "11:30:46"),
-  createData('Dataset L passed threshold "150"', "2022-04-30", "05:28:36"),
-  createData('Dataset M passed threshold "20"', "2022-04-13", "06:25:26"),
-  createData('Dataset N passed threshold "30"', "2022-05-05", "03:21:26"),
-  createData('Dataset O passed threshold "90"', "2022-04-11", "00:20:26"),
-  createData('Dataset A passed threshold "80"', "2022-12-05", "13:20:67"),
-  createData('Dataset H passed threshold "70"', "2022-03-14", "13:59:46"),
-  createData('Dataset A passed threshold "190"', "2022-07-21", "12:40:06"),
-  createData('Dataset K passed threshold "230"', "2022-02-01", "11:30:46"),
-  createData('Dataset L passed threshold "50"', "2022-04-30", "05:28:36"),
-  createData('Dataset M passed threshold "40"', "2022-04-13", "06:25:26"),
-  createData('Dataset N passed threshold "60"', "2022-05-05", "03:21:26"),
-  createData('Dataset O passed threshold "30"', "2022-04-11", "00:20:26"),
-  createData('Dataset H passed threshold "90"', "2022-12-05", "13:20:67"),
-  createData('Dataset B passed threshold "30"', "2022-03-14", "13:59:46"),
-  createData('Dataset D passed threshold "180"', "2022-07-21", "12:40:06"),
-  createData('Dataset Y passed threshold "230"', "2022-02-01", "11:30:46"),
-  createData('Dataset L passed threshold "100"', "2022-04-30", "05:28:36"),
-  createData('Dataset M passed threshold "120"', "2022-04-13", "06:25:26"),
-  createData('Dataset N passed threshold "130"', "2022-05-05", "03:21:26"),
-  createData('Dataset O passed threshold "80"', "2022-04-11", "00:20:26"),
-];
+import axios from "axios";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -81,7 +42,7 @@ function getComparator(order, orderBy) {
 
 const headCells = [
   {
-    id: "msg",
+    id: "message",
     numeric: false,
     disablePadding: true,
     label: "Message",
@@ -229,6 +190,26 @@ function Notifications() {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rows, setRows] = React.useState([]);
+
+  useEffect(() => {
+    console.log("Awaiting notification data from server...");
+
+    axios
+    .get("http://localhost:8080/api/v1/notification/get", {
+      auth: {
+        username: "user",
+        password: "password",
+      },
+    })
+    .then((res) => {
+      console.log("Notifications set!");
+      setRows(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, []);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -238,7 +219,7 @@ function Notifications() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.msg);
+      const newSelecteds = rows.map((n) => n.message);
       setSelected(newSelecteds);
       return;
     }
@@ -314,17 +295,17 @@ function Notifications() {
                         page * rowsPerPage + rowsPerPage
                       )
                       .map((row, index) => {
-                        const isItemSelected = isSelected(row.msg);
+                        const isItemSelected = isSelected(row.message);
                         const labelId = `enhanced-table-checkbox-${index}`;
 
                         return (
                           <TableRow
                             hover
-                            onClick={(event) => handleClick(event, row.msg)}
+                            onClick={(event) => handleClick(event, row.message)}
                             role="checkbox"
                             aria-checked={isItemSelected}
                             tabIndex={-1}
-                            key={row.msg}
+                            key={row.message}
                             selected={isItemSelected}
                           >
                             <TableCell padding="checkbox" className="log-box">
@@ -344,7 +325,7 @@ function Notifications() {
                               scope="row"
                               padding="none"
                             >
-                              {row.msg}
+                              {row.message}
                             </TableCell>
                             <TableCell className="log-box" align="left">
                               {row.date}

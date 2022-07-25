@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Line, Chart } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js';
 import 'chartjs-adapter-luxon';
 import StreamingPlugin from 'chartjs-plugin-streaming';
 import "./Chart.css";
 import SockJsClient from 'react-stomp'
+import axios from 'axios';
 
 ChartJS.register(StreamingPlugin);
 
@@ -12,11 +13,11 @@ function RealTimeChart({ topicTitle }) {
   // TODO: change url to point to specific topic from props
   const socketURL = 'http://localhost:8080/topic-endpoint';
 
-  let consumerNumber = 0;
+  let consumerValue = 0;
 
   const authHeaders = {
-    login: "user",
-    passcode: "password",
+    username: "user",
+    password: "password",
   };
 
   const onConnected = () => {
@@ -28,7 +29,7 @@ function RealTimeChart({ topicTitle }) {
   }
 
   const onMessageReceive = (msg) => {
-    consumerNumber = msg;
+    consumerValue = msg;
     console.log("Data received: " + msg);
   };
 
@@ -36,7 +37,7 @@ function RealTimeChart({ topicTitle }) {
     chart.data.datasets.forEach(dataset => {
       dataset.data.push({
         x: Date.now(),
-        y: consumerNumber
+        y: consumerValue
       });
     }); 
   };
@@ -69,9 +70,9 @@ function RealTimeChart({ topicTitle }) {
     <div>
       <SockJsClient 
         url={socketURL}
-        topics={['/topic/test']}
         headers={authHeaders}
         subscribeHeaders={authHeaders}
+        topics={['/topic/test']}
         onConnect={onConnected}
         onDisconnect={onDisconnected}
         onMessage={msg => onMessageReceive(msg)}
