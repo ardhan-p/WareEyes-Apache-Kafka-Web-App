@@ -107,6 +107,7 @@ function Login() {
         <h1 id="login-title">Log in to WareEyes</h1>
         <Formik>
           <form onSubmit={handleSubmit}>
+            {/* TODO: add user or admin seletion buttons */}
             <label id="user-pwd" htmlFor="username">
               Username
             </label>
