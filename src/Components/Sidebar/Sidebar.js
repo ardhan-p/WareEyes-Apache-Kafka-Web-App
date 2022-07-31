@@ -53,6 +53,9 @@ function Sidebar() {
           className="logout-btn"
           type="button"
           onClick={() => {
+            window.localStorage.removeItem("isLoggedIn");
+            window.localStorage.removeItem("isAdmin");
+            window.localStorage.removeItem("currentEmail");
             navigate("/Login");
           }}
         >

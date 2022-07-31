@@ -79,6 +79,9 @@ function Login() {
         })
         .then((res) => {
           console.log(res);
+          window.localStorage.setItem("isLoggedIn", true);
+          window.localStorage.setItem("isAdmin", data.admin);
+          window.localStorage.setItem("currentEmail", data.email);
 
           // check if the data return from data base
           if (res.data === true) {
