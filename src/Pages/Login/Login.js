@@ -60,6 +60,8 @@ function Login() {
 
       //navigate("/DashBoard");
 
+      // TODO: add login persistence on the following section
+
       const data = {
         email: values.email,
         password: values.password,
@@ -107,7 +109,11 @@ function Login() {
         <h1 id="login-title">Log in to WareEyes</h1>
         <Formik>
           <form onSubmit={handleSubmit}>
-            {/* TODO: add user or admin seletion buttons */}
+            <label id="admin-toggle">Admin Login</label>
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="slider round"></span>
+            </label>
             <label id="user-pwd" htmlFor="username">
               Username
             </label>
