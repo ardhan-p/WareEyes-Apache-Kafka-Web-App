@@ -34,11 +34,12 @@ function Login() {
     handleBlur,
     handleChange,
     isSubmitting,
-  } = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
+    } = useFormik({
+      initialValues: {
+        email: "",
+        password: "",
+        admin: false,
+      },
 
     // validation for email and password
     validationSchema: Yup.object().shape({
@@ -65,6 +66,7 @@ function Login() {
       const data = {
         email: values.email,
         password: values.password,
+        admin: values.admin,
       };
 
       // to validate user login
@@ -111,7 +113,7 @@ function Login() {
           <form onSubmit={handleSubmit}>
             <label id="admin-toggle">Admin Login</label>
             <label class="switch">
-              <input type="checkbox" />
+              <input name="admin" type="checkbox" onChange={handleChange}/>
               <span class="slider round"></span>
             </label>
             <label id="user-pwd" htmlFor="username">
