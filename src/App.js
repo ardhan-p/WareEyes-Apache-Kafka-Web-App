@@ -13,13 +13,14 @@ import { DarkModeContext } from './Context/darkModeContext';
 
 function App() {
   const{darkMode} = useContext(DarkModeContext);
+  const loggedIn = window.localStorage.getItem("isLoggedIn");
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
     <HashRouter>
       <Routes>
-        <Route exact path="/" element={<Login />} />
-        <Route path="/Login" element={<Login />} />
+        <Route exact path="/" element={loggedIn ? <Dashboard /> : <Login />} />
+        <Route path="/Login" element={loggedIn ? <Dashboard /> : <Login />} />
         <Route path="/ForgetPassword" element={<ForgetPassword />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/Dashboard" element={<Dashboard />} />

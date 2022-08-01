@@ -9,6 +9,20 @@ function Navbar() {
   const { dispatch } = useContext(DarkModeContext);
   const timestampLower = getCustomFullDateAndTimeWithAmPm();
 
+  function Name() {
+    const isAccType = window.localStorage.getItem("isAdmin");
+    if (isAccType) {
+      return <UserName />;
+    }
+  }
+
+  function UserName() {
+    const email = window.localStorage.getItem("currentEmail");
+    const name = email.substring(0, email.indexOf('@'));
+
+    return name;
+  }
+
 
   return (
     <div className="navbar">
@@ -18,8 +32,8 @@ function Navbar() {
         </div>
         <div className="date-time">{timestampLower}</div>
         <div className="profile">
-          <AccountCircleIcon className="profile-icon" />
-          user
+          <AccountCircleIcon className="profile-icon" /> 
+          <Name />
         </div>
       </div>
     </div>

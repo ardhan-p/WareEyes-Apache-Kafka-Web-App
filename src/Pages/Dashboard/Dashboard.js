@@ -14,19 +14,14 @@ function Dashboard() {
       {
         label: "Data 1",
         data: Topic1.map((data) => data.topicGain),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-        ],
+        backgroundColor: ["rgba(75,192,192,1)"],
         borderColor: "blue",
         borderWidth: 2,
-        
       },
       {
         label: "Data 2",
         data: Topic2.map((data) => data.userGain),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-        ],
+        backgroundColor: ["rgba(75,192,192,1)"],
         borderColor: "red",
         borderWidth: 2,
       },
@@ -47,9 +42,7 @@ function Dashboard() {
       {
         label: "Data 3",
         data: Topic3.map((data) => data.Topic3),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-        ],
+        backgroundColor: ["rgba(75,192,192,1)"],
         borderColor: "black",
         borderWidth: 2,
       },
@@ -62,10 +55,7 @@ function Dashboard() {
       {
         label: "Data 4",
         data: Topic4.map((data) => data.userGain),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-
-        ],
+        backgroundColor: ["rgba(75,192,192,1)"],
         borderColor: "yellow",
         borderWidth: 2,
       },
@@ -78,14 +68,27 @@ function Dashboard() {
       {
         label: "Data 5",
         data: Topic4.map((data) => data.userLost),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-        ],
+        backgroundColor: ["rgba(75,192,192,1)"],
         borderColor: "purple",
         borderWidth: 2,
       },
     ],
   });
+
+  function Greeting() {
+    const isLoggedIn = window.localStorage.getItem("isLoggedIn");
+    if (isLoggedIn) {
+      return <UserName />;
+    }
+  }
+
+  function UserName() {
+    const email = window.localStorage.getItem("currentEmail");
+
+    const name = email.substring(0, email.indexOf('@'));
+    return "Welcome back " + name + "!";
+  }
+
 
   return (
     <div className="main-dashboard">
@@ -93,7 +96,7 @@ function Dashboard() {
       <div className="dashboard-container">
         <Navbar />
         <div className="welcome-msg">
-          Welcome user!
+          <Greeting />
           <div className="edit-dashboard">
             <button className="edit-dashboard-btn"> Edit dashboard </button>
           </div>

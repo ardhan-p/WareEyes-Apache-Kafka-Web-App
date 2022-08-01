@@ -60,10 +60,9 @@ li:hover, li:active{
 }
 
 .bottom {
-    position: relative;
-    bottom: -65%;
-    display: flex;
-    justify-content:center;
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
 }
 
 .logout-btn {

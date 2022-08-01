@@ -51,13 +51,6 @@
     font-size: 22px;
 }
 
-.search-icon {
-    color: #9F9F9F;
-    position: absolute;
-    left: 28%;
-    margin-top: 0.8%;
-}
-
 .graph_searched {
     display: flex;
     justify-content: center;

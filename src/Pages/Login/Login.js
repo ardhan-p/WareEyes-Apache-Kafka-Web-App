@@ -7,7 +7,6 @@ import logo1 from "../../Images/app_icon.png";
 import logo2 from "../../Images/login_img.png";
 import "./Login.css";
 
-
 function togglePassword() {
   var x = document.getElementById("password");
   var y = document.getElementById("eye-open");
@@ -26,7 +25,6 @@ function togglePassword() {
 
 function Login() {
   const {
-    values,
     handleSubmit,
     getFieldProps,
     touched,
@@ -34,12 +32,12 @@ function Login() {
     handleBlur,
     handleChange,
     isSubmitting,
-    } = useFormik({
-      initialValues: {
-        email: "",
-        password: "",
-        admin: false,
-      },
+  } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      admin: false,
+    },
 
     // validation for email and password
     validationSchema: Yup.object().shape({
@@ -50,6 +48,7 @@ function Login() {
         .matches(/(?=.*[0-9])/, "Password must contain at least a number"),
     }),
 
+    // to validate and reset the form
     onSubmit(values, { resetForm, setSubmitting }) {
       console.log("Submitting");
       console.log(values);
@@ -79,15 +78,14 @@ function Login() {
         })
         .then((res) => {
           console.log(res);
-          window.localStorage.setItem("isLoggedIn", true);
-          window.localStorage.setItem("isAdmin", data.admin);
-          window.localStorage.setItem("currentEmail", data.email);
-
           // check if the data return from data base
           if (res.data === true) {
+            window.localStorage.setItem("isLoggedIn", true);
+            window.localStorage.setItem("isAdmin", data.admin);
+            window.localStorage.setItem("currentEmail", data.email);
             navigate("/DashBoard");
           } else {
-            alert("Wrong Password, Please try again!");
+            alert("Wrong account credentials, Please try again!");
           }
         })
         .catch((err) => {
@@ -116,7 +114,7 @@ function Login() {
           <form onSubmit={handleSubmit}>
             <label id="admin-toggle">Admin Login</label>
             <label class="switch">
-              <input name="admin" type="checkbox" onChange={handleChange}/>
+              <input name="admin" type="checkbox" onChange={handleChange} />
               <span class="slider round"></span>
             </label>
             <label id="user-pwd" htmlFor="username">
@@ -159,9 +157,7 @@ function Login() {
             </span>
             <p>
               <Link to={"/ForgetPassword"}>
-                <p id="forgetpassword">
-                  Forgot password?
-                </p>
+                <p id="forgetpassword">Forgot password?</p>
               </Link>
             </p>
             <button id="login-btn" type="submit" disabled={isSubmitting}>
