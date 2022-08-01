@@ -1,0 +1,23 @@
+.manageAcc-page {
+    background-color: #FFF;
+    display:flex;
+}
+
+.manageAcc-container {
+    flex: 7;
+}
+
+.welcome-msg {
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 57px;
+    margin: 40px;
+}
+
+.go-back{
+    margin-left: 60px;
+}
