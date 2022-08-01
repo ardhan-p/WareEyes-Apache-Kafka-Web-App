@@ -11,34 +11,22 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 function Sidebar() {
   let navigate = useNavigate();
 
-  // function IsAdmin(props) {
-  //   return (
-  //     console.log(props.Admin + " true"),
-  //     (
-  //       <Link to="/Settings">
-  //         <li>
-  //           <AdminPanelSettingsIcon className="icon" />
-  //           <span className="title"> Admin Tools</span>
-  //         </li>
-  //       </Link>
-  //     )
-  //   );
-  // }
-
-  // function NotAdmin(props) {
-  //   const isLoggedIn = window.localStorage.getItem("isAdmin");
-  //   return console.log(props.Admin + " false");
-  // }
-  // const test = window.localStorage.getItem("isAdmin");
-  // function AdminTools(props) {
-  //   if (test === true) {
-  //     console.log(test + " is admin");
-  //     return <IsAdmin />;
-  //   } else if (test === false) {
-  //     console.log(test + " is not admin");
-  //     return <NotAdmin />;
-  //   }
-  // }
+  function AdminTools() {
+    const isAdmin = localStorage.getItem("isAdmin");
+    if (isAdmin === "true") {
+      console.log(" user is admin");
+      return (
+        <Link to="/AdminTools">
+          <li>
+            <AdminPanelSettingsIcon className="icon" />
+            <span className="title"> Admin Tools</span>
+          </li>
+        </Link>
+      );
+    }
+      console.log(" user is not admin");
+      return;
+    }
 
   return (
     <div className="sidebar">
@@ -55,7 +43,7 @@ function Sidebar() {
               <span className="title"> Dashboard </span>
             </li>
           </Link>
-          {/* <AdminTools /> */}
+          <AdminTools />
           <Link to="/MonitorData">
             <li>
               <BarChartIcon className="icon" />

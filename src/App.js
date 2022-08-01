@@ -7,6 +7,7 @@ import Dashboard from './Pages/Dashboard/Dashboard';
 import MonitorData from './Pages/MonitorData/MonitorData';
 import Notifications from './Pages/Notifications/Notifications';
 import Settings from './Pages/Settings/Settings';
+import AdminTools from './Pages/AdminTools/AdminTools';
 import React, { useContext } from 'react'
 import "./Style/dark.scss"
 import { DarkModeContext } from './Context/darkModeContext';
@@ -23,6 +24,7 @@ function App() {
         <Route path="/Login" element={loggedIn ? <Dashboard /> : <Login />} />
         <Route path="/ForgetPassword" element={<ForgetPassword />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
+        <Route path="/AdminTools" element={<AdminTools />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/MonitorData" element={<MonitorData />} />
         <Route path="/Notifications" element={<Notifications />} />
