@@ -5,6 +5,7 @@ import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import "./ForgetPassword.css";
+import { Helmet } from "react-helmet";
 
 function ForgetPassword() {
 
@@ -63,6 +64,7 @@ function ForgetPassword() {
 
   return (
     <div id="forget-password-page">
+      <Helmet bodyAttributes={{ style: "background-color : #4869B2" }} />
       <div id="forget-password-container">
         <img src={logo1} alt="Application Logo" id="app-logo1" />
         <label id="reset-password-title"> Reset Password </label>

@@ -86,7 +86,7 @@ function Dashboard() {
     const email = window.localStorage.getItem("currentEmail");
 
     const name = email.substring(0, email.indexOf('@'));
-    return "Welcome back " + name + "!";
+    return "Welcome " + name + "!";
   }
 
 
@@ -95,7 +95,7 @@ function Dashboard() {
       <Sidebar />
       <div className="dashboard-container">
         <Navbar />
-        <div className="welcome-msg">
+        <div className="welcome-msg-dash">
           <Greeting />
           <div className="edit-dashboard">
             <button className="edit-dashboard-btn"> Edit dashboard </button>

@@ -2,14 +2,17 @@
     display: flex;
     background-color: #FFFFFF;
 }
+.body {
+    background-color: #FFFFFF;
+}
 
 .dashboard-container {
     flex: 7;
 }
 
-.welcome-msg {
-    padding-left: 20px;
-    padding-top: 10px;
+.welcome-msg-dash {
+    margin-left: 20px;
+    margin-top:20px;
     font-size: 32px;
     display: flex;
 }
@@ -30,7 +33,7 @@
 
 .charts {
     display: flex;
-    margin-top: 2.5%;
+    margin-top: 2%;
     padding-left: 1.5%;
     gap: 1.5%;
     height: 295px;

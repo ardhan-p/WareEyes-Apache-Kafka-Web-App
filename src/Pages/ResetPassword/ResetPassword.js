@@ -6,6 +6,7 @@ import logo1 from "../../Images/app_icon.png";
 import "./ResetPassword.css";
 import { HiOutlineLockClosed } from "react-icons/hi";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 function togglePassword() {
   var x = document.getElementById("new-password");
@@ -112,6 +113,7 @@ function ResetPassword() {
 
   return (
     <div id="reset-password-page">
+      <Helmet bodyAttributes={{ style: "background-color : #4869B2" }} />
       <div id="reset-password-container">
         <img src={logo1} alt="Application Logo" id="app-logo1" />
         <label id="create-new-password-title"> Create New Password </label>

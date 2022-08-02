@@ -5,6 +5,7 @@ import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import logo1 from "../../Images/app_icon.png";
 import logo2 from "../../Images/login_img.png";
+import { Helmet } from "react-helmet";
 import "./Login.css";
 
 function togglePassword() {
@@ -99,6 +100,8 @@ function Login() {
   let navigate = useNavigate();
 
   return (
+    <div className="login-background">
+      <Helmet bodyAttributes={{ style: "background-color : #4869B2" }} />
     <div className="login-container">
       <section id="left-box">
         <img src={logo1} alt="Application Logo" id="app-logo" />
@@ -167,6 +170,7 @@ function Login() {
           </form>
         </Formik>
       </section>
+    </div>
     </div>
   );
 }

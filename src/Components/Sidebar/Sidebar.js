@@ -43,7 +43,6 @@ function Sidebar() {
               <span className="title"> Dashboard </span>
             </li>
           </Link>
-          <AdminTools />
           <Link to="/MonitorData">
             <li>
               <BarChartIcon className="icon" />
@@ -53,16 +52,18 @@ function Sidebar() {
           <Link to="/Notifications">
             <li>
               <NotificationsNoneIcon className="icon" />
-              <div className="counter">1</div>
+              <div className="counter">123</div>
               <span className="title"> Notification </span>
             </li>
           </Link>
+          <AdminTools />
           <Link to="/Settings">
             <li>
               <SettingsIcon className="icon" />
               <span className="title"> Settings</span>
             </li>
           </Link>
+          
         </ul>
       </div>
       <div className="bottom">
