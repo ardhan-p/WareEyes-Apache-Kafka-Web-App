@@ -1,6 +1,6 @@
 .manageAcc-page {
     background-color: #FFF;
-    display:flex;
+    display: flex;
 }
 
 .manageAcc-container {
@@ -18,6 +18,31 @@
     margin: 40px;
 }
 
-.go-back{
+.go-back {
     margin-left: 60px;
+}
+
+.add-delete {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-right: 120px;
+}
+
+.add-btn {
+    width: 100px;
+    height: 35px;
+    background: #4FDB0E;
+    border-radius: 10px;
+    border-style: none;
+    color: #FFFFFF;
+}
+
+.delete-btn {
+    width: 100px;
+    height: 35px;
+    background: #FF452C;
+    border-radius: 10px;
+    border-style: none;
+    color: #FFFFFF;
 }
