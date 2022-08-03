@@ -42,6 +42,12 @@ function getComparator(order, orderBy) {
 
 const headCells = [
   {
+    id: "id",
+    numeric: true,
+    disablePadding: false,
+    label:"ID"
+  },
+  {
     id: "message",
     numeric: false,
     disablePadding: true,
@@ -70,9 +76,12 @@ function EnhancedTableHead(props) {
     rowCount,
     onRequestSort,
   } = props;
+
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
+
+
 
   return (
     <TableHead>
@@ -127,7 +136,43 @@ EnhancedTableHead.propTypes = {
 };
 
 const EnhancedTableToolbar = (props) => {
-  const { numSelected } = props;
+  const { numSelected, selected, rows, setRows} = props;
+
+  const handleOnClickDelete = (event) => {
+    console.log("Deleting notifications...")
+
+    axios
+    .post("http://localhost:8080/api/v1/notification/delete", selected, {
+      auth: {
+        username: "user",
+        password: "password",
+      },
+    })
+    .then((res) => {
+      console.log("Notifications deleted!");
+      console.log("Refreshing notification data from server...");
+      axios
+        .get("http://localhost:8080/api/v1/notification/get", {
+          auth: {
+            username: "user",
+            password: "password",
+          },
+        })
+        .then((res) => {
+          console.log("Notifications set!");
+          console.log(res.data);
+          setRows(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      alert("Notification doesn't exist!");
+      console.log(err);
+    });
+
+  };
 
   return (
     <Toolbar
@@ -165,7 +210,7 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton>
+          <IconButton onClick={handleOnClickDelete}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -219,7 +264,7 @@ function Notifications() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.message);
+      const newSelecteds = rows.map((n) => n);
       setSelected(newSelecteds);
       return;
     }
@@ -269,7 +314,7 @@ function Notifications() {
         <div className="notification-logs">
           <Box sx={{ width: "100%" }}>
             <Paper sx={{ width: "100%", mb: 2 }} className="log-box">
-              <EnhancedTableToolbar numSelected={selected.length} />
+              <EnhancedTableToolbar numSelected={selected.length} selected={selected} rows={rows} setRows={setRows}/>
               <TableContainer>
                 <Table
                   sx={{ minWidth: 750 }}
@@ -295,13 +340,13 @@ function Notifications() {
                         page * rowsPerPage + rowsPerPage
                       )
                       .map((row, index) => {
-                        const isItemSelected = isSelected(row.message);
+                        const isItemSelected = isSelected(row);
                         const labelId = `enhanced-table-checkbox-${index}`;
 
                         return (
                           <TableRow
                             hover
-                            onClick={(event) => handleClick(event, row.message)}
+                            onClick={(event) => handleClick(event, row)}
                             role="checkbox"
                             aria-checked={isItemSelected}
                             tabIndex={-1}
@@ -317,6 +362,9 @@ function Notifications() {
                                   "aria-labelledby": labelId,
                                 }}
                               />
+                            </TableCell>
+                            <TableCell className="log-box" align="left">
+                              {row.id}
                             </TableCell>
                             <TableCell
                               className="log-box"
