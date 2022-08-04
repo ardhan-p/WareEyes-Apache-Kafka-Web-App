@@ -46,3 +46,11 @@
     border-style: none;
     color: #FFFFFF;
 }
+
+.error-msg {
+    color: #FF0000;
+    margin-left: 13%;
+    font-style: italic;
+    font-size: 12px;
+    margin-top: -5%;
+  }

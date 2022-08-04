@@ -57,11 +57,6 @@ function Login() {
         resetForm();
         setSubmitting(false);
       }, 2000);
-      // alert('SUCCESS!! :-)\n\n' + JSON.stringify(values, null, 2));
-
-      //navigate("/DashBoard");
-
-      // TODO: add login persistence on the following section
 
       const data = {
         email: values.email,
@@ -79,7 +74,7 @@ function Login() {
         })
         .then((res) => {
           console.log(res);
-          // check if the data return from data base
+          // check if the data return from database
           if (res.data === true) {
             window.localStorage.setItem("isLoggedIn", true);
             window.localStorage.setItem("isAdmin", data.admin);

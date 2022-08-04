@@ -1,106 +1,95 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import Navbar from "../../Components/Navbar/Navbar";
 import Popup from "../../Components/Popup/Popup";
 import { DataGrid } from "@mui/x-data-grid";
+import axios from "axios";
+import * as Yup from "yup";
+import { Formik, useFormik } from "formik";
 import "./ManageAccount.css";
 
 function ManageAccount() {
   let navigate = useNavigate();
 
+  const [buttonPopup, setButtonPopup] = useState(false);
+  const [rows, setRows] = useState([]);
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      admin: false,
+    },
+    validationSchema: Yup.object().shape({
+      name: Yup.string().required("Name is required"),
+      email: Yup.string().email().required("Email is required"),
+      password: Yup.string()
+        .required("Password is required")
+        .min(6, "Password must be at least 6 characters")
+        .matches(/(?=.*[0-9])/, "Password must contain at least a number"),
+    }),
+    onSubmit(values, {resetForm}) {
+      console.log(values);
+
+      const data = {
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        admin: values.admin, 
+      };
+
+      axios
+        .post("http://localhost:8080/api/v1/login/addUser", data, {
+          auth: {
+            username: "user",
+            password: "password",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          alert(values.email + " has been added successfully!")
+          resetForm();
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Something went wrong!")
+          resetForm();
+        });
+    },
+  });
+
   const columns = [
-    { field: "firstName", headerName: "Name", width: 230 },
+    { field: "name", headerName: "Name", width: 230 },
     { field: "email", headerName: "Email", width: 330 },
-    { field: "role", headerName: "Role", width: 130 },
+    { field: "admin", headerName: "Admin", width: 130 },
     { field: "dateCreated", headerName: "Date created", width: 230 },
     { field: "permission", headerName: "Permission", width: 130 },
     { field: "remark", headerName: "Remark", width: 380 },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      firstName: "Ryan",
-      email: "ryan@gmail.com",
-      role: "user",
-      dateCreated: "May 21, 2022",
-      remark: "This account is created recently",
-    },
-    {
-      id: 2,
-      firstName: "Ryan",
-      email: "ryan@gmail.com",
-      role: "user",
-      dateCreated: "May 21, 2022",
-      remark: "This account is not admin and only got a limite feature",
-    },
-    {
-      id: 3,
-      firstName: "Ryan",
-      email: "ryan@gmail.com",
-      role: "user",
-      dateCreated: "May 21, 2022",
-    },
-    {
-      id: 4,
-      firstName: "Ryan",
-      email: "ryan@gmail.com",
-      role: "user",
-      dateCreated: "May 21, 2022",
-    },
-    {
-      id: 5,
-      firstName: "Ryan",
-      email: "ryan@gmail.com",
-      role: "user",
-      dateCreated: "May 21, 2022",
-    },
-    {
-      id: 6,
-      firstName: "Ryan",
-      email: "ryan@gmail.com",
-      role: "user",
-      dateCreated: "May 21, 2022",
-    },
-    {
-      id: 7,
-      firstName: "Ryan",
-      email: "ryan@gmail.com",
-      role: "user",
-      dateCreated: "May 21, 2022",
-    },
-    {
-      id: 8,
-      firstName: "Ryan",
-      email: "ryan@gmail.com",
-      role: "user",
-      dateCreated: "May 21, 2022",
-    },
-    {
-      id: 9,
-      firstName: "Ryan",
-      email: "ryan@gmail.com",
-      role: "user",
-      dateCreated: "May 21, 2022",
-    },
-    {
-      id: 10,
-      firstName: "Ryan",
-      email: "ryan@gmail.com",
-      role: "user",
-      dateCreated: "May 21, 2022",
-    },
-    {
-      id: 11,
-      firstName: "Ryan",
-      email: "ryan@gmail.com",
-      role: "user",
-      dateCreated: "May 21, 2022",
-    },
-  ];
+  // fetch all user data from backend
+  useEffect(() => {
+    console.log("Awaiting userlist data from server...");
 
-  const [buttonPopup, setButtonPopup] = useState(false);
+    axios
+    .get("http://localhost:8080/api/v1/login/getUser", {
+      auth: {
+        username: "user",
+        password: "password",
+      },
+    })
+    .then((res) => {
+      console.log("Users set!");
+      console.log(res.data);
+      setRows(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, [buttonPopup]);
+
   return (
     <div className="manageAcc-page">
       <Sidebar />
@@ -132,15 +121,14 @@ function ManageAccount() {
             type="button"
             className="delete-btn"
             onClick={() => {
-              navigate("/AdminTools");
+              // TODO: add connection to delete users API
             }}
           >
             Delete
           </button>
         </div>
         <div
-          style={{ height: 476, width: "90%", marginLeft: 50, marginTop: 20 }}
-        >
+          style={{ height: 476, width: "90%", marginLeft: 50, marginTop: 20 }}>
           <DataGrid
             rows={rows}
             columns={columns}
@@ -152,32 +140,79 @@ function ManageAccount() {
       </div>
       <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
         <h2>Account Creation</h2>
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>
-              <input type="text"></input>
-            </th>
-          </tr>
-          <tr>
-            <th>Username</th>
-            <th>
-              <input type="text"></input>
-            </th>
-          </tr>
-          <tr>
-            <th>Password</th>
-            <th>
-              <input type="text"></input>
-            </th>
-          </tr>
-          <tr>
-            <th>Role</th>
-            <th>
-              <input type="text"></input>
-            </th>
-          </tr>
-        </table>
+        <Formik>
+          <form onSubmit={formik.handleSubmit}>
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>
+                  <input 
+                    name="name" 
+                    type="text" 
+                    placeholder="Enter name..."
+                    onChange={formik.handleChange}
+                    value={formik.values.name}>
+                  </input>
+                </th>
+              </tr>
+              <tr>
+                <th></th>
+                <th className="error-msg">{formik.errors.name}</th>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <th>
+                  <input 
+                    name="email" 
+                    type="text" 
+                    placeholder="Enter email..."
+                    onChange={formik.handleChange}
+                    value={formik.values.email}>
+                    </input>
+                </th>
+              </tr>
+              <tr>
+                <th></th>
+                <th className="error-msg">{formik.errors.email}</th>
+              </tr>
+              <tr>
+                <th>Password</th>
+                <th>
+                  <input 
+                    name="password" 
+                    type="password" 
+                    placeholder="Enter password..."
+                    onChange={formik.handleChange}
+                    value={formik.values.password}>
+                  </input>
+                </th>
+              </tr>
+              <tr>
+                <th></th>
+                <th className="error-msg">{formik.errors.password}</th>
+              </tr>
+              <tr>
+                <th>Admin User</th>
+                <th>
+                  <input 
+                    name="admin" 
+                    type="checkbox"
+                    onChange={formik.handleChange}
+                    value={formik.values.admin}>
+                  </input>
+                </th>
+              </tr>
+              <tr>
+                <th></th>
+                <th>
+                  <button type="submit">
+                    Create Account
+                  </button>
+                </th>
+              </tr>
+            </table>
+          </form>
+        </Formik>
       </Popup>
     </div>
   );

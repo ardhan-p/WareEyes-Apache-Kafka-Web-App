@@ -14,7 +14,6 @@ function Sidebar() {
   function AdminTools() {
     const isAdmin = localStorage.getItem("isAdmin");
     if (isAdmin === "true") {
-      console.log(" user is admin");
       return (
         <Link to="/AdminTools">
           <li>
