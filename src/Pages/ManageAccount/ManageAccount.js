@@ -13,7 +13,34 @@ function ManageAccount() {
   let navigate = useNavigate();
 
   const [buttonPopup, setButtonPopup] = useState(false);
+  const [deleteUsers, setDeleteUsers] = useState(false);
   const [rows, setRows] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
+  
+  const deleteUsersOnClick = (async (event) => {
+    const response = await axios
+    .post("http://localhost:8080/api/v1/login/deleteUsers", selectedRows, {
+      auth: {
+        username: "user",
+        password: "password",
+      },
+    })
+    .then((res) => {
+      console.log("Result: " + res + " - deleted sucessfully");
+      alert("Deleted successfully!")
+    })
+    .catch((err) => {
+      console.log(err);
+    }); 
+
+    setDeleteUsers(current => !current)
+  });
+
+  const columns = [
+    { field: "name", headerName: "Name", width: 500},
+    { field: "email", headerName: "Email", width: 500},
+    { field: "admin", headerName: "Admin", width: 500},
+  ];
 
   const formik = useFormik({
     initialValues: {
@@ -60,16 +87,7 @@ function ManageAccount() {
     },
   });
 
-  const columns = [
-    { field: "name", headerName: "Name", width: 230 },
-    { field: "email", headerName: "Email", width: 330 },
-    { field: "admin", headerName: "Admin", width: 130 },
-    { field: "dateCreated", headerName: "Date created", width: 230 },
-    { field: "permission", headerName: "Permission", width: 130 },
-    { field: "remark", headerName: "Remark", width: 380 },
-  ];
-
-  // fetch all user data from backend
+  // fetch all user data from backend server
   useEffect(() => {
     console.log("Awaiting userlist data from server...");
 
@@ -88,7 +106,7 @@ function ManageAccount() {
     .catch((err) => {
       console.log(err);
     });
-  }, [buttonPopup]);
+  }, [buttonPopup, deleteUsers]);
 
   return (
     <div className="manageAcc-page">
@@ -102,8 +120,7 @@ function ManageAccount() {
             className="go-back"
             onClick={() => {
               navigate("/AdminTools");
-            }}
-          >
+            }}>
             Back
           </button>
         </div>
@@ -113,17 +130,15 @@ function ManageAccount() {
             className="add-btn"
             onClick={() => {
               setButtonPopup(true);
-            }}
-          >
+            }}>
             Add
           </button>
           <button
             type="button"
             className="delete-btn"
             onClick={() => {
-              // TODO: add connection to delete users API
-            }}
-          >
+              deleteUsersOnClick();
+            }}>
             Delete
           </button>
         </div>
@@ -135,6 +150,14 @@ function ManageAccount() {
             pageSize={7}
             rowsPerPageOptions={[5]}
             checkboxSelection
+            onSelectionModelChange={(items) => {
+              const selectedItems = new Set(items);
+              const selectedRowData = rows.filter((row) => 
+                selectedItems.has(row.id), 
+              );
+              setSelectedRows(selectedRowData);
+              console.log(selectedRowData);
+            }}
           />
         </div>
       </div>
