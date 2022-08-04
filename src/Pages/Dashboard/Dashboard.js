@@ -105,23 +105,24 @@ function Dashboard() {
           <AlertNotifcation />
           <AlertNotifcation />
         </div>
-        <div className="charts">
-          <div className="charts-col1">
-            <Graph chartData={topic1} />
+        <div className="dashboarding-monitoring-div">
+          <div className="charts">
+            <div className="graph-displayed-dashboard">
+              <RealTimeChart topicTitle="Topic 1"/>
+            </div>
+            <div className="graph-displayed-dashboard">
+              <RealTimeChart topicTitle="Topic 1"/>
+            </div>
+            <div className="graph-displayed-dashboard">
+              <RealTimeChart topicTitle="Topic 1"/>
+            </div>
+            <div className="graph-displayed-dashboard">
+              <RealTimeChart topicTitle="Topic 1"/>
+            </div>
           </div>
-          <div className="charts-col2">
-            <Graph chartData={topic3} />
-          </div>
-        </div>
-        <div className="charts">
-          <div className="charts-col1">
-            <Graph chartData={topic4} />
-          </div>
-          <div className="charts-col2">
-            <Graph chartData={topic5} />
-          </div>
-          <div className="dashboard-right">
-            <div className="notification">{/* <Widget /> */}</div>
+          <div className="dashboard-widgets">
+            <div>
+            </div>
           </div>
         </div>
       </div>

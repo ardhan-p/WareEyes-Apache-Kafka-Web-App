@@ -11,6 +11,8 @@ function MonitorData() {
   let navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [graphName, setGraphName] = useState("Default Graph");
+  const [topicThreshold, setTopicThreshold] = useState(0);
 
   return (
     <div className="monitor-data">
@@ -26,8 +28,7 @@ function MonitorData() {
                 className="go-back"
                 onClick={() => {
                   navigate("/DashBoard");
-                }}
-              >
+                }}>
                 Back
               </button>
             </div>
@@ -42,8 +43,7 @@ function MonitorData() {
                   title="Type in a topic"
                   onChange={(event) => {
                     setSearchTerm(event.target.value);
-                  }}
-                ></input>
+                  }}></input>
                 {JSONDATA.filter((val) => {
                   if (searchTerm === "") {
                     return val
@@ -62,20 +62,24 @@ function MonitorData() {
           </div>
           <div className="right">
             <div className="monitor-graph-container">
-              <div classNam="monitor-top">
-                <label className="graph-label">Topic 1 Graph</label>
+              <div className="monitor-top">
+                <label className="graph-label">{graphName}</label>
               </div>
-              <div classNam="monitor-center">
+              <div className="monitor-center">
                 <div className="graph-displayed">
                   <RealTimeChart topicTitle="Topic 1" />
                 </div>
               </div>
-              <div classNam="monitor-bottom">
-                <div>
-                  <label className="event-display">
-                    Threshold Limit (Events)
-                    <text className="event-counter">TBD</text>
-                  </label>
+              <div className="monitor-bottom">
+                <div className="event-display">
+                  <label className="event-label">Threshold Limit (Events)</label>
+                  <h2 className="event-counter">{topicThreshold}</h2>
+                </div>
+                <div className="filter-div">
+
+                </div>
+                <div className="export-div">
+
                 </div>
               </div>
             </div>
