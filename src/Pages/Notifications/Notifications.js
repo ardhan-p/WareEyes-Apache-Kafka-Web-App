@@ -136,10 +136,10 @@ EnhancedTableHead.propTypes = {
 const EnhancedTableToolbar = (props) => {
   const { numSelected, selected, rows, setRows} = props;
 
-  const handleOnClickDelete = (event) => {
+  const handleOnClickDelete = async (event) => {
     console.log("Deleting notifications...")
 
-    axios
+    const response = await axios
     .post("http://localhost:8080/api/v1/notification/delete", selected, {
       auth: {
         username: "user",
