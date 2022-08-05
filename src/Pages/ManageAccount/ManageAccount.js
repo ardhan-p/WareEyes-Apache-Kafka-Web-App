@@ -7,6 +7,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import * as Yup from "yup";
 import { Formik, useFormik } from "formik";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import "./ManageAccount.css";
 
 function ManageAccount() {
@@ -37,9 +38,9 @@ function ManageAccount() {
   });
 
   const columns = [
-    { field: "name", headerName: "Name", width: 500},
-    { field: "email", headerName: "Email", width: 500},
-    { field: "admin", headerName: "Admin", width: 500},
+    { field: "name", headerName: "Name", width: 300},
+    { field: "email", headerName: "Email", width: 400},
+    { field: "admin", headerName: "Admin", width: 200},
   ];
 
   const formik = useFormik({
@@ -101,6 +102,18 @@ function ManageAccount() {
     .then((res) => {
       console.log("Users set!");
       console.log(res.data);
+      res.data.map((user) => {
+        console.log(user);
+        if(user.admin === true) {
+          console.log("Yes");
+          user.admin = "Yes";
+        }
+        if(user.admin === false) {
+          console.log("no");
+          user.admin = "No";
+        }
+      })
+ 
       setRows(res.data);
     })
     .catch((err) => {

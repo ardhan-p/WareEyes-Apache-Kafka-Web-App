@@ -58,6 +58,7 @@ function RealTimeChart({ topicTitle }) {
   };
 
   const options = {
+    // maintainAspectRatio: false,
     scales: {
       x: {
         type: 'realtime',

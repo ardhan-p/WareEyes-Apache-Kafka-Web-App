@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import Navbar from "../../Components/Navbar/Navbar";
-import SearchIcon from "@mui/icons-material/Search";
 import "./MonitorData.css";
 import JSONDATA from "./MockData.json";
 import RealTimeChart from "../../Components/Chart/RealTimeChart";

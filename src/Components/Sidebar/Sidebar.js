@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Sidebar.css";
 import { useNavigate, Link } from "react-router-dom";
 import HouseIcon from "@mui/icons-material/House";
@@ -11,6 +11,8 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 function Sidebar() {
   let navigate = useNavigate();
 
+  const [notificationAlert, setnotificationAlert] = useState("100");
+
   function AdminTools() {
     const isAdmin = localStorage.getItem("isAdmin");
     if (isAdmin === "true") {
@@ -18,7 +20,7 @@ function Sidebar() {
         <Link to="/AdminTools">
           <li>
             <AdminPanelSettingsIcon className="icon" />
-            <span className="title"> Admin Tools</span>
+            <span className="title"> Admin Tools </span>
           </li>
         </Link>
       );
@@ -51,7 +53,7 @@ function Sidebar() {
           <Link to="/Notifications">
             <li>
               <NotificationsNoneIcon className="icon" />
-              <div className="counter">123</div>
+              <div className="counter">{notificationAlert}</div>
               <span className="title"> Notification </span>
             </li>
           </Link>
