@@ -66,7 +66,7 @@ function MonitorData() {
               </div>
               <div className="monitor-center">
                 <div className="graph-displayed">
-                  <RealTimeChart topicTitle="testTheTopic" />
+                  <RealTimeChart topicTitle="testTopic" />
                 </div>
               </div>
               <div className="monitor-bottom">
