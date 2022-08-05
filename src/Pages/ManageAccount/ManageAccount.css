@@ -53,4 +53,20 @@
     font-style: italic;
     font-size: 12px;
     margin-top: -5%;
-  }
+}
+
+.add-account {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.create-account-btn{
+    width: 100px;
+    height: 35px;
+    background: #FF452C;
+    border-radius: 8px;
+    border-style: none;
+    color: #FFFFFF;
+    margin-top: 20px;
+    margin-right: 130px;
+}

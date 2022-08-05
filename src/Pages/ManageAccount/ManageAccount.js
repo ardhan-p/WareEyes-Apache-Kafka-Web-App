@@ -7,7 +7,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import * as Yup from "yup";
 import { Formik, useFormik } from "formik";
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import "./ManageAccount.css";
 
 function ManageAccount() {
@@ -106,11 +105,11 @@ function ManageAccount() {
         console.log(user);
         if(user.admin === true) {
           console.log("Yes");
-          user.admin = "Yes";
+          return (user.admin = "Yes");
         }
         if(user.admin === false) {
           console.log("no");
-          user.admin = "No";
+          return (user.admin = "No")
         }
       })
  
@@ -178,58 +177,55 @@ function ManageAccount() {
         <h2>Account Creation</h2>
         <Formik>
           <form onSubmit={formik.handleSubmit}>
-            <table>
+            <table className="add-account">
               <tr>
-                <th>Name</th>
-                <th>
+                <th className="kafka-topic-th">Name</th>
+                <th className="kafka-topic-th">
                   <input 
+                  className= "kafka-text-box"
                     name="name" 
                     type="text" 
-                    placeholder="Enter name..."
                     onChange={formik.handleChange}
                     value={formik.values.name}>
                   </input>
+                  <span className="error-msg">{formik.errors.name}</span>
                 </th>
               </tr>
               <tr>
-                <th></th>
-                <th className="error-msg">{formik.errors.name}</th>
               </tr>
               <tr>
-                <th>Email</th>
-                <th>
+                <th className="kafka-topic-th">Email</th>
+                <th className="kafka-topic-th">
                   <input 
+                  className= "kafka-text-box"
                     name="email" 
                     type="text" 
-                    placeholder="Enter email..."
                     onChange={formik.handleChange}
                     value={formik.values.email}>
                     </input>
+                    <span className="error-msg">{formik.errors.email}</span>
                 </th>
               </tr>
               <tr>
-                <th></th>
-                <th className="error-msg">{formik.errors.email}</th>
               </tr>
               <tr>
-                <th>Password</th>
-                <th>
+                <th className="kafka-topic-th">Password</th>
+                <th className="kafka-topic-th">
                   <input 
+                  className= "kafka-text-box"
                     name="password" 
                     type="password" 
-                    placeholder="Enter password..."
                     onChange={formik.handleChange}
                     value={formik.values.password}>
                   </input>
+                  <span className="error-msg">{formik.errors.password}</span>
                 </th>
               </tr>
               <tr>
-                <th></th>
-                <th className="error-msg">{formik.errors.password}</th>
               </tr>
               <tr>
-                <th>Admin User</th>
-                <th>
+                <th className="kafka-topic-th">Admin User</th>
+                <th className="kafka-topic-th">
                   <input 
                     name="admin" 
                     type="checkbox"
@@ -239,10 +235,9 @@ function ManageAccount() {
                 </th>
               </tr>
               <tr>
-                <th></th>
                 <th>
-                  <button type="submit">
-                    Create Account
+                  <button className="create-account-btn" type="submit">
+                    + Create
                   </button>
                 </th>
               </tr>

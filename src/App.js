@@ -12,6 +12,7 @@ import React, { useContext } from 'react'
 import "./Style/dark.scss"
 import { DarkModeContext } from './Context/darkModeContext';
 import ManageAccount from "./Pages/ManageAccount/ManageAccount";
+import AddKafkaTopic from "./Pages/AddKafkaTopic/AddKafkaTopic";
 
 function App() {
   const{darkMode} = useContext(DarkModeContext);
@@ -27,6 +28,7 @@ function App() {
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/AdminTools" element={<AdminTools />} />
         <Route path="/ManageAccount" element={<ManageAccount />} />
+        <Route path="/AddKafkaTopic" element={<AddKafkaTopic />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/MonitorData" element={<MonitorData />} />
         <Route path="/Notifications" element={<Notifications />} />

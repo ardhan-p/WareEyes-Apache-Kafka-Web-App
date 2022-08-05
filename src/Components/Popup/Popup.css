@@ -15,7 +15,7 @@
     position: relative;
     padding: 32px;
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     background-color: #FFFFFF;
     border-radius: 20px;
 }
@@ -24,4 +24,13 @@
     position: absolute;
     top: 16px;
     right: 16px;
+}
+
+.close-btn {
+    width: 100px;
+    height: 35px;
+    background: #FF452C;
+    border-radius: 10px;
+    border-style: none;
+    color: #FFFFFF;
 }
