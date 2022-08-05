@@ -10,10 +10,14 @@ import axios from 'axios';
 ChartJS.register(StreamingPlugin);
 
 function RealTimeChart({ topicTitle }) {
-  // TODO: change url to point to specific topic from props
   const socketURL = 'http://localhost:8080/topic-endpoint';
+  const [topicURL, setTopicURL] = useState("")
 
   let consumerValue = 0;
+
+  useEffect(() => {
+    setTopicURL("/topic/" + topicTitle);
+  }, []);
 
   const authHeaders = {
     username: "user",
@@ -72,7 +76,7 @@ function RealTimeChart({ topicTitle }) {
         url={socketURL}
         headers={authHeaders}
         subscribeHeaders={authHeaders}
-        topics={['/topic/test']}
+        topics={[topicURL]}
         onConnect={onConnected}
         onDisconnect={onDisconnected}
         onMessage={msg => onMessageReceive(msg)}
