@@ -13,6 +13,7 @@ import "./Style/dark.scss"
 import { DarkModeContext } from './Context/darkModeContext';
 import ManageAccount from "./Pages/ManageAccount/ManageAccount";
 import AddKafkaTopic from "./Pages/AddKafkaTopic/AddKafkaTopic";
+import SetThreshold from "./Pages/SetThreshold/SetThreshold";
 
 function App() {
   const{darkMode} = useContext(DarkModeContext);
@@ -29,6 +30,7 @@ function App() {
         <Route path="/AdminTools" element={<AdminTools />} />
         <Route path="/ManageAccount" element={<ManageAccount />} />
         <Route path="/AddKafkaTopic" element={<AddKafkaTopic />} />
+        <Route path="/SetThreshold" element={<SetThreshold />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/MonitorData" element={<MonitorData />} />
         <Route path="/Notifications" element={<Notifications />} />

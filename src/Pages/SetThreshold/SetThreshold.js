@@ -4,22 +4,30 @@ import Sidebar from "../../Components/Sidebar/Sidebar";
 import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
 import * as Yup from "yup";
-import { Formik, useFormik } from "formik";
-import "./AddKafkaTopic.css";
+import { Field, Formik, useFormik } from "formik";
+import "./SetThreshold.css";
 
-function AddKafkaTopic() {
+function SetThreshold() {
   let navigate = useNavigate();
 
+  //   const dropdownOptions = [
+  //     { key: "Select an Topic", value: "" },
+  //     { key: "Topic 1", value: "Topic 1" },
+  //     { key: "Topic 2", value: "Topic 2" },
+  //     { key: "Topic 3", value: "Topic 3" },
+  //   ]
   const formik = useFormik({
     initialValues: {
       TopicName: "",
       partitions: "",
       replication: "",
+      threshold: "",
     },
     validationSchema: Yup.object().shape({
-      TopicName: Yup.string().required("Topic name is required"),
+      TopicName: Yup.string().required("Topic is required"),
       partitions: Yup.string().required("Partitions is required"),
       replication: Yup.string().required("Replication is required"),
+      threshold: Yup.string().required("Threshold is required"),
     }),
     onSubmit(values, { resetForm }) {
       console.log(values);
@@ -28,6 +36,7 @@ function AddKafkaTopic() {
         TopicName: values.TopicName,
         partitions: values.partitions,
         replication: values.replication,
+        threshold: values.threshold,
       };
 
       axios
@@ -39,7 +48,12 @@ function AddKafkaTopic() {
         })
         .then((res) => {
           console.log(res);
-          alert(values.TopicName + " has been added successfully!");
+          alert(
+            values.TopicName +
+              " Threshold of " +
+              values.threshold +
+              " has been set successfully!"
+          );
           resetForm();
         })
         .catch((err) => {
@@ -51,11 +65,11 @@ function AddKafkaTopic() {
   });
 
   return (
-    <div className="AddKafkaTopic-page">
+    <div className="SetThreshold-page">
       <Sidebar />
-      <div className="AddKafkaTopic-container">
+      <div className="SetThreshold-container">
         <Navbar />
-        <div className="AddKafkaTopic-msg">Topic creation</div>
+        <div className="SetThreshold-msg">Set Threshold</div>
         <div>
           <button
             type="button"
@@ -69,21 +83,25 @@ function AddKafkaTopic() {
         </div>
         <Formik>
           <form onSubmit={formik.handleSubmit}>
-            <table className="add-kafka-topic">
+            <table className="set-threshold-value">
               <tr>
                 <th className="kafka-topic-th">Topic name</th>
                 <th className="kafka-topic-th">
-                  <input
+                  <select
                     className="kafka-text-box"
                     name="TopicName"
-                    type="text"
                     onChange={formik.handleChange}
                     value={formik.values.TopicName}
-                  ></input>
+                  >
+                    <option value="">Select a Topic</option>
+                    <option value="Topic 1">Topic 1</option>
+                    <option value="Topic 2">Topic 2</option>
+                    <option value="Topic 3">Topic 3</option>
+                    <option value="Topic 4">Topic 4</option>
+                  </select>
                   <span className="error-msg">{formik.errors.TopicName}</span>
                 </th>
               </tr>
-              <tr></tr>
               <tr>
                 <th className="kafka-topic-th">Number of partitions</th>
                 <th className="kafka-topic-th">
@@ -97,7 +115,6 @@ function AddKafkaTopic() {
                   <span className="error-msg">{formik.errors.partitions}</span>
                 </th>
               </tr>
-              <tr></tr>
               <tr>
                 <th className="kafka-topic-th">Replication factor</th>
                 <th className="kafka-topic-th">
@@ -112,15 +129,28 @@ function AddKafkaTopic() {
                 </th>
               </tr>
               <tr>
-                <div className="create-topic">
+                <th className="kafka-topic-th">Threshold</th>
+                <th className="kafka-topic-th">
+                  <input
+                    className="kafka-text-box"
+                    name="threshold"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.threshold}
+                  ></input>
+                  <span className="error-msg">{formik.errors.threshold}</span>
+                </th>
+              </tr>
+              <tr>
+                <div className="confirm-threshold">
                   <button
                     type="submit"
-                    className="create-btn"
+                    className="confirm-btn"
                     // onClick={() => {
                     //   navigate("/AdminTools");
                     // }}
                   >
-                    + Create
+                    Confirm
                   </button>
                 </div>
               </tr>
@@ -132,4 +162,4 @@ function AddKafkaTopic() {
   );
 }
 
-export default AddKafkaTopic;
+export default SetThreshold;
