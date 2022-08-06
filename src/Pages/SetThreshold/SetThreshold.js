@@ -10,37 +10,33 @@ import "./SetThreshold.css";
 function SetThreshold() {
   let navigate = useNavigate();
 
-  //   const dropdownOptions = [
-  //     { key: "Select an Topic", value: "" },
-  //     { key: "Topic 1", value: "Topic 1" },
-  //     { key: "Topic 2", value: "Topic 2" },
-  //     { key: "Topic 3", value: "Topic 3" },
-  //   ]
+  const [topicList, setTopicList] = useState(["Default Topic1"]);
+
   const formik = useFormik({
     initialValues: {
-      TopicName: "",
+      name: "",
       partitions: "",
-      replication: "",
+      replicationFactor: "",
       threshold: "",
     },
     validationSchema: Yup.object().shape({
-      TopicName: Yup.string().required("Topic is required"),
+      name: Yup.string().required("Topic is required"),
       partitions: Yup.string().required("Partitions is required"),
-      replication: Yup.string().required("Replication is required"),
-      threshold: Yup.string().required("Threshold is required"),
+      replicationFactor: Yup.string().required("Replication factor is required"),
+      threshold: Yup.string().required("Threshold value is required"),
     }),
     onSubmit(values, { resetForm }) {
       console.log(values);
 
       const data = {
-        TopicName: values.TopicName,
+        name: values.name,
         partitions: values.partitions,
-        replication: values.replication,
+        replicationFactor: values.replicationFactor,
         threshold: values.threshold,
       };
 
       axios
-        .post("http://localhost:8080/api/v1/login/addUser", data, {
+        .post("http://localhost:8080/api/v1/kafka/modifyTopic", data, {
           auth: {
             username: "user",
             password: "password",
@@ -49,8 +45,8 @@ function SetThreshold() {
         .then((res) => {
           console.log(res);
           alert(
-            values.TopicName +
-              " Threshold of " +
+            values.name +
+              " - Threshold of " +
               values.threshold +
               " has been set successfully!"
           );
@@ -64,12 +60,30 @@ function SetThreshold() {
     },
   });
 
+  useEffect(() => {
+    axios
+    .get("http://localhost:8080/api/v1/kafka/get", {
+      auth: {
+        username: "user",
+        password: "password",
+      },
+    })
+    .then((res) => {
+      setTopicList(res.data);
+      console.log("Topic list set!");
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    }); 
+  }, [])
+
   return (
     <div className="SetThreshold-page">
       <Sidebar />
       <div className="SetThreshold-container">
         <Navbar />
-        <div className="SetThreshold-msg">Set Threshold</div>
+        <div className="SetThreshold-msg">Set Kafka Topic Threshold</div>
         <div>
           <button
             type="button"
@@ -85,30 +99,30 @@ function SetThreshold() {
           <form onSubmit={formik.handleSubmit}>
             <table className="set-threshold-value">
               <tr>
-                <th className="kafka-topic-th">Topic name</th>
+                <th className="kafka-topic-th">Topic Name</th>
                 <th className="kafka-topic-th">
                   <select
                     className="kafka-text-box"
-                    name="TopicName"
+                    name="name"
                     onChange={formik.handleChange}
-                    value={formik.values.TopicName}
+                    value={formik.values.name}
                   >
-                    <option value="">Select a Topic</option>
-                    <option value="Topic 1">Topic 1</option>
-                    <option value="Topic 2">Topic 2</option>
-                    <option value="Topic 3">Topic 3</option>
-                    <option value="Topic 4">Topic 4</option>
+                    {topicList.map((value) => (
+                      <option key={value} value={value}>
+                        {value}
+                      </option>
+                    ))}
                   </select>
-                  <span className="error-msg">{formik.errors.TopicName}</span>
+                  <span className="error-msg">{formik.errors.name}</span>
                 </th>
               </tr>
               <tr>
-                <th className="kafka-topic-th">Number of partitions</th>
+                <th className="kafka-topic-th">Number of Partitions</th>
                 <th className="kafka-topic-th">
                   <input
                     className="kafka-text-box"
                     name="partitions"
-                    type="text"
+                    type="number"
                     onChange={formik.handleChange}
                     value={formik.values.partitions}
                   ></input>
@@ -116,25 +130,25 @@ function SetThreshold() {
                 </th>
               </tr>
               <tr>
-                <th className="kafka-topic-th">Replication factor</th>
+                <th className="kafka-topic-th">Replication Factor</th>
                 <th className="kafka-topic-th">
                   <input
                     className="kafka-text-box"
-                    name="replication"
-                    type="text"
+                    name="replicationFactor"
+                    type="number"
                     onChange={formik.handleChange}
-                    value={formik.values.replication}
+                    value={formik.values.replicationFactor}
                   ></input>
-                  <span className="error-msg">{formik.errors.replication}</span>
+                  <span className="error-msg">{formik.errors.replicationFactor}</span>
                 </th>
               </tr>
               <tr>
-                <th className="kafka-topic-th">Threshold</th>
+                <th className="kafka-topic-th">Threshold Value</th>
                 <th className="kafka-topic-th">
                   <input
                     className="kafka-text-box"
                     name="threshold"
-                    type="text"
+                    type="number"
                     onChange={formik.handleChange}
                     value={formik.values.threshold}
                   ></input>

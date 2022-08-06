@@ -12,26 +12,29 @@ function AddKafkaTopic() {
 
   const formik = useFormik({
     initialValues: {
-      TopicName: "",
+      name: "",
       partitions: "",
-      replication: "",
+      replicationFactor: "",
+      threshold: "",
     },
     validationSchema: Yup.object().shape({
-      TopicName: Yup.string().required("Topic name is required"),
+      name: Yup.string().required("Topic name is required"),
       partitions: Yup.string().required("Partitions is required"),
-      replication: Yup.string().required("Replication is required"),
+      replicationFactor: Yup.string().required("Replication factor is required"),
+      threshold: Yup.string().required("Threshold value is required"),
     }),
     onSubmit(values, { resetForm }) {
       console.log(values);
 
       const data = {
-        TopicName: values.TopicName,
+        name: values.name,
         partitions: values.partitions,
-        replication: values.replication,
+        replicationFactor: values.replicationFactor,
+        threshold: values.threshold,
       };
 
       axios
-        .post("http://localhost:8080/api/v1/login/addUser", data, {
+        .post("http://localhost:8080/api/v1/kafka/createTopic", data, {
           auth: {
             username: "user",
             password: "password",
@@ -39,7 +42,7 @@ function AddKafkaTopic() {
         })
         .then((res) => {
           console.log(res);
-          alert(values.TopicName + " has been added successfully!");
+          alert(values.name + " has been added successfully!");
           resetForm();
         })
         .catch((err) => {
@@ -55,7 +58,7 @@ function AddKafkaTopic() {
       <Sidebar />
       <div className="AddKafkaTopic-container">
         <Navbar />
-        <div className="AddKafkaTopic-msg">Topic creation</div>
+        <div className="AddKafkaTopic-msg">Topic Creation</div>
         <div>
           <button
             type="button"
@@ -71,26 +74,26 @@ function AddKafkaTopic() {
           <form onSubmit={formik.handleSubmit}>
             <table className="add-kafka-topic">
               <tr>
-                <th className="kafka-topic-th">Topic name</th>
+                <th className="kafka-topic-th">Topic Name</th>
                 <th className="kafka-topic-th">
                   <input
                     className="kafka-text-box"
-                    name="TopicName"
+                    name="name"
                     type="text"
                     onChange={formik.handleChange}
-                    value={formik.values.TopicName}
+                    value={formik.values.name}
                   ></input>
-                  <span className="error-msg">{formik.errors.TopicName}</span>
+                  <span className="error-msg">{formik.errors.name}</span>
                 </th>
               </tr>
               <tr></tr>
               <tr>
-                <th className="kafka-topic-th">Number of partitions</th>
+                <th className="kafka-topic-th">Number of Partitions</th>
                 <th className="kafka-topic-th">
                   <input
                     className="kafka-text-box"
                     name="partitions"
-                    type="text"
+                    type="number"
                     onChange={formik.handleChange}
                     value={formik.values.partitions}
                   ></input>
@@ -99,16 +102,30 @@ function AddKafkaTopic() {
               </tr>
               <tr></tr>
               <tr>
-                <th className="kafka-topic-th">Replication factor</th>
+                <th className="kafka-topic-th">Replication Factor</th>
                 <th className="kafka-topic-th">
                   <input
                     className="kafka-text-box"
-                    name="replication"
-                    type="text"
+                    name="replicationFactor"
+                    type="number"
                     onChange={formik.handleChange}
-                    value={formik.values.replication}
+                    value={formik.values.replicationFactor}
                   ></input>
-                  <span className="error-msg">{formik.errors.replication}</span>
+                  <span className="error-msg">{formik.errors.replicationFactor}</span>
+                </th>
+              </tr>
+              <tr></tr>
+              <tr>
+                <th className="kafka-topic-th">Threshold Value</th>
+                <th className="kafka-topic-th">
+                  <input
+                    className="kafka-text-box"
+                    name="threshold"
+                    type="number"
+                    onChange={formik.handleChange}
+                    value={formik.values.threshold}
+                  ></input>
+                  <span className="error-msg">{formik.errors.threshold}</span>
                 </th>
               </tr>
               <tr>

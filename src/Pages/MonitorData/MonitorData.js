@@ -1,17 +1,37 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import Navbar from "../../Components/Navbar/Navbar";
 import "./MonitorData.css";
-import JSONDATA from "./MockData.json";
+import axios from "axios";
 import RealTimeChart from "../../Components/Chart/RealTimeChart";
 
 function MonitorData() {
   let navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [topicList, setTopicList] = useState(["Default Topic"]);
   const [graphName, setGraphName] = useState("Default Graph");
   const [topicThreshold, setTopicThreshold] = useState(0);
+
+  useEffect(() => {
+    axios
+    .get("http://localhost:8080/api/v1/kafka/get", {
+      auth: {
+        username: "user",
+        password: "password",
+      },
+    })
+    .then((res) => {
+      setTopicList(res.data);
+      console.log("Topic list set!");
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    }); 
+
+  }, []);
 
   return (
     <div className="monitor-data">
@@ -43,16 +63,16 @@ function MonitorData() {
                   onChange={(event) => {
                     setSearchTerm(event.target.value);
                   }}></input>
-                {JSONDATA.filter((val) => {
+                {topicList.filter((val) => {
                   if (searchTerm === "") {
                     return val
-                  } else if (val.labels.toLowerCase().includes(searchTerm.toLowerCase())) {
+                  } else if (val.toLowerCase().includes(searchTerm.toLowerCase())) {
                     return val
                   }
-                }).map((val, key) => {
+                }).map((val) => {
                   return (
-                    <div className="graph_searched" key={key}>
-                      {val.labels}
+                    <div className="graph_searched" key={val}>
+                      {val}
                     </div>
                   );
                 })}
