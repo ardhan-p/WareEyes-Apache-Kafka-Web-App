@@ -5,7 +5,6 @@ import 'chartjs-adapter-luxon';
 import StreamingPlugin from 'chartjs-plugin-streaming';
 import "./Chart.css";
 import SockJsClient from 'react-stomp'
-import axios from 'axios';
 
 ChartJS.register(StreamingPlugin);
 
@@ -17,7 +16,8 @@ function RealTimeChart({ topicTitle }) {
 
   useEffect(() => {
     setTopicURL("/topic/" + topicTitle);
-  }, []);
+    console.log("Topic selected: " + topicTitle);
+  }, [topicTitle]);
 
   const authHeaders = {
     username: "user",
@@ -26,6 +26,8 @@ function RealTimeChart({ topicTitle }) {
 
   const onConnected = () => {
     console.log("Connected to Websocket");
+    console.log("URL: " + socketURL);
+    console.log("Topic: " + topicURL);
   };
 
   const onDisconnected = () => {
@@ -91,4 +93,4 @@ function RealTimeChart({ topicTitle }) {
   );
 }
 
-export default RealTimeChart;
+export default React.memo(RealTimeChart);
