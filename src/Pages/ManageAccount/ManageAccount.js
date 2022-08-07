@@ -18,22 +18,26 @@ function ManageAccount() {
   const [selectedRows, setSelectedRows] = useState([]);
   
   const deleteUsersOnClick = (async (event) => {
-    const response = await axios
-    .post("http://localhost:8080/api/v1/login/deleteUsers", selectedRows, {
-      auth: {
-        username: "user",
-        password: "password",
-      },
-    })
-    .then((res) => {
-      console.log("Result: " + res + " - deleted sucessfully");
-      alert("Deleted successfully!")
-    })
-    .catch((err) => {
-      console.log(err);
-    }); 
-
-    setDeleteUsers(current => !current)
+    if (selectedRows.length === 0 ) {
+        alert("No users selected, please select users to delete!")
+    } else {
+      const response = await axios
+      .post("http://localhost:8080/api/v1/login/deleteUsers", selectedRows, {
+        auth: {
+          username: "user",
+          password: "password",
+        },
+      })
+      .then((res) => {
+        console.log("Result: " + res + " - deleted sucessfully");
+        alert("Deleted successfully!")
+      })
+      .catch((err) => {
+        console.log(err);
+      }); 
+  
+      setDeleteUsers(current => !current)
+    }
   });
 
   const columns = [

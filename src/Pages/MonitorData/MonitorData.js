@@ -13,6 +13,7 @@ function MonitorData() {
   const [searchTerm, setSearchTerm] = useState("");
   const [topicList, setTopicList] = useState(["Default Topic"]);
   const [graphName, setGraphName] = useState("Default Graph");
+  const [chartSpeed, setChartSpeed] = useState(30000);
   const [topicThreshold, setTopicThreshold] = useState(0);
 
   useEffect(() => {
@@ -92,7 +93,7 @@ function MonitorData() {
               </div>
               <div className="monitor-center">
                 <div className="graph-displayed">
-                  <RealTimeChart topicTitle={graphName} />
+                  <RealTimeChart topicTitle={graphName} chartSpeed={chartSpeed}/>
                 </div>
               </div>
               <div className="monitor-bottom">
@@ -100,11 +101,17 @@ function MonitorData() {
                   <label className="event-label">Threshold Limit (Events)</label>
                   <h2 className="event-counter">{topicThreshold}</h2>
                 </div>
-                <div className="filter-div">
-
-                </div>
-                <div className="export-div">
-
+                <div className="monitor-button-div">
+                  <div className="filter-div">
+                    <button className="monitor-button">
+                      Filter Chart
+                    </button>
+                  </div>
+                  <div className="export-div">
+                    <button className="monitor-button">
+                      Export Chart
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

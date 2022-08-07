@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Line, Chart } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js';
 import 'chartjs-adapter-luxon';
@@ -8,9 +8,10 @@ import SockJsClient from 'react-stomp'
 
 ChartJS.register(StreamingPlugin);
 
-function RealTimeChart({ topicTitle }) {
+function RealTimeChart({ topicTitle, chartSpeed }) {
   const socketURL = 'http://localhost:8080/topic-endpoint';
   const [topicURL, setTopicURL] = useState("")
+  const [chartDuration, setChartDuration] = useState(30000);
 
   let consumerValue = 0;
 
@@ -18,6 +19,10 @@ function RealTimeChart({ topicTitle }) {
     setTopicURL("/topic/" + topicTitle);
     console.log("Topic selected: " + topicTitle);
   }, [topicTitle]);
+
+  useEffect(() => {
+    setChartDuration(chartSpeed);
+  }, [chartSpeed]);
 
   const authHeaders = {
     username: "user",
@@ -65,7 +70,7 @@ function RealTimeChart({ topicTitle }) {
       x: {
         type: 'realtime',
         realtime: {
-          duration: 30000,
+          duration: chartDuration,
           refresh: 1000,
           onRefresh: onRefresh
         }
