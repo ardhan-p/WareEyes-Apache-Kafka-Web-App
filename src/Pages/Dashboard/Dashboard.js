@@ -8,72 +8,11 @@ import { Topic1, Topic2, Topic3, Topic4 } from "../../Components/Data/Data";
 import "./Dashboard.css";
 
 function Dashboard() {
-  const [topic1, topic2, setUserData] = useState({
-    labels: Topic1.map((data) => data.month),
-    datasets: [
-      {
-        label: "Data 1",
-        data: Topic1.map((data) => data.topicGain),
-        backgroundColor: ["rgba(75,192,192,1)"],
-        borderColor: "blue",
-        borderWidth: 2,
-      },
-      {
-        label: "Data 2",
-        data: Topic2.map((data) => data.userGain),
-        backgroundColor: ["rgba(75,192,192,1)"],
-        borderColor: "red",
-        borderWidth: 2,
-      },
-    ],
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
 
-  const [topic3] = useState({
-    labels: Topic3.map((data) => data.month),
-    datasets: [
-      {
-        label: "Data 3",
-        data: Topic3.map((data) => data.Topic3),
-        backgroundColor: ["rgba(75,192,192,1)"],
-        borderColor: "black",
-        borderWidth: 2,
-      },
-    ],
-  });
-
-  const [topic4] = useState({
-    labels: Topic4.map((data) => data.year),
-    datasets: [
-      {
-        label: "Data 4",
-        data: Topic4.map((data) => data.userGain),
-        backgroundColor: ["rgba(75,192,192,1)"],
-        borderColor: "yellow",
-        borderWidth: 2,
-      },
-    ],
-  });
-
-  const [topic5] = useState({
-    labels: Topic4.map((data) => data.year),
-    datasets: [
-      {
-        label: "Data 5",
-        data: Topic4.map((data) => data.userLost),
-        backgroundColor: ["rgba(75,192,192,1)"],
-        borderColor: "purple",
-        borderWidth: 2,
-      },
-    ],
-  });
+  const [topic1, setTopic1] = useState("Deliveries-Received");
+  const [topic2, setTopic2] = useState("Deliveries-Sent");
+  const [topic3, setTopic3] = useState("Inventory-Quantity");
+  const [topic4, setTopic4] = useState("Transactions-Completed");
 
   function Greeting() {
     const isLoggedIn = window.localStorage.getItem("isLoggedIn");
@@ -108,16 +47,16 @@ function Dashboard() {
         <div className="dashboarding-monitoring-div">
           <div className="charts">
             <div className="graph-displayed-dashboard">
-              <RealTimeChart topicTitle="Topic 1"/>
+              <RealTimeChart topicTitle={topic1}/>
             </div>
             <div className="graph-displayed-dashboard">
-              <RealTimeChart topicTitle="Topic 1"/>
+              <RealTimeChart topicTitle={topic2}/>
             </div>
             <div className="graph-displayed-dashboard">
-              <RealTimeChart topicTitle="Topic 1"/>
+              <RealTimeChart topicTitle={topic3}/>
             </div>
             <div className="graph-displayed-dashboard">
-              <RealTimeChart topicTitle="Topic 1"/>
+              <RealTimeChart topicTitle={topic4}/>
             </div>
           </div>
           <div className="dashboard-widgets">
