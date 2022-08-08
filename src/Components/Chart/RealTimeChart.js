@@ -39,9 +39,10 @@ function RealTimeChart({ topicTitle, chartSpeed }) {
     console.log("Disconnected from Websocket");
   }
 
+  // TODO: add function to trigger notification when data received exceeds topic threshold
   const onMessageReceive = (msg) => {
     consumerValue = msg;
-    console.log("Data received: " + msg);
+    console.log("Kafka topic: " + topicTitle + " - Data received: " + msg);
   };
 
   const onRefresh = (chart) => {
