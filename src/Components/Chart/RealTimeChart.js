@@ -8,10 +8,11 @@ import SockJsClient from 'react-stomp'
 
 ChartJS.register(StreamingPlugin);
 
-function RealTimeChart({ topicTitle, chartSpeed }) {
+function RealTimeChart({ topicTitle, chartSpeed, pauseState }) {
   const socketURL = 'http://localhost:8080/topic-endpoint';
   const [topicURL, setTopicURL] = useState("")
   const [chartDuration, setChartDuration] = useState(30000);
+  const [chartState, setChartState] = useState(false);
 
   let consumerValue = 0;
 
@@ -23,6 +24,10 @@ function RealTimeChart({ topicTitle, chartSpeed }) {
   useEffect(() => {
     setChartDuration(chartSpeed);
   }, [chartSpeed]);
+
+  useEffect(() => {
+    setChartState(pauseState);
+  }, [pauseState]);
 
   const authHeaders = {
     username: "user",
@@ -71,10 +76,18 @@ function RealTimeChart({ topicTitle, chartSpeed }) {
       x: {
         type: 'realtime',
         realtime: {
-          duration: chartDuration,
-          refresh: 1000,
-          onRefresh: onRefresh
-        }
+          pause: chartState,
+          onRefresh: onRefresh,
+        },
+      },
+      y: {
+        beginAtZero: true,
+      }
+    },
+    plugins :{
+      streaming: {
+        duration: chartDuration,
+        refresh: 1000,
       }
     }
   };

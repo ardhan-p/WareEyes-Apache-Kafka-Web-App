@@ -15,6 +15,7 @@ function MonitorData() {
   const [graphName, setGraphName] = useState("Default Graph");
   const [chartSpeed, setChartSpeed] = useState(30000);
   const [topicThreshold, setTopicThreshold] = useState(0);
+  const [chartState, setChartState] = useState(false);
 
   useEffect(() => {
     axios
@@ -38,6 +39,11 @@ function MonitorData() {
   // TODO: get kafka topic threshold from database and set it using useState
   const handleTopicOnClick = (val) => {
     setGraphName(val);
+  };
+
+  const togglePauseState = (setChartState) => {
+    setChartState(current => !current);
+    RealTimeChart.update('none');    
   };
 
   return (
@@ -93,7 +99,7 @@ function MonitorData() {
               </div>
               <div className="monitor-center">
                 <div className="graph-displayed">
-                  <RealTimeChart topicTitle={graphName} chartSpeed={chartSpeed}/>
+                  <RealTimeChart topicTitle={graphName} chartSpeed={chartSpeed} pauseState={chartState} />
                 </div>
               </div>
               <div className="monitor-bottom">
@@ -103,7 +109,7 @@ function MonitorData() {
                 </div>
                 <div className="monitor-button-div">
                   <div className="filter-div">
-                    <button className="monitor-button">
+                    <button className="monitor-button" onClick={() => togglePauseState(setChartState)}>
                       Filter Chart
                     </button>
                   </div>

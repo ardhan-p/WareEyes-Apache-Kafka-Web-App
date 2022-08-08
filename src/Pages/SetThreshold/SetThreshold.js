@@ -123,6 +123,7 @@ function SetThreshold() {
                     className="kafka-text-box"
                     name="partitions"
                     type="number"
+                    min="1"
                     onChange={formik.handleChange}
                     value={formik.values.partitions}
                   ></input>
@@ -136,6 +137,7 @@ function SetThreshold() {
                     className="kafka-text-box"
                     name="replicationFactor"
                     type="number"
+                    min="1"
                     onChange={formik.handleChange}
                     value={formik.values.replicationFactor}
                   ></input>
@@ -149,6 +151,7 @@ function SetThreshold() {
                     className="kafka-text-box"
                     name="threshold"
                     type="number"
+                    min="0"
                     onChange={formik.handleChange}
                     value={formik.values.threshold}
                   ></input>
