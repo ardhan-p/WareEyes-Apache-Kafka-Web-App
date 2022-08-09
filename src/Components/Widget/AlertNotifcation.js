@@ -5,9 +5,10 @@ import { getCustomFullDateAndTimeWithAmPm } from "@hirishu10/simple-date-time";
 import "./AlertNotifcation.css";
 import Collapse from '@mui/material/Collapse';
 
-export default function AlertNotifcation() {
+function AlertNotifcation({topic, threshold}) {
   const [open, setOpen] = React.useState(true);
   const timestampLower = getCustomFullDateAndTimeWithAmPm();
+
   return (
     <Collapse in={open}>
     <div className="alertnotifcation">
@@ -15,7 +16,7 @@ export default function AlertNotifcation() {
         <ErrorOutlineIcon />
       </div>
       <div className="alert-message">
-        Dataset 1 passed threshold “50”
+        {topic} passed threshold “{threshold}”
         <div className="alert-time">{timestampLower}</div>
         <button type="button" className="cancel-icon" onClick={() => {
                 setOpen(false);
@@ -25,3 +26,5 @@ export default function AlertNotifcation() {
     </Collapse>
   );
 }
+
+export default AlertNotifcation;

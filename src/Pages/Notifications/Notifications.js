@@ -160,6 +160,7 @@ const EnhancedTableToolbar = (props) => {
           console.log("Notifications set!");
           console.log(res.data);
           setRows(res.data);
+
         })
         .catch((err) => {
           console.log(err);
@@ -248,6 +249,8 @@ function Notifications() {
     .then((res) => {
       console.log("Notifications set!");
       setRows(res.data);
+      window.localStorage.setItem("notificationCounter", res.data.length.toString());
+      // console.log(res.data.length.toString());
     })
     .catch((err) => {
       console.log(err);

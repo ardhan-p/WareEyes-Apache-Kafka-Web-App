@@ -11,7 +11,7 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 function Sidebar() {
   let navigate = useNavigate();
 
-  const [notificationAlert, setnotificationAlert] = useState("100");
+  const [notificationAlert, setnotificationAlert] = useState(window.localStorage.getItem("notficationCounter"));
 
   function AdminTools() {
     const isAdmin = localStorage.getItem("isAdmin");
@@ -53,7 +53,7 @@ function Sidebar() {
           <Link to="/Notifications">
             <li>
               <NotificationsNoneIcon className="icon" />
-              <div className="counter">{notificationAlert}</div>
+              <div className="counter">{window.localStorage.getItem("notificationCounter")}</div>
               <span className="title"> Notification </span>
             </li>
           </Link>

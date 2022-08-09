@@ -8,7 +8,7 @@ import SockJsClient from 'react-stomp'
 
 ChartJS.register(StreamingPlugin);
 
-function RealTimeChart({ topicTitle, chartSpeed, threshold }) {
+function RealTimeChart({ topicTitle, chartSpeed, setTopicData}) {
   const socketURL = 'http://localhost:8080/topic-endpoint';
   const [topicURL, setTopicURL] = useState("")
   const [chartDuration, setChartDuration] = useState(10000);
@@ -39,10 +39,9 @@ function RealTimeChart({ topicTitle, chartSpeed, threshold }) {
     console.log("Disconnected from Websocket");
   }
 
-  // TODO: add function to trigger notification when data received exceeds topic threshold
   const onMessageReceive = (msg) => {
     consumerValue = msg;
-    //console.log(topicTitle + " - Data received: " + msg);
+    setTopicData(consumerValue);
   };
 
   const onRefresh = (chart) => {
