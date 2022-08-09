@@ -8,11 +8,10 @@ import SockJsClient from 'react-stomp'
 
 ChartJS.register(StreamingPlugin);
 
-function RealTimeChart({ topicTitle, chartSpeed, pauseState }) {
+function RealTimeChart({ topicTitle, chartSpeed, threshold }) {
   const socketURL = 'http://localhost:8080/topic-endpoint';
   const [topicURL, setTopicURL] = useState("")
-  const [chartDuration, setChartDuration] = useState(30000);
-  const [chartState, setChartState] = useState(false);
+  const [chartDuration, setChartDuration] = useState(10000);
 
   let consumerValue = 0;
 
@@ -24,10 +23,6 @@ function RealTimeChart({ topicTitle, chartSpeed, pauseState }) {
   useEffect(() => {
     setChartDuration(chartSpeed);
   }, [chartSpeed]);
-
-  useEffect(() => {
-    setChartState(pauseState);
-  }, [pauseState]);
 
   const authHeaders = {
     username: "user",
@@ -47,7 +42,7 @@ function RealTimeChart({ topicTitle, chartSpeed, pauseState }) {
   // TODO: add function to trigger notification when data received exceeds topic threshold
   const onMessageReceive = (msg) => {
     consumerValue = msg;
-    console.log("Kafka topic: " + topicTitle + " - Data received: " + msg);
+    //console.log(topicTitle + " - Data received: " + msg);
   };
 
   const onRefresh = (chart) => {
@@ -76,7 +71,6 @@ function RealTimeChart({ topicTitle, chartSpeed, pauseState }) {
       x: {
         type: 'realtime',
         realtime: {
-          pause: chartState,
           onRefresh: onRefresh,
         },
       },
@@ -88,6 +82,7 @@ function RealTimeChart({ topicTitle, chartSpeed, pauseState }) {
       streaming: {
         duration: chartDuration,
         refresh: 1000,
+        delay: 3000,
       }
     }
   };

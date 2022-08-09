@@ -5,6 +5,8 @@ import Navbar from "../../Components/Navbar/Navbar";
 import "./MonitorData.css";
 import axios from "axios";
 import RealTimeChart from "../../Components/Chart/RealTimeChart";
+import Graph from "../../Components/Chart/Chart";
+import { Topic1, Topic2, Topic3, Topic4 } from "../../Components/Data/Data";
 
 function MonitorData() {
   let navigate = useNavigate();
@@ -15,7 +17,8 @@ function MonitorData() {
   const [graphName, setGraphName] = useState("Default Graph");
   const [chartSpeed, setChartSpeed] = useState(30000);
   const [topicThreshold, setTopicThreshold] = useState(0);
-  const [chartState, setChartState] = useState(false);
+  const [eachTopicThreshold, setEachTopicThreshold] = useState([]);
+  // const [chartState, setChartState] = useState(false);
 
   useEffect(() => {
     axios
@@ -26,9 +29,15 @@ function MonitorData() {
       },
     })
     .then((res) => {
-      setTopicList(res.data);
+      setTopicList(res.data.map((topic) => {
+        return topic.name;
+      }));
+      setEachTopicThreshold(res.data.map((topic) => {
+        return topic.threshold;
+      }));
+      setGraphName(res.data[0].name);
+      setTopicThreshold(res.data[0].threshold);
       console.log("Topic list set!");
-      console.log(res.data);
     })
     .catch((err) => {
       console.log(err);
@@ -38,13 +47,17 @@ function MonitorData() {
 
   // TODO: get kafka topic threshold from database and set it using useState
   const handleTopicOnClick = (val) => {
+    const index = topicList.indexOf(val);
     setGraphName(val);
+    setTopicThreshold(eachTopicThreshold[index]);
   };
 
-  const togglePauseState = (setChartState) => {
-    setChartState(current => !current);
-    RealTimeChart.update('none');    
-  };
+  // const togglePauseState = (setChartState) => {
+  //   setChartState(current => !current);
+  //   RealTimeChart.update('none');    
+  // };
+
+  // onClick={() => togglePauseState(setChartState)}
 
   return (
     <div className="monitor-data">
@@ -95,11 +108,12 @@ function MonitorData() {
           <div className="right">
             <div className="monitor-graph-container">
               <div className="monitor-top">
-                <label className="graph-label">{graphName + " Kafka Event Data"}</label>
+                <label className="graph-label">{graphName + " (Kafka Event Data Graph)"}</label>
               </div>
               <div className="monitor-center">
                 <div className="graph-displayed">
-                  <RealTimeChart topicTitle={graphName} chartSpeed={chartSpeed} pauseState={chartState} />
+                  {/* <RealTimeChart topicTitle={graphName} chartSpeed={chartSpeed} pauseState={chartState} /> */}
+                  <Graph topicTitle={graphName + " (Kafka Event Data Graph)"} />
                 </div>
               </div>
               <div className="monitor-bottom">
@@ -109,7 +123,7 @@ function MonitorData() {
                 </div>
                 <div className="monitor-button-div">
                   <div className="filter-div">
-                    <button className="monitor-button" onClick={() => togglePauseState(setChartState)}>
+                    <button className="monitor-button">
                       Filter Chart
                     </button>
                   </div>

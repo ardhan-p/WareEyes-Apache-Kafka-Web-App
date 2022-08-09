@@ -80,6 +80,7 @@ function AddKafkaTopic() {
                     className="kafka-text-box"
                     name="name"
                     type="text"
+                    maxlength = "27"
                     onChange={formik.handleChange}
                     value={formik.values.name}
                   ></input>
