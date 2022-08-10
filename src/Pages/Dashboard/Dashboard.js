@@ -37,6 +37,12 @@ function Dashboard() {
 
   // fetch topic threshold data from backend server
   useEffect(() => {
+
+    if (localStorage.getItem("notificationCounter") === null) {
+      let newCounter = 0;
+      window.localStorage.setItem("notificationCounter", newCounter.toString());
+    }
+
     axios
     .get("http://localhost:8080/api/v1/kafka/get", {
       auth: {
@@ -66,8 +72,6 @@ function Dashboard() {
       console.log(err);
     }); 
 
-    let newCounter = 0;
-    window.localStorage.setItem("notificationCounter", newCounter.toString());
 
   }, []);
 

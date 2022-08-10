@@ -13,24 +13,24 @@ function AddKafkaTopic() {
   const formik = useFormik({
     initialValues: {
       name: "",
+      threshold: "",
       partitions: "",
       replicationFactor: "",
-      threshold: "",
     },
     validationSchema: Yup.object().shape({
       name: Yup.string().required("Topic name is required"),
+      threshold: Yup.string().required("Threshold value is required"),
       partitions: Yup.string().required("Partitions is required"),
       replicationFactor: Yup.string().required("Replication factor is required"),
-      threshold: Yup.string().required("Threshold value is required"),
     }),
     onSubmit(values, { resetForm }) {
       console.log(values);
 
       const data = {
         name: values.name,
+        threshold: values.threshold,
         partitions: values.partitions,
         replicationFactor: values.replicationFactor,
-        threshold: values.threshold,
       };
 
       axios
@@ -89,6 +89,21 @@ function AddKafkaTopic() {
               </tr>
               <tr></tr>
               <tr>
+                <th className="kafka-topic-th">Threshold Value</th>
+                <th className="kafka-topic-th">
+                  <input
+                    className="kafka-text-box"
+                    name="threshold"
+                    type="number"
+                    min="0"
+                    onChange={formik.handleChange}
+                    value={formik.values.threshold}
+                  ></input>
+                  <span className="error-msg">{formik.errors.threshold}</span>
+                </th>
+              </tr>
+              <tr></tr>
+              <tr>
                 <th className="kafka-topic-th">Number of Partitions</th>
                 <th className="kafka-topic-th">
                   <input
@@ -115,21 +130,6 @@ function AddKafkaTopic() {
                     value={formik.values.replicationFactor}
                   ></input>
                   <span className="error-msg">{formik.errors.replicationFactor}</span>
-                </th>
-              </tr>
-              <tr></tr>
-              <tr>
-                <th className="kafka-topic-th">Threshold Value</th>
-                <th className="kafka-topic-th">
-                  <input
-                    className="kafka-text-box"
-                    name="threshold"
-                    type="number"
-                    min="0"
-                    onChange={formik.handleChange}
-                    value={formik.values.threshold}
-                  ></input>
-                  <span className="error-msg">{formik.errors.threshold}</span>
                 </th>
               </tr>
               <tr>

@@ -45,19 +45,11 @@ function MonitorData() {
 
   }, []);
 
-  // TODO: get kafka topic threshold from database and set it using useState
   const handleTopicOnClick = (val) => {
     const index = topicList.indexOf(val);
     setGraphName(val);
     setTopicThreshold(eachTopicThreshold[index]);
   };
-
-  // const togglePauseState = (setChartState) => {
-  //   setChartState(current => !current);
-  //   RealTimeChart.update('none');    
-  // };
-
-  // onClick={() => togglePauseState(setChartState)}
 
   return (
     <div className="monitor-data">
