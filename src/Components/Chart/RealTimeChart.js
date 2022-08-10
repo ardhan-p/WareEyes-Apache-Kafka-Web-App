@@ -8,7 +8,7 @@ import SockJsClient from 'react-stomp'
 
 ChartJS.register(StreamingPlugin);
 
-function RealTimeChart({ topicTitle, chartSpeed, setTopicData}) {
+function RealTimeChart({ topicTitle, chartSpeed, setTopicData }) {
   const socketURL = 'http://localhost:8080/topic-endpoint';
   const [topicURL, setTopicURL] = useState("")
   const [chartDuration, setChartDuration] = useState(10000);

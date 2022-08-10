@@ -45,7 +45,7 @@ const headCells = [
     id: "id",
     numeric: true,
     disablePadding: false,
-    label:"ID"
+    label:"ID",
   },
   {
     id: "message",
@@ -158,9 +158,14 @@ const EnhancedTableToolbar = (props) => {
         })
         .then((res) => {
           console.log("Notifications set!");
-          console.log(res.data);
+          res.data?.map((notification) => {
+            const msg = notification.message.substring(0, notification.message.indexOf('@')); 
+            return (notification.message = msg);
+          });
           setRows(res.data);
-
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         })
         .catch((err) => {
           console.log(err);
@@ -248,9 +253,13 @@ function Notifications() {
     })
     .then((res) => {
       console.log("Notifications set!");
+      console.log(res.data);
+      res.data?.map((notification) => {
+        const msg = notification.message.substring(0, notification.message.indexOf('@')); 
+        return (notification.message = msg);
+      });
       setRows(res.data);
       window.localStorage.setItem("notificationCounter", res.data.length.toString());
-      // console.log(res.data.length.toString());
     })
     .catch((err) => {
       console.log(err);
@@ -321,6 +330,7 @@ function Notifications() {
                   sx={{ minWidth: 750 }}
                   aria-labelledby="tableTitle"
                   size="small"
+                  key={rows.id}
                 >
                   <EnhancedTableHead
                     numSelected={selected.length}

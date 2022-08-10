@@ -82,6 +82,8 @@ function Dashboard() {
     const today = date.toISOString().slice(0, 10);
     const time = date.getHours() + ":" + date.getUTCMinutes() + ":" + date.getUTCSeconds();
 
+    const id = Math.random().toString(16).slice(2);
+
     const data = {
       message: "",
       date: today,
@@ -91,28 +93,28 @@ function Dashboard() {
     if (topic1Data >= threshold1) {
       setNotificationTopic1(topic1);
       setNotificationValue1(topic1Data);
-      data.message = topic1 + " passed threshold '" + topic1Data + "'";
+      data.message = topic1 + " passed threshold '" + topic1Data + "' @" + id;
       hasPassedThreshold = true;
     }
 
     if (topic2Data >= threshold2) {
       setNotificationTopic1(topic2);
       setNotificationValue1(topic2Data);
-      data.message = topic2 + " passed threshold '" + topic2Data + "'";
+      data.message = topic2 + " passed threshold '" + topic2Data + "' @" + id;
       hasPassedThreshold = true;
     }
 
     if (topic3Data >= threshold3) {
       setNotificationTopic2(topic3);
       setNotificationValue2(topic3Data);
-      data.message = topic3 + " passed threshold '" + topic3Data + "'";
+      data.message = topic3 + " passed threshold '" + topic3Data + "' @" + id;
       hasPassedThreshold = true;
     }
 
     if (topic4Data >= threshold4) {
       setNotificationTopic2(topic4);
       setNotificationValue2(topic4Data);
-      data.message = topic4 + " passed threshold '" + topic4Data + "'";
+      data.message = topic4 + " passed threshold '" + topic4Data + "' @" + id;
       hasPassedThreshold = true;
     }
 
