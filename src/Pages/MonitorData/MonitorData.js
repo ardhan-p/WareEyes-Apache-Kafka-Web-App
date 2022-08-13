@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState , useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import Navbar from "../../Components/Navbar/Navbar";
@@ -51,6 +51,7 @@ function MonitorData() {
     setTopicThreshold(eachTopicThreshold[index]);
   };
 
+
   return (
     <div className="monitor-data">
       <Sidebar />
@@ -75,7 +76,6 @@ function MonitorData() {
                   className="search-bar"
                   type="text"
                   id="myInput"
-                  onkeyup="myFunction()"
                   placeholder="Search Topic..."
                   title="Type in a topic"
                   onChange={(event) => {
@@ -105,25 +105,7 @@ function MonitorData() {
               <div className="monitor-center">
                 <div className="graph-displayed">
                   {/* <RealTimeChart topicTitle={graphName} chartSpeed={chartSpeed} pauseState={chartState} /> */}
-                  <Graph topicTitle={graphName + " (Kafka Event Data Graph)"} />
-                </div>
-              </div>
-              <div className="monitor-bottom">
-                <div className="event-display">
-                  <label className="event-label">Threshold Limit (Events)</label>
-                  <h2 className="event-counter">{topicThreshold}</h2>
-                </div>
-                <div className="monitor-button-div">
-                  <div className="filter-div">
-                    <button className="monitor-button">
-                      Filter Chart
-                    </button>
-                  </div>
-                  <div className="export-div">
-                    <button className="monitor-button">
-                      Export Chart
-                    </button>
-                  </div>
+                  <Graph topicTitle={graphName + " (Kafka Event Data Graph)"} topicThreshold={topicThreshold} />
                 </div>
               </div>
             </div>
