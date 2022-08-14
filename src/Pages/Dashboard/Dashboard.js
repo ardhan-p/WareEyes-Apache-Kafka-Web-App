@@ -305,7 +305,7 @@ function Dashboard() {
       </div>
       <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
         <h2>Set Topics to Monitor</h2>
-        <div>
+        <div className="edit-dashboard-popup">
           <select className="select-monitor-topic" defaultValue={'DEFAULT'} onChange={selectTopic1}>
             <option value="DEFAULT" disabled>Choose topic...</option>
             {topicList.map((value) => (

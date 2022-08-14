@@ -68,6 +68,11 @@
     padding-left: 20px;
 }
 
+.select-monitor-topic{
+    border-style: none;
+    margin: 20px;
+}
+
 /* #edit-dashboard {
     float: right;
     color: #F4F4F4;
