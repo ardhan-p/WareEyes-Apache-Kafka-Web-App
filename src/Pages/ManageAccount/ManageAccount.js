@@ -18,7 +18,6 @@ function ManageAccount() {
   const [selectedRows, setSelectedRows] = useState([]);
 
   const deleteUsersOnClick = async (event) => {
-
     try {
       if (selectedRows.length === 0) {
         alert("No users selected, please select users to delete!");
@@ -34,7 +33,6 @@ function ManageAccount() {
           }
         });
 
-        //console.log (selectedRows);
         await axios
           .post("http://localhost:8080/api/v1/login/deleteUsers", selectedRows, {
             auth: {

@@ -75,6 +75,16 @@ function Sidebar() {
             window.localStorage.removeItem("isLoggedIn");
             window.localStorage.removeItem("isAdmin");
             window.localStorage.removeItem("currentEmail");
+
+            window.localStorage.removeItem("topic1Name");
+            window.localStorage.removeItem("topic2Name");
+            window.localStorage.removeItem("topic3Name");
+            window.localStorage.removeItem("topic4Name");
+
+            window.localStorage.removeItem("topic1Threshold");
+            window.localStorage.removeItem("topic2Threshold");
+            window.localStorage.removeItem("topic3Threshold");
+            window.localStorage.removeItem("topic4Threshold");
             navigate("/");
             setTimeout(() => {
               window.location.reload();

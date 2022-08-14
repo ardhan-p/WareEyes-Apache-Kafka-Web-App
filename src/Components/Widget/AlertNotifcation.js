@@ -18,9 +18,6 @@ function AlertNotifcation({topic, threshold}) {
       <div className="alert-message">
         {topic} passed threshold “{threshold}”
         <div className="alert-time">{timestampLower}</div>
-        <button type="button" className="cancel-icon" onClick={() => {
-                setOpen(false);
-              }}><CancelOutlinedIcon /></ button>
       </div>
     </div>
     </Collapse>

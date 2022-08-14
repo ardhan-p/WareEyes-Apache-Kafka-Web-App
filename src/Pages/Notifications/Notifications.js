@@ -254,10 +254,6 @@ function Notifications() {
     .then((res) => {
       console.log("Notifications set!");
       console.log(res.data);
-      // res.data?.map((notification) => {
-      //   const msg = notification.message.substring(0, notification.message.indexOf('@')); 
-      //   return (notification.message = msg);
-      // });
       setRows(res.data);
       window.localStorage.setItem("notificationCounter", res.data.length.toString());
     })
