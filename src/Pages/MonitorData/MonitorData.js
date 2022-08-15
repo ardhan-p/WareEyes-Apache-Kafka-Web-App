@@ -1,58 +1,56 @@
-import React, { useState } from "react";
+import React, { useState , useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import Navbar from "../../Components/Navbar/Navbar";
-import SearchIcon from "@mui/icons-material/Search";
-import Graph from "../../Components/Chart/Chart";
-import { Topic1, Topic2 } from "../../Components/Data/Data";
 import "./MonitorData.css";
-import JSONDATA from "./MockData.json";
+import axios from "axios";
 import RealTimeChart from "../../Components/Chart/RealTimeChart";
+import Graph from "../../Components/Chart/Chart";
+import { Topic1, Topic2, Topic3, Topic4 } from "../../Components/Data/Data";
 
 function MonitorData() {
   let navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [topicList, setTopicList] = useState([]);
+  const [graphName, setGraphName] = useState("");
+  const [chartSpeed, setChartSpeed] = useState(30000);
+  const [topicThreshold, setTopicThreshold] = useState(0);
+  const [eachTopicThreshold, setEachTopicThreshold] = useState([]);
 
-  const [topic1, topic2, setUserData] = useState({
-    labels: Topic1.map((data) => data.month),
-    datasets: [
-      {
-        label: "Data 1",
-        data: Topic1.map((data) => data.topicGain),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
-        ],
-        borderColor: "blue",
-        borderWidth: 2,
+  useEffect(() => {
+    console.log("Before:");
+    console.log(topicList);
+
+    axios
+    .get("http://localhost:8080/api/v1/kafka/get", {
+      auth: {
+        username: "user",
+        password: "password",
       },
-      {
-        label: "Data 2",
-        data: Topic2.map((data) => data.userGain),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
-        ],
-        borderColor: "red",
-        borderWidth: 2,
-      },
-    ],
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
+    })
+    .then((res) => {
+      setTopicList(res.data.map((topic) => {
+        return topic.name;
+      }));
+      setEachTopicThreshold(res.data.map((topic) => {
+        return topic.threshold;
+      }));
+      setGraphName(res.data[0].name);
+      setTopicThreshold(res.data[0].threshold);
+      console.log("Topic list set!");
+    })
+    .catch((err) => {
+      console.log(err);
+    }); 
+
+  }, []);
+
+  const handleTopicOnClick = (val) => {
+    const index = topicList.indexOf(val);
+    setGraphName(val);
+    setTopicThreshold(eachTopicThreshold[index]);
+  };
 
   return (
     <div className="monitor-data">
@@ -68,35 +66,31 @@ function MonitorData() {
                 className="go-back"
                 onClick={() => {
                   navigate("/DashBoard");
-                }}
-              >
+                }}>
                 Back
               </button>
             </div>
             <div className="search-container">
               <div>
-                <SearchIcon className="search-icon" fontSize="large" />
                 <input
                   className="search-bar"
                   type="text"
                   id="myInput"
-                  onkeyup="myFunction()"
                   placeholder="Search Topic..."
                   title="Type in a topic"
                   onChange={(event) => {
                     setSearchTerm(event.target.value);
-                  }}
-                ></input>
-                {JSONDATA.filter((val) => {
+                  }}></input>
+                {topicList.filter((val) => {
                   if (searchTerm === "") {
                     return val
-                  } else if (val.labels.toLowerCase().includes(searchTerm.toLowerCase())) {
+                  } else if (val.toLowerCase().includes(searchTerm.toLowerCase())) {
                     return val
                   }
-                }).map((val, key) => {
+                }).map((val) => {
                   return (
-                    <div className="graph_searched" key={key}>
-                      {val.labels}
+                    <div className="graph_searched" onClick={() => handleTopicOnClick(val)} key={val}>
+                      {val}
                     </div>
                   );
                 })}
@@ -105,20 +99,16 @@ function MonitorData() {
           </div>
           <div className="right">
             <div className="monitor-graph-container">
-              <div classNam="monitor-top">
-                <label className="graph-label">Topic 1 Graph</label>
+              <div className="monitor-top">
+                <label className="graph-label">{graphName + " (Kafka Event Data Graph)"}</label>
               </div>
-              <div classNam="monitor-center">
+              <div className="monitor-center">
                 <div className="graph-displayed">
-                  <RealTimeChart topicTitle="Topic 1" />
-                </div>
-              </div>
-              <div classNam="monitor-bottom">
-                <div>
-                  <label className="event-display">
-                    Threshold Limit (Events)
-                    <text className="event-counter">TBD</text>
-                  </label>
+                  {
+                    graphName && topicThreshold && (<>
+                      <Graph topicTitle={graphName} topicThreshold={topicThreshold} />
+                    </>)
+                  }
                 </div>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Sidebar.css";
 import { useNavigate, Link } from "react-router-dom";
 import HouseIcon from "@mui/icons-material/House";
@@ -6,11 +6,28 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
-
-
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 function Sidebar() {
   let navigate = useNavigate();
+
+  const [notificationAlert, setnotificationAlert] = useState(window.localStorage.getItem("notficationCounter"));
+
+  function AdminTools() {
+    const isAdmin = localStorage.getItem("isAdmin");
+    if (isAdmin === "true") {
+      return (
+        <Link to="/AdminTools">
+          <li>
+            <AdminPanelSettingsIcon className="icon" />
+            <span className="title"> Admin Tools </span>
+          </li>
+        </Link>
+      );
+    }
+      console.log(" user is not admin");
+      return;
+    }
 
   return (
     <div className="sidebar">
@@ -36,16 +53,18 @@ function Sidebar() {
           <Link to="/Notifications">
             <li>
               <NotificationsNoneIcon className="icon" />
-              <div className="counter">1</div>
+              <div className="counter">{window.localStorage.getItem("notificationCounter")}</div>
               <span className="title"> Notification </span>
             </li>
           </Link>
+          <AdminTools />
           <Link to="/Settings">
             <li>
               <SettingsIcon className="icon" />
               <span className="title"> Settings</span>
             </li>
           </Link>
+          
         </ul>
       </div>
       <div className="bottom">
@@ -53,7 +72,23 @@ function Sidebar() {
           className="logout-btn"
           type="button"
           onClick={() => {
-            navigate("/Login");
+            window.localStorage.removeItem("isLoggedIn");
+            window.localStorage.removeItem("isAdmin");
+            window.localStorage.removeItem("currentEmail");
+
+            window.localStorage.removeItem("topic1Name");
+            window.localStorage.removeItem("topic2Name");
+            window.localStorage.removeItem("topic3Name");
+            window.localStorage.removeItem("topic4Name");
+
+            window.localStorage.removeItem("topic1Threshold");
+            window.localStorage.removeItem("topic2Threshold");
+            window.localStorage.removeItem("topic3Threshold");
+            window.localStorage.removeItem("topic4Threshold");
+            navigate("/");
+            setTimeout(() => {
+              window.location.reload();
+            }, 600);
           }}
         >
           {" "}

@@ -1,0 +1,65 @@
+.AddKafkaTopic-page {
+    background-color: #FFF;
+    display: flex;
+}
+
+.AddKafkaTopic-container {
+    flex: 7;
+}
+
+.AddKafkaTopic-msg {
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 57px;
+    margin: 40px;
+}
+
+.go-back {
+    margin-left: 60px;
+}
+
+.create-topic {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-right: 10%;
+}
+
+.create-btn{
+    width: 100px;
+    height: 35px;
+    background: #FF452C;
+    border-radius: 8px;
+    border-style: none;
+    color: #FFFFFF;
+    margin-top: 20px;
+    margin-right: 200px;
+}
+
+.add-kafka-topic {
+    border-collapse:collapse;
+    border-spacing:0;
+    width: 40%;
+    margin: 40px;
+}
+
+.kafka-topic-th {
+    border: 1px solid black;
+    overflow:hidden;
+    padding: 10px;
+    word-break:normal;
+    text-align:left;
+}
+
+.kafka-text-box{
+    /* border-style: none; */
+    height: 40px;
+    width: 290px;
+    background: rgba(184, 219, 253, 0.3);
+    border: 1px solid #000000;
+    padding-left: 10px;
+}

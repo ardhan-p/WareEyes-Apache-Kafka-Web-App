@@ -1,4 +1,4 @@
-import { React, useState, useContext } from "react";
+import { React } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
@@ -6,6 +6,7 @@ import logo1 from "../../Images/app_icon.png";
 import "./ResetPassword.css";
 import { HiOutlineLockClosed } from "react-icons/hi";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 function togglePassword() {
   var x = document.getElementById("new-password");
@@ -40,11 +41,9 @@ function toggleConfirmPassword() {
 }
 
 function ResetPassword() {
-
   const location = useLocation();
 
   const {
-    values,
     handleSubmit,
     getFieldProps,
     touched,
@@ -56,7 +55,7 @@ function ResetPassword() {
     initialValues: {
       newPassword: "",
       confirmPassword: "",
-      password:"",
+      password: "",
       email: location.state.email,
     },
 
@@ -84,7 +83,7 @@ function ResetPassword() {
         password: values.confirmPassword,
       };
 
-      console.log(data)
+      console.log(data);
 
       axios
         .post("http://localhost:8080/api/v1/login/updatePassword", data, {
@@ -94,10 +93,10 @@ function ResetPassword() {
           },
         })
         .then((res) => {
-          if(res.data === 1){
-          alert("Password successfully changed!");
-          navigate("/Login");
-          console.log(res);
+          if (res.data === 1) {
+            alert("Password successfully changed!");
+            navigate("/Login");
+            console.log(res);
           } else {
             alert("Failed to reset password!");
             console.log(res);
@@ -114,6 +113,7 @@ function ResetPassword() {
 
   return (
     <div id="reset-password-page">
+      <Helmet bodyAttributes={{ style: "background-color : #4869B2" }} />
       <div id="reset-password-container">
         <img src={logo1} alt="Application Logo" id="app-logo1" />
         <label id="create-new-password-title"> Create New Password </label>

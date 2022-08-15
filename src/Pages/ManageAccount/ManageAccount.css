@@ -1,0 +1,72 @@
+.manageAcc-page {
+    background-color: #FFF;
+    display: flex;
+}
+
+.manageAcc-container {
+    flex: 7;
+}
+
+.welcome-msg {
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 57px;
+    margin: 40px;
+}
+
+.go-back {
+    margin-left: 60px;
+}
+
+.add-delete {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-right: 10%;
+}
+
+.add-btn {
+    width: 100px;
+    height: 35px;
+    background: #4FDB0E;
+    border-radius: 10px;
+    border-style: none;
+    color: #FFFFFF;
+}
+
+.delete-btn {
+    width: 100px;
+    height: 35px;
+    background: #FF452C;
+    border-radius: 10px;
+    border-style: none;
+    color: #FFFFFF;
+}
+
+.error-msg {
+    color: #FF0000;
+    margin-left: 13%;
+    font-style: italic;
+    font-size: 12px;
+    margin-top: -5%;
+}
+
+.add-account {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.create-account-btn{
+    width: 100px;
+    height: 35px;
+    background: #FF452C;
+    border-radius: 8px;
+    border-style: none;
+    color: #FFFFFF;
+    margin-top: 20px;
+    margin-right: 130px;
+}
