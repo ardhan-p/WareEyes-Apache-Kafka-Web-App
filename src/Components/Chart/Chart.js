@@ -17,7 +17,6 @@ function Graph({ topicTitle, topicThreshold }) {
   const [dataPoints, setDataPoints] = useState([]);
 
   const data = {
-    // labels: graphXData,
     datasets: [
       {
         label: "Event Value",
@@ -114,6 +113,7 @@ function Graph({ topicTitle, topicThreshold }) {
 
   }
 
+  // to get the current date in a formate of "YYYY-MM-DD"
   function currentDate() {
     var d = new Date(),
     month = "" + (d.getMonth() + 1),
@@ -127,14 +127,13 @@ function Graph({ topicTitle, topicThreshold }) {
   }
 
   useEffect(() => {
+    let status = false;
     const url = "http://localhost:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + currentDate();
 
-    let status = false;
-
-    console.log(url);
     setGraphDate(selectedDate);
 
-    axios.get(url, {
+    axios
+    .get(url, {
       auth: {
         username: "user",
         password: "password",

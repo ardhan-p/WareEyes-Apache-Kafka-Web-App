@@ -1,12 +1,10 @@
-import React, { useState , useEffect, useRef, useCallback } from "react";
+import React, { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import Navbar from "../../Components/Navbar/Navbar";
-import "./MonitorData.css";
 import axios from "axios";
-import RealTimeChart from "../../Components/Chart/RealTimeChart";
 import Graph from "../../Components/Chart/Chart";
-import { Topic1, Topic2, Topic3, Topic4 } from "../../Components/Data/Data";
+import "./MonitorData.css";
 
 function MonitorData() {
   let navigate = useNavigate();
@@ -14,13 +12,11 @@ function MonitorData() {
   const [searchTerm, setSearchTerm] = useState("");
   const [topicList, setTopicList] = useState([]);
   const [graphName, setGraphName] = useState("");
-  const [chartSpeed, setChartSpeed] = useState(30000);
   const [topicThreshold, setTopicThreshold] = useState(0);
   const [eachTopicThreshold, setEachTopicThreshold] = useState([]);
 
   useEffect(() => {
-    console.log("Before:");
-    console.log(topicList);
+    let status = false;
 
     axios
     .get("http://localhost:8080/api/v1/kafka/get", {
@@ -30,6 +26,7 @@ function MonitorData() {
       },
     })
     .then((res) => {
+      if (!status) {
       setTopicList(res.data.map((topic) => {
         return topic.name;
       }));
@@ -39,10 +36,16 @@ function MonitorData() {
       setGraphName(res.data[0].name);
       setTopicThreshold(res.data[0].threshold);
       console.log("Topic list set!");
+    }
     })
     .catch((err) => {
       console.log(err);
     }); 
+
+    return () => {
+      console.log("Cancelled!")
+      status = true;
+    }
 
   }, []);
 
@@ -66,7 +69,8 @@ function MonitorData() {
                 className="go-back"
                 onClick={() => {
                   navigate("/DashBoard");
-                }}>
+                }}
+              >
                 Back
               </button>
             </div>
@@ -80,35 +84,48 @@ function MonitorData() {
                   title="Type in a topic"
                   onChange={(event) => {
                     setSearchTerm(event.target.value);
-                  }}></input>
-                {topicList.filter((val) => {
-                  if (searchTerm === "") {
-                    return val
-                  } else if (val.toLowerCase().includes(searchTerm.toLowerCase())) {
-                    return val
-                  }
-                }).map((val) => {
-                  return (
-                    <div className="graph_searched" onClick={() => handleTopicOnClick(val)} key={val}>
-                      {val}
-                    </div>
-                  );
-                })}
+                  }}
+                ></input>
+                {topicList
+                  .filter((val) => {
+                    if (
+                      searchTerm === "" ||
+                      val.toLowerCase().includes(searchTerm.toLowerCase())
+                    ) {
+                      return val;
+                    }
+                  })
+                  .map((val) => {
+                    return (
+                      <div
+                        className="graph_searched"
+                        onClick={() => handleTopicOnClick(val)}
+                        key={val}
+                      >
+                        {val}
+                      </div>
+                    );
+                  })}
               </div>
             </div>
           </div>
           <div className="right">
             <div className="monitor-graph-container">
               <div className="monitor-top">
-                <label className="graph-label">{graphName + " (Kafka Event Data Graph)"}</label>
+                <label className="graph-label">
+                  {graphName + " (Kafka Event Data Graph)"}
+                </label>
               </div>
               <div className="monitor-center">
                 <div className="graph-displayed">
-                  {
-                    graphName && topicThreshold && (<>
-                      <Graph topicTitle={graphName} topicThreshold={topicThreshold} />
-                    </>)
-                  }
+                  {graphName && topicThreshold && (
+                    <>
+                      <Graph
+                        topicTitle={graphName}
+                        topicThreshold={topicThreshold}
+                      />
+                    </>
+                  )}
                 </div>
               </div>
             </div>

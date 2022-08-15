@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Line, Chart } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS , registerables} from 'chart.js';
 import 'chartjs-adapter-luxon';
 import StreamingPlugin from 'chartjs-plugin-streaming';
@@ -17,12 +17,30 @@ function RealTimeChart({ topicTitle, chartSpeed, setTopicData }) {
   let consumerValue = 0;
 
   useEffect(() => {
-    setTopicURL("/topic/" + topicTitle);
-    console.log("Topic selected: " + topicTitle);
+    let status = false;
+
+    if (!status) {
+      setTopicURL("/topic/" + topicTitle);
+      console.log("Topic selected: " + topicTitle);
+    }
+
+    return () => {
+      console.log("Cancelled!");
+      status = true;
+    };
   }, [topicTitle]);
 
   useEffect(() => {
-    setChartDuration(chartSpeed);
+    let status = false;
+
+    if (!status) {
+      setChartDuration(chartSpeed);
+    }
+
+    return () => {
+      console.log("Cancelled!");
+      status = true;
+    };
   }, [chartSpeed]);
 
   const authHeaders = {

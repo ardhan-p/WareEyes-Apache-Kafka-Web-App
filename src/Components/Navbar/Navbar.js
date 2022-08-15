@@ -1,21 +1,23 @@
 import React, { useContext } from "react";
 import { getCustomFullDateAndTimeWithAmPm } from "@hirishu10/simple-date-time";
-import "./Navbar.css";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import { DarkModeContext } from "../../Context/darkModeContext";
+import "./Navbar.css";
 
 function Navbar() {
   const { dispatch } = useContext(DarkModeContext);
   const timestampLower = getCustomFullDateAndTimeWithAmPm();
 
-  function Name() {
+  // Check if the user has the admin role permission
+  function CheckIsAdmin() {
     const isAccType = window.localStorage.getItem("isAdmin");
     if (isAccType) {
       return <UserName />;
     }
   }
 
+  // Display name of user once is logged in
   function UserName() {
     const email = window.localStorage.getItem("currentEmail");
     const name = email.substring(0, email.indexOf('@'));
@@ -33,7 +35,7 @@ function Navbar() {
         <div className="date-time">{timestampLower}</div>
         <div className="profile">
           <AccountCircleIcon className="profile-icon" /> 
-          <Name />
+          <CheckIsAdmin />
         </div>
       </div>
     </div>
