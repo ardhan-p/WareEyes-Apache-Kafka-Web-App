@@ -12,7 +12,7 @@ import React, { useContext } from 'react'
 import "./Style/dark.scss"
 import { DarkModeContext } from './Context/darkModeContext';
 import ManageAccount from "./Pages/ManageAccount/ManageAccount";
-import AddKafkaTopic from "./Pages/AddKafkaTopic/AddKafkaTopic";
+import ManageKafkaTopic from "./Pages/ManageKafkaTopic/ManageKafkaTopic";
 import SetThreshold from "./Pages/SetThreshold/SetThreshold";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/AdminTools" element={<AdminTools />} />
         <Route path="/ManageAccount" element={<ManageAccount />} />
-        <Route path="/AddKafkaTopic" element={<AddKafkaTopic />} />
+        <Route path="/ManageKafkaTopic" element={<ManageKafkaTopic />} />
         <Route path="/SetThreshold" element={<SetThreshold />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/MonitorData" element={<MonitorData />} />

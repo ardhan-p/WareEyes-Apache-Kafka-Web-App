@@ -18,7 +18,7 @@ function AdminTools() {
         </div>
         <div className="feature-container">
           <div className="feature"><button onClick={() => {navigate("/ManageAccount")}} className="manage-account">Manage Account</button></div>
-          <div className="feature"><button onClick={() => {navigate("/AddKafkaTopic")}} className="new-kafkatopic">Add New Kafka Topic</button></div>
+          <div className="feature"><button onClick={() => {navigate("/ManageKafkaTopic")}} className="new-kafkatopic">Manage Kafka topic</button></div>
           <div className="feature"><button onClick={() => {navigate("/SetThreshold")}}className="set-threshold">Set Threshold</button></div>
         </div>
       </div>

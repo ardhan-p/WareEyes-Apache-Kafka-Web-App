@@ -1,0 +1,74 @@
+.managetopic-page {
+    background-color: #FFF;
+    display: flex;
+}
+
+.managetopic-container {
+    flex: 7;
+}
+
+.managetopic-msg {
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 57px;
+    margin: 40px;
+}
+
+.add-delete-edit {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-right: 7%;
+}
+
+.edit-btn {
+    width: 100px;
+    height: 35px;
+    background: #71B6FA;
+    border-radius: 10px;
+    border-style: none;
+    color: #FFFFFF;
+
+}
+
+.add-kafka-topic {
+    border-collapse:collapse;
+    border-spacing:0;
+    width: 100%;
+    margin: 10px 40px 40px 0px;
+}
+
+.kafka-topic-th {
+    border: 1px solid black;
+    padding: 10px;
+    word-break:normal;
+    text-align:left;
+    padding-left: 30px;
+}
+
+
+.kafka-text-box{
+    /* border-style: none; */
+    height: 40px;
+    width: 250px;
+    background: rgba(184, 219, 253, 0.3);
+    border: 1px solid #000000;
+    padding-left: 10px;
+}
+
+.create-btn, .confirmEdit-btn{
+    width: 100px;
+    height: 35px;
+    background: #FF452C;
+    border-radius: 8px;
+    border-style: none;
+    color: #FFFFFF;
+    margin-top: 20px;
+
+}
+
+

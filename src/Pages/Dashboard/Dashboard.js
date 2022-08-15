@@ -125,6 +125,10 @@ function Dashboard() {
       .catch((err) => {
         console.log(err);
       });
+      
+      return () => {
+        status = true;
+      };
 
   }, [status]);
 
