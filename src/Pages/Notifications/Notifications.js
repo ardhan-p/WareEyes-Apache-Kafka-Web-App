@@ -158,10 +158,6 @@ const EnhancedTableToolbar = (props) => {
         })
         .then((res) => {
           console.log("Notifications set!");
-          // res.data?.map((notification) => {
-          //   const msg = notification.message.substring(0, notification.message.indexOf('@')); 
-          //   return (notification.message = msg);
-          // });
           setRows(res.data);
           setTimeout(() => {
             window.location.reload();
@@ -242,6 +238,7 @@ function Notifications() {
   const [rows, setRows] = React.useState([]);
 
   useEffect(() => {
+    let status = false;
     console.log("Awaiting notification data from server...");
 
     axios
@@ -252,14 +249,20 @@ function Notifications() {
       },
     })
     .then((res) => {
+      if(!status) {
       console.log("Notifications set!");
-      console.log(res.data);
       setRows(res.data);
       window.localStorage.setItem("notificationCounter", res.data.length.toString());
+      }
     })
     .catch((err) => {
       console.log(err);
     });
+
+    return () => {
+      console.log("Notification cancelled")
+      status = true;
+    };
   }, []);
 
   const handleRequestSort = (event, property) => {

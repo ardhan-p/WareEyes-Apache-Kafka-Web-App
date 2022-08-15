@@ -13,6 +13,7 @@ function ManageAccount() {
   let navigate = useNavigate();
 
   const [buttonPopup, setButtonPopup] = useState(false);
+  const [popupSelect, setPopupSelect] = useState(false);
   const [deleteUsers, setDeleteUsers] = useState(false);
   const [rows, setRows] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -22,8 +23,8 @@ function ManageAccount() {
       if (selectedRows.length === 0) {
         alert("No users selected, please select users to delete!");
       } else {
-        selectedRows.map( (user) => {
-          console.log("123")
+        selectedRows.map((user) => {
+          console.log("123");
           if (user.admin === "Yes") {
             return (user.admin = true);
           }
@@ -34,12 +35,16 @@ function ManageAccount() {
         });
 
         await axios
-          .post("http://localhost:8080/api/v1/login/deleteUsers", selectedRows, {
-            auth: {
-              username: "user",
-              password: "password",
-            },
-          })
+          .post(
+            "http://localhost:8080/api/v1/login/deleteUsers",
+            selectedRows,
+            {
+              auth: {
+                username: "user",
+                password: "password",
+              },
+            }
+          )
           .then((res) => {
             console.log("Result: " + res.data + " - deleted sucessfully");
             //alert("Deleted successfully!");
@@ -94,8 +99,12 @@ function ManageAccount() {
           },
         })
         .then((res) => {
-          console.log(res);
-          alert(values.name + " has been added successfully!");
+          if (res.data === 0) {
+            alert("User already exists!");
+          } else {
+            console.log(res);
+            alert(values.name + " has been added successfully!");
+          }
           resetForm();
         })
         .catch((err) => {
@@ -108,6 +117,7 @@ function ManageAccount() {
 
   // fetch all user data from backend server
   useEffect(() => {
+    let status = false;
     console.log("Awaiting userlist data from server...");
 
     axios
@@ -118,23 +128,27 @@ function ManageAccount() {
         },
       })
       .then((res) => {
-        console.log("Users set!");
-        res.data?.map((user) => {
-          // console.log(user)
-          if (user.admin === true) {
-            return (user.admin = "Yes");
-          }
-          if (user.admin === false) {
-            return (user.admin = "No");
-          }
-        });
-
-        setRows(res.data);
+        if (!status) {
+          console.log("Users set!");
+          res.data?.map((user) => {
+            if (user.admin === true) {
+              return (user.admin = "Yes");
+            }
+            if (user.admin === false) {
+              return (user.admin = "No");
+            }
+          });
+          setRows(res.data);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [buttonPopup, deleteUsers]);
+
+    return () => {
+      status = true;
+    };
+  }, [popupSelect, deleteUsers]);
 
   return (
     <div className="manageAcc-page">
@@ -180,7 +194,7 @@ function ManageAccount() {
             rows={rows}
             columns={columns}
             pageSize={7}
-            rowsPerPageOptions={[5]}
+            rowsPerPageOptions={[7]}
             checkboxSelection
             onSelectionModelChange={(items) => {
               const selectedItems = new Set(items);
@@ -256,6 +270,9 @@ function ManageAccount() {
                   <button
                     className="create-account-btn"
                     type="submit"
+                    onClick={() => {
+                      setPopupSelect((current) => !current);
+                    }}
                   >
                     + Create
                   </button>
