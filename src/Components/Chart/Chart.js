@@ -4,29 +4,23 @@ import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import "chartjs-adapter-date-fns";
 import DataLabelsPlugin from "chartjs-plugin-datalabels";
+import axios from "axios";
+
 Chart.register(...registerables, DataLabelsPlugin);
 
 function Graph({ topicTitle, topicThreshold }) {
   let ref = useRef(null);
+  const controller = new AbortController();
 
-  const [selectedDate, setSelectedDate] = useState("");
-
-  const [dataPoints, setDataPoints] = useState([
-    { x: "2022-08-14T00:00:00", y: 530 },
-    { x: "2022-08-14T04:00:00", y: 340 },
-    { x: "2022-08-14T15:30:00", y: 510 },
-    { x: "2022-08-14T16:00:00", y: 610 },
-    { x: "2022-08-14T19:30:00", y: 111 },
-    { x: "2022-08-14T20:00:00", y: 180 },
-    { x: "2022-08-14T23:00:00", y: 290 },
-    { x: "2022-08-14T23:50:00", y: 100 },
-  ]);
+  const [selectedDate, setSelectedDate] = useState(currentDate());
+  const [graphDate, setGraphDate] = useState("");
+  const [dataPoints, setDataPoints] = useState([]);
 
   const data = {
     // labels: graphXData,
     datasets: [
       {
-        label: "THRESHOLD PASSED",
+        label: "Event Value",
         data: dataPoints,
         backgroundColor: "rgba(54, 162, 235, 0.5)",
         borderColor: "rgb(54, 162, 235)",
@@ -63,7 +57,7 @@ function Graph({ topicTitle, topicThreshold }) {
       x: {
         type: "time",
         time: {
-          unit: "hour",
+          unit: "minute",
         },
         ticks: {
           major: {
@@ -77,7 +71,7 @@ function Graph({ topicTitle, topicThreshold }) {
         },
         title: {
           display: true,
-          text: "Date",
+          text: graphDate,
         },
       },
       y: {
@@ -90,31 +84,77 @@ function Graph({ topicTitle, topicThreshold }) {
     },
   };
 
-  function filterData() {
+  const dateInputSelect = () => {
     const selectedDate1 = document.getElementById("startdate");
     setSelectedDate(selectedDate1.value);
     console.log(selectedDate1.value);
+  }
 
-    //TODO: AXIOS POST
-    //setDataPoints()
+  const filterDataOnClick = () => {
+    const url = "http://localhost:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + selectedDate;
+
+    console.log(url);
+    setGraphDate(selectedDate);
+
+    axios.get(url, {
+      signal: controller.signal,
+      auth: {
+        username: "user",
+        password: "password",
+      },
+    })
+    .then((res) => {
+      console.log(res.data);
+      setDataPoints(res.data);
+      controller.abort();
+    })
+    .catch((err) => {
+      console.log(err);    
+    });
+
+  }
+
+  function currentDate() {
+    var d = new Date(),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
   }
 
   useEffect(() => {
-    // date formate
-    function formatDate() {
-      var d = new Date(),
-        month = "" + (d.getMonth() + 1),
-        day = "" + d.getDate(),
-        year = d.getFullYear();
+    const url = "http://localhost:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + currentDate();
 
-      if (month.length < 2) month = "0" + month;
-      if (day.length < 2) day = "0" + day;
+    let status = false;
 
-      return [year, month, day].join("-");
+    console.log(url);
+    setGraphDate(selectedDate);
+
+    axios.get(url, {
+      auth: {
+        username: "user",
+        password: "password",
+      },
+    })
+    .then((res) => {
+      if (!status) {
+        console.log(res.data);
+        setDataPoints(res.data);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+    return () => {
+      console.log("Cancelled!")
+      status = true;
     }
-
-    setSelectedDate(formatDate);
-  }, []);
+  }, [topicTitle]);
 
   // to export the graph into image
   const downloadGraph = useCallback(() => {
@@ -136,12 +176,12 @@ function Graph({ topicTitle, topicThreshold }) {
           <div className="monitor-button-div">
             <div className="filter-div">
               <input
-                onChange={setSelectedDate}
+                onChange={dateInputSelect}
                 type="date"
                 id="startdate"
                 value={selectedDate}
               ></input>
-              <button className="monitor-button" onClick={filterData}>Filter Chart</button>
+              <button className="monitor-button" onClick={filterDataOnClick}>Filter Chart</button>
             </div>
             <div className="export-div">
               <button className="monitor-button" onClick={downloadGraph}>

@@ -106,9 +106,13 @@ function Dashboard() {
 
   useEffect(() => {
     const date = new Date();
-
     const today = date.toISOString().slice(0, 10);
-    const time = date.getHours() + ":" + date.getUTCMinutes() + ":" + date.getUTCSeconds();
+
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    const time = hours + ":" + minutes + ":" + seconds;
 
     const data = {
       message: "",
@@ -127,9 +131,13 @@ function Dashboard() {
 
   useEffect(() => {
     const date = new Date();
-
     const today = date.toISOString().slice(0, 10);
-    const time = date.getHours() + ":" + date.getUTCMinutes() + ":" + date.getUTCSeconds();
+
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    const time = hours + ":" + minutes + ":" + seconds;
 
     const data = {
       message: "",
@@ -148,9 +156,13 @@ function Dashboard() {
 
   useEffect(() => {
     const date = new Date();
-
     const today = date.toISOString().slice(0, 10);
-    const time = date.getHours() + ":" + date.getUTCMinutes() + ":" + date.getUTCSeconds();
+
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    const time = hours + ":" + minutes + ":" + seconds;
 
     const data = {
       message: "",
@@ -169,9 +181,13 @@ function Dashboard() {
 
   useEffect(() => {
     const date = new Date();
-
     const today = date.toISOString().slice(0, 10);
-    const time = date.getHours() + ":" + date.getUTCMinutes() + ":" + date.getUTCSeconds();
+
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    const time = hours + ":" + minutes + ":" + seconds;
 
     const data = {
       message: "",

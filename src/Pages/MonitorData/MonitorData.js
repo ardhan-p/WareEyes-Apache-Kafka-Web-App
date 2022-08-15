@@ -11,16 +11,17 @@ import { Topic1, Topic2, Topic3, Topic4 } from "../../Components/Data/Data";
 function MonitorData() {
   let navigate = useNavigate();
 
-  // TODO: add filter and export chart functions
   const [searchTerm, setSearchTerm] = useState("");
-  const [topicList, setTopicList] = useState(["Default Topic"]);
-  const [graphName, setGraphName] = useState("Default Graph");
+  const [topicList, setTopicList] = useState([]);
+  const [graphName, setGraphName] = useState("");
   const [chartSpeed, setChartSpeed] = useState(30000);
   const [topicThreshold, setTopicThreshold] = useState(0);
   const [eachTopicThreshold, setEachTopicThreshold] = useState([]);
-  // const [chartState, setChartState] = useState(false);
 
   useEffect(() => {
+    console.log("Before:");
+    console.log(topicList);
+
     axios
     .get("http://localhost:8080/api/v1/kafka/get", {
       auth: {
@@ -50,7 +51,6 @@ function MonitorData() {
     setGraphName(val);
     setTopicThreshold(eachTopicThreshold[index]);
   };
-
 
   return (
     <div className="monitor-data">
@@ -104,8 +104,11 @@ function MonitorData() {
               </div>
               <div className="monitor-center">
                 <div className="graph-displayed">
-                  {/* <RealTimeChart topicTitle={graphName} chartSpeed={chartSpeed} pauseState={chartState} /> */}
-                  <Graph topicTitle={graphName + " (Kafka Event Data Graph)"} topicThreshold={topicThreshold} />
+                  {
+                    graphName && topicThreshold && (<>
+                      <Graph topicTitle={graphName} topicThreshold={topicThreshold} />
+                    </>)
+                  }
                 </div>
               </div>
             </div>

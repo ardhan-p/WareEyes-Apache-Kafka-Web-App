@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Line, Chart } from 'react-chartjs-2';
-import { Chart as ChartJS } from 'chart.js';
+import { Chart as ChartJS , registerables} from 'chart.js';
 import 'chartjs-adapter-luxon';
 import StreamingPlugin from 'chartjs-plugin-streaming';
+import DataLabelsPlugin from "chartjs-plugin-datalabels";
 import "./Chart.css";
 import SockJsClient from 'react-stomp'
 
-ChartJS.register(StreamingPlugin);
+ChartJS.register(...registerables, DataLabelsPlugin, StreamingPlugin);
 
 function RealTimeChart({ topicTitle, chartSpeed, setTopicData }) {
   const socketURL = 'http://localhost:8080/topic-endpoint';
@@ -65,7 +66,6 @@ function RealTimeChart({ topicTitle, chartSpeed, setTopicData }) {
   };
 
   const options = {
-    // maintainAspectRatio: false,
     scales: {
       x: {
         type: 'realtime',
@@ -80,9 +80,20 @@ function RealTimeChart({ topicTitle, chartSpeed, setTopicData }) {
     plugins :{
       streaming: {
         duration: chartDuration,
-        refresh: 1000,
-        delay: 3000,
-      }
+        refresh: 5000,
+        delay: 2000,
+      },
+      datalabels: {
+        backgroundColor: (context) => context.dataset.borderColor,
+        padding: 4,
+        borderRadius: 4,
+        clip: true,
+        color: "white",
+        font: {
+          weight: "bold",
+        },
+        formatter: (value) => value.y,
+      },
     }
   };
 
