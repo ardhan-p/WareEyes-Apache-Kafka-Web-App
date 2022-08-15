@@ -1,16 +1,12 @@
 import React from "react";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { getCustomFullDateAndTimeWithAmPm } from "@hirishu10/simple-date-time";
 import "./AlertNotifcation.css";
-import Collapse from '@mui/material/Collapse';
 
 function AlertNotifcation({topic, threshold}) {
-  const [open, setOpen] = React.useState(true);
   const timestampLower = getCustomFullDateAndTimeWithAmPm();
 
   return (
-    <Collapse in={open}>
     <div className="alertnotifcation">
       <div className="alert-icon">
         <ErrorOutlineIcon />
@@ -20,7 +16,6 @@ function AlertNotifcation({topic, threshold}) {
         <div className="alert-time">{timestampLower}</div>
       </div>
     </div>
-    </Collapse>
   );
 }
 
