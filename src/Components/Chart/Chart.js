@@ -8,12 +8,12 @@ import axios from "axios";
 
 Chart.register(...registerables, DataLabelsPlugin);
 
-function Graph({ topicTitle, topicThreshold }) {
+function Graph({ topicTitle, topicThreshold, date}) {
   let ref = useRef(null);
   const controller = new AbortController();
 
-  const [selectedDate, setSelectedDate] = useState(currentDate());
-  const [graphDate, setGraphDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(date);
+  const [graphDate, setGraphDate] = useState(date);
   const [dataPoints, setDataPoints] = useState([]);
 
   const data = {
@@ -130,7 +130,8 @@ function Graph({ topicTitle, topicThreshold }) {
     let status = false;
     const url = "http://localhost:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + currentDate();
 
-    setGraphDate(selectedDate);
+    setGraphDate(date);
+    setSelectedDate(date);
 
     axios
     .get(url, {
@@ -148,6 +149,7 @@ function Graph({ topicTitle, topicThreshold }) {
     .catch((err) => {
       console.log(err);
     });
+
 
     return () => {
       console.log("Cancelled!")

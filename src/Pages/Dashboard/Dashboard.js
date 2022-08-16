@@ -51,10 +51,8 @@ function Dashboard() {
         },
       })
       .then((res) => {
-        if(!status) {
-          setTopicList(res.data);
-          setTopicCounter(res.data.length);
-        }
+        setTopicList(res.data);
+        setTopicCounter(res.data.length);
           if (
             localStorage.getItem("topic1Name") === null ||
             localStorage.getItem("topic2Name") === null ||
@@ -126,10 +124,6 @@ function Dashboard() {
         console.log(err);
       });
       
-      return () => {
-        status = true;
-      };
-
   }, [status]);
 
   useEffect(() => {

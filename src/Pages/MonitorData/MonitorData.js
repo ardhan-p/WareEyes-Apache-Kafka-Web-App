@@ -14,6 +14,7 @@ function MonitorData() {
   const [graphName, setGraphName] = useState("");
   const [topicThreshold, setTopicThreshold] = useState(0);
   const [eachTopicThreshold, setEachTopicThreshold] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(currentDate());
 
   useEffect(() => {
     let status = false;
@@ -49,10 +50,25 @@ function MonitorData() {
 
   }, []);
 
+  // to get the current date in a formate of "YYYY-MM-DD"
+  function currentDate() {
+    var d = new Date(),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  }
+
   const handleTopicOnClick = (val) => {
     const index = topicList.indexOf(val);
     setGraphName(val);
     setTopicThreshold(eachTopicThreshold[index]);
+    setSelectedDate(currentDate());
+    console.log(selectedDate + " - from MonitorData.js");
   };
 
   return (
@@ -123,6 +139,7 @@ function MonitorData() {
                       <Graph
                         topicTitle={graphName}
                         topicThreshold={topicThreshold}
+                        date={selectedDate}
                       />
                     </>
                   )}

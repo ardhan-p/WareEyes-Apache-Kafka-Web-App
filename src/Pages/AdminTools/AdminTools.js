@@ -17,9 +17,8 @@ function AdminTools() {
           <AdminPanelSettingsIcon fontSize="large" className="admin-icon" />
         </div>
         <div className="feature-container">
-          <div className="feature"><button onClick={() => {navigate("/ManageAccount")}} className="manage-account">Manage Account</button></div>
-          <div className="feature"><button onClick={() => {navigate("/ManageKafkaTopic")}} className="new-kafkatopic">Manage Kafka topic</button></div>
-          <div className="feature"><button onClick={() => {navigate("/SetThreshold")}}className="set-threshold">Set Threshold</button></div>
+          <div className="feature"><button onClick={() => {navigate("/ManageAccount")}} className="manage-account">Manage Accounts</button></div>
+          <div className="feature"><button onClick={() => {navigate("/ManageKafkaTopic")}} className="new-kafkatopic">Manage Kafka Topics</button></div>
         </div>
       </div>
     </div>

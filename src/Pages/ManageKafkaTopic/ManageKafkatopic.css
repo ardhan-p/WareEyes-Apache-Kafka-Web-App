@@ -38,8 +38,8 @@
 .add-kafka-topic {
     border-collapse:collapse;
     border-spacing:0;
-    width: 100%;
-    margin: 10px 40px 40px 0px;
+    width: 40%;
+    margin: 40px;
 }
 
 .kafka-topic-th {

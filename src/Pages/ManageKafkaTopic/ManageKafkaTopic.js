@@ -7,7 +7,7 @@ import axios from "axios";
 import * as Yup from "yup";
 import { Formik, useFormik } from "formik";
 import { DataGrid, gridColumnsTotalWidthSelector } from "@mui/x-data-grid";
-import "./ManageKafkaTopic.css";
+import "./ManageKafkatopic.css";
 
 function ManageKafkaTopic() {
   let navigate = useNavigate();
@@ -18,14 +18,15 @@ function ManageKafkaTopic() {
   const [deleteUsers, setDeleteUsers] = useState(false);
   const [rows, setRows] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
+  const [topicList, setTopicList] = useState([]);
 
-  // fetch all user data from backend server
+  // fetch all topic data from backend server
   useEffect(() => {
     let status = false;
     console.log("Awaiting Kafka Topic data from server...");
 
     axios
-      .get("http://localhost:8080/api/v1/login/getUser", {
+      .get("http://localhost:8080/api/v1/kafka/get", {
         auth: {
           username: "user",
           password: "password",
@@ -33,8 +34,12 @@ function ManageKafkaTopic() {
       })
       .then((res) => {
         if (!status) {
+          console.log(res.data);
           console.log("Topic set!");
           setRows(res.data);
+          setTopicList(res.data.map((topic) => {
+            return topic.name;
+          }));
         }
       })
       .catch((err) => {
@@ -53,7 +58,7 @@ function ManageKafkaTopic() {
       } else {
         await axios
           .post(
-            "http://localhost:8080/api/v1/login/deleteUsers",
+            "http://localhost:8080/api/v1/kafka/deleteTopic",
             selectedRows,
             {
               auth: {
@@ -64,7 +69,7 @@ function ManageKafkaTopic() {
           )
           .then((res) => {
             console.log("Result: " + res.data + " - deleted sucessfully");
-            //alert("Deleted successfully!");
+            alert("Deleted successfully!");
           })
           .catch((err) => {
             console.log(err);
@@ -96,7 +101,7 @@ function ManageKafkaTopic() {
       replicationFactor: "",
     },
     validationSchema: Yup.object().shape({
-      name: Yup.string().required("Topic name is required"),
+      name: Yup.string().required("Topic name is required").matches(/^[a-zA-Z-]*$/, "Topic needs to be one word with no numbers! (Dashes are allowed)"),
       threshold: Yup.string().required("Threshold value is required"),
       partitions: Yup.string().required("Partitions is required"),
       replicationFactor: Yup.string().required(
@@ -164,7 +169,7 @@ function ManageKafkaTopic() {
       <Sidebar />
       <div className="managetopic-container">
         <Navbar />
-        <div className="managetopic-msg">Kakfa Topic Logs</div>
+        <div className="managetopic-msg">Manage Kafka Topics</div>
         <div>
           <button
             type="button"
@@ -316,13 +321,18 @@ function ManageKafkaTopic() {
               <tr>
                 <th className="kafka-topic-th">Topic Name</th>
                 <th className="kafka-topic-th">
-                  <input
+                  <select
                     className="kafka-text-box"
                     name="name"
                     onChange={formik.handleChange}
                     value={formik.values.name}
                   >
-                  </input>
+                    {topicList.map((value) => (
+                      <option key={value} value={value}>
+                        {value}
+                      </option>
+                    ))}
+                  </select>
                   <span className="error-msg">{formik.errors.name}</span>
                 </th>
               </tr>
