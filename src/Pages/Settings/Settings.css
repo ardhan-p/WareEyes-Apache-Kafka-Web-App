@@ -6,3 +6,46 @@
 .setting-container {
     flex: 7;
 }
+
+.setting-msg{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 57px;
+    margin: 40px;
+}
+
+.setting-table{
+    border-collapse: collapse;
+    width: 25%;
+    /* border: 1px solid #000000; */
+    text-align:left;
+    margin-left: 35%;
+    margin-top: -13%;
+}
+
+.edit-photo{
+    border-style: none;
+    background-color:transparent;
+    text-decoration: underline;
+    color: blue;
+    position: absolute;
+    left: 32.5%;
+    bottom: 45%;
+}
+
+.change-button{
+    width: 100px;
+    height: 35px;
+    background: blue;
+    border-radius: 8px;
+    border-style: none;
+    color: #FFFFFF;
+}
+
+.setting-text-box{
+    border-style: none;
+    height: 30px;
+    width: 200px;
+}
