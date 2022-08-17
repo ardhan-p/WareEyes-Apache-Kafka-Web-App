@@ -214,6 +214,7 @@ function ManageKafkaTopic() {
           style={{ height: 476, width: "90%", marginLeft: 50, marginTop: 20 }}
         >
           <DataGrid
+            className="manage-kafka-topic-table"
             rows={rows}
             columns={columns}
             pageSize={7}

@@ -319,9 +319,7 @@ function Dashboard() {
   }
 
   function UserName() {
-    const email = window.localStorage.getItem("currentEmail");
-
-    const name = email.substring(0, email.indexOf("@"));
+    const name = window.localStorage.getItem("currentName");
     return "Welcome " + name + "!";
   }
 

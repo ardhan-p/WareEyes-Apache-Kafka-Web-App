@@ -1,16 +1,20 @@
 .app.dark {
     color: rgb(156, 156, 156);
 
+    .managetopic-container,
+    .manageAcc-container,
+    .admin-container,
     .main-dashboard,
     .monitor-data,
     .notification-log,
     .setting-page {
         background-color: #111;
-        color: rgb(156, 156, 156);
+        // color: rgb(156, 156, 156);
+        color:#FFFFFF;
 
         .go-back {
             background-color: #999;
-            color: grey;
+            color: #FFFFFF;
         }
 
         .monitor-graph-container,
@@ -18,17 +22,35 @@
             background-color: grey;
         }
 
+        .change-button,
+        .new-kafkatopic,
+        .manage-account,
+        .monitor-button,
         .event-display {
-            color: #999;
+            color: #FFFFFF;
             background-color: grey;
         }
 
+        .add-account,
+        .manage-kafka-topic-table,
+        .manage-account-table,
+        .graph_searched,
         .search-bar {
-            color: #999;
+            color: #FFFFFF;
             background-color: grey;
             border-color: #333;
         }
 
+        .search-bar::placeholder {
+            color: #FFFFFF;
+        }
+
+    }
+
+    .popup-inner {
+        color: #FFFFFF;
+        background-color: grey;
+        border-color: #333;
     }
 
     .chart-background {
@@ -37,6 +59,9 @@
         box-shadow: 2px 3px 18px -8px grey;
     }
 
+    .graph-displayed-dashboard {
+        background-color: #111;
+    }
 
 
 
@@ -49,7 +74,7 @@
     .navbar,
     .log-box {
         background-color: #111;
-        color: #999;
+        color: #FFFFFF;
         border-color: #333;
 
         li:hover,
@@ -61,7 +86,7 @@
     .logout-icon,
     .logout-btn,
     .edit-dashboard-btn {
-        color: #999;
+        color: #FFFFFF;
         background-color: grey;
     }
 
@@ -69,7 +94,7 @@
         border: 1px solid grey;
 
         .alert-icon {
-            color: #999;
+            color: #FFFFFF;
             background-color: grey;
         }
     }

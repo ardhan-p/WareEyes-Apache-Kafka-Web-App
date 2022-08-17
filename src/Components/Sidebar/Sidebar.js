@@ -73,8 +73,10 @@ function Sidebar() {
           type="button"
           onClick={() => {
             window.localStorage.removeItem("isLoggedIn");
-            window.localStorage.removeItem("isAdmin");
+            window.localStorage.removeItem("userID");
             window.localStorage.removeItem("currentEmail");
+            window.localStorage.removeItem("currentName");
+            window.localStorage.removeItem("isAdmin");
 
             window.localStorage.removeItem("topic1Name");
             window.localStorage.removeItem("topic2Name");

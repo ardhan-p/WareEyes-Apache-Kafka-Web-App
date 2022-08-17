@@ -75,10 +75,13 @@ function Login() {
         .then((res) => {
           console.log(res);
           // check if the data return from database
-          if (res.data === true) {
+          if (res.data != '') {
+            console.log(res.data);
             window.localStorage.setItem("isLoggedIn", true);
-            window.localStorage.setItem("isAdmin", data.admin);
-            window.localStorage.setItem("currentEmail", data.email);
+            window.localStorage.setItem("userID", res.data.id);
+            window.localStorage.setItem("currentEmail", res.data.email);
+            window.localStorage.setItem("currentName", res.data.name);
+            window.localStorage.setItem("isAdmin", res.data.admin);
             navigate("/DashBoard");
           } else {
             alert("Wrong account credentials, Please try again!");
@@ -112,7 +115,7 @@ function Login() {
           <form onSubmit={handleSubmit}>
             <label id="admin-toggle">Admin Login</label>
             <label class="switch">
-              <input name="admin" type="checkbox" onChange={handleChange} />
+              <input name="admin" id="admin" type="checkbox" onChange={handleChange} />
               <span class="slider round"></span>
             </label>
             <label id="user-pwd" htmlFor="username">
