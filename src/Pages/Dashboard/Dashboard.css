@@ -11,14 +11,13 @@
 }
 
 .welcome-msg-dash {
-    margin-left: 20px;
-    margin-top:20px;
+    padding: 20px 0 0 20px;
     font-size: 32px;
     display: flex;
 }
 
 .edit-dashboard {
-    position: fixed;
+    position: absolute;
     right: 50px;
 }
 
@@ -37,9 +36,9 @@
 }
 
 .dashboard-widgets {
-    position: fixed;
-    right: 35px;
-    bottom: 25px;
+    position: absolute;    
+    right: 180px;
+    bottom: 10px;
 }
 
 .charts {
@@ -49,8 +48,8 @@
     margin-top: 2%;
     padding-left: 1.5%;
     gap: 1.5%;
-    position: fixed;
-    bottom: 15px;
+    position: absolute;
+    bottom: 0px;
 }
 
 .graph-displayed-dashboard {
@@ -60,8 +59,7 @@
     border-radius: 30px;
     background-color: #FFFFFF;
     padding: 1%;
-    margin: 0.5%;
-    height: 330px;
+    margin: 0 0 0.5% 0.5%;
 }
 
 .notification-dashboard {
@@ -72,24 +70,3 @@
     border-style: none;
     margin: 20px;
 }
-
-/* #edit-dashboard {
-    float: right;
-    color: #F4F4F4;
-    background-color: #4869B2CC;
-    border-style: none;
-    border-radius: 8px;
-    width: 147px;
-    height: 26px;
-    text-align: center;
-    margin-top: -720px;
-    margin-right: 20px;
-    
-
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    cursor: pointer;
-}
- */
