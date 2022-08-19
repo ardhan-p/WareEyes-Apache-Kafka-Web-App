@@ -66,7 +66,7 @@ function Login() {
 
       // to validate user login
       axios
-        .post("http://localhost:8080/api/v1/login/validateLogin", data, {
+        .post("http://18.142.146.204:8080/api/v1/login/validateLogin", data, {
           auth: {
             username: "user",
             password: "password",

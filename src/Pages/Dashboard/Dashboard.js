@@ -44,7 +44,7 @@ function Dashboard() {
     }
 
     axios
-      .get("http://localhost:8080/api/v1/kafka/get", {
+      .get("http://18.142.146.204:8080/api/v1/kafka/get", {
         auth: {
           username: "user",
           password: "password",
@@ -299,7 +299,7 @@ function Dashboard() {
 
   function postNotification(data) {
     axios
-      .post("http://localhost:8080/api/v1/notification/post", data, {
+      .post("http://18.142.146.204:8080/api/v1/notification/post", data, {
         auth: {
           username: "user",
           password: "password",

@@ -90,7 +90,7 @@ function Graph({ topicTitle, topicThreshold, date}) {
   }
 
   const filterDataOnClick = () => {
-    const url = "http://localhost:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + selectedDate;
+    const url = "http://18.142.146.204:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + selectedDate;
 
     console.log(url);
     setGraphDate(selectedDate);
@@ -128,7 +128,7 @@ function Graph({ topicTitle, topicThreshold, date}) {
 
   useEffect(() => {
     let status = false;
-    const url = "http://localhost:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + currentDate();
+    const url = "http://18.142.146.204:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + currentDate();
 
     setGraphDate(date);
     setSelectedDate(date);

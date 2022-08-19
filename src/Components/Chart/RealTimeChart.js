@@ -10,7 +10,7 @@ import SockJsClient from 'react-stomp'
 ChartJS.register(...registerables, DataLabelsPlugin, StreamingPlugin);
 
 function RealTimeChart({ topicTitle, chartSpeed, setTopicData }) {
-  const socketURL = 'http://localhost:8080/topic-endpoint';
+  const socketURL = 'http://18.142.146.204:8080/topic-endpoint';
   const [topicURL, setTopicURL] = useState("")
   const [chartDuration, setChartDuration] = useState(10000);
 

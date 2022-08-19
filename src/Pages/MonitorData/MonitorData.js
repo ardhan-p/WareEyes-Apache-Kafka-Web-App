@@ -20,7 +20,7 @@ function MonitorData() {
     let status = false;
 
     axios
-    .get("http://localhost:8080/api/v1/kafka/get", {
+    .get("http://18.142.146.204:8080/api/v1/kafka/get", {
       auth: {
         username: "user",
         password: "password",

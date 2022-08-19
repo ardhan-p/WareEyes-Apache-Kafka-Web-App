@@ -26,7 +26,7 @@ function ManageKafkaTopic() {
     console.log("Awaiting Kafka Topic data from server...");
 
     axios
-      .get("http://localhost:8080/api/v1/kafka/get", {
+      .get("http://18.142.146.204:8080/api/v1/kafka/get", {
         auth: {
           username: "user",
           password: "password",
@@ -58,7 +58,7 @@ function ManageKafkaTopic() {
       } else {
         await axios
           .post(
-            "http://localhost:8080/api/v1/kafka/deleteTopic",
+            "http://18.142.146.204:8080/api/v1/kafka/deleteTopic",
             selectedRows,
             {
               auth: {
@@ -120,7 +120,7 @@ function ManageKafkaTopic() {
 
       if (buttonAddPopup === true) {
         axios
-          .post("http://localhost:8080/api/v1/kafka/createTopic", data, {
+          .post("http://18.142.146.204:8080/api/v1/kafka/createTopic", data, {
             auth: {
               username: "user",
               password: "password",
@@ -139,7 +139,7 @@ function ManageKafkaTopic() {
       }
       if (buttonEditPopup === true) {
         axios
-          .post("http://localhost:8080/api/v1/kafka/modifyTopic", data, {
+          .post("http://18.142.146.204:8080/api/v1/kafka/modifyTopic", data, {
             auth: {
               username: "user",
               password: "password",

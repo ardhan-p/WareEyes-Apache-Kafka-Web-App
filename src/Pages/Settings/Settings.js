@@ -42,7 +42,7 @@ function Settings() {
       console.log(data);
 
       axios
-        .post("http://localhost:8080/api/v1/login/updateUser", data, {
+        .post("http://18.142.146.204:8080/api/v1/login/updateUser", data, {
           auth: {
             username: "user",
             password: "password",
@@ -72,7 +72,7 @@ function Settings() {
   useEffect(() => {
     let status = false;
 
-    const url = "http://localhost:8080/api/v1/login/getUser/" + window.localStorage.getItem("userID");
+    const url = "http://18.142.146.204:8080/api/v1/login/getUser/" + window.localStorage.getItem("userID");
 
     console.log(url);
 

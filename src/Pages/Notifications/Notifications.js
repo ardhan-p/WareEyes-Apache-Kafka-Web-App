@@ -140,7 +140,7 @@ const EnhancedTableToolbar = (props) => {
     console.log("Deleting notifications...")
 
     const response = await axios
-    .post("http://localhost:8080/api/v1/notification/delete", selected, {
+    .post("http://18.142.146.204:8080/api/v1/notification/delete", selected, {
       auth: {
         username: "user",
         password: "password",
@@ -150,7 +150,7 @@ const EnhancedTableToolbar = (props) => {
       console.log("Notifications deleted!");
       console.log("Refreshing notification data from server...");
       axios
-        .get("http://localhost:8080/api/v1/notification/get", {
+        .get("http://18.142.146.204:8080/api/v1/notification/get", {
           auth: {
             username: "user",
             password: "password",
@@ -242,7 +242,7 @@ function Notifications() {
     console.log("Awaiting notification data from server...");
 
     axios
-    .get("http://localhost:8080/api/v1/notification/get", {
+    .get("http://18.142.146.204:8080/api/v1/notification/get", {
       auth: {
         username: "user",
         password: "password",

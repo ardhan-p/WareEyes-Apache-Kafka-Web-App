@@ -34,7 +34,7 @@ function AddKafkaTopic() {
       };
 
       axios
-        .post("http://localhost:8080/api/v1/kafka/createTopic", data, {
+        .post("http://18.142.146.204:8080/api/v1/kafka/createTopic", data, {
           auth: {
             username: "user",
             password: "password",

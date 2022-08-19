@@ -86,7 +86,7 @@ function ResetPassword() {
       console.log(data);
 
       axios
-        .post("http://localhost:8080/api/v1/login/updatePassword", data, {
+        .post("http://18.142.146.204:8080/api/v1/login/updatePassword", data, {
           auth: {
             username: "user",
             password: "password",

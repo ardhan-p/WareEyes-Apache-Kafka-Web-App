@@ -36,7 +36,7 @@ function ManageAccount() {
 
         await axios
           .post(
-            "http://localhost:8080/api/v1/login/deleteUsers",
+            "http://18.142.146.204:8080/api/v1/login/deleteUsers",
             selectedRows,
             {
               auth: {
@@ -92,7 +92,7 @@ function ManageAccount() {
       };
 
       axios
-        .post("http://localhost:8080/api/v1/login/addUser", data, {
+        .post("http://18.142.146.204:8080/api/v1/login/addUser", data, {
           auth: {
             username: "user",
             password: "password",
@@ -121,7 +121,7 @@ function ManageAccount() {
     console.log("Awaiting userlist data from server...");
 
     axios
-      .get("http://localhost:8080/api/v1/login/getUser", {
+      .get("http://18.142.146.204:8080/api/v1/login/getUser", {
         auth: {
           username: "user",
           password: "password",
