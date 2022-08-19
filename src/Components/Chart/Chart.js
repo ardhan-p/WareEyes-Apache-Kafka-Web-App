@@ -8,6 +8,7 @@ import axios from "axios";
 
 Chart.register(...registerables, DataLabelsPlugin);
 
+// static chart component, displays Kafka event data on a selected date
 function Graph({ topicTitle, topicThreshold, date}) {
   let ref = useRef(null);
   const controller = new AbortController();
@@ -16,6 +17,7 @@ function Graph({ topicTitle, topicThreshold, date}) {
   const [graphDate, setGraphDate] = useState(date);
   const [dataPoints, setDataPoints] = useState([]);
 
+  // chart data attributes
   const data = {
     datasets: [
       {
@@ -30,6 +32,7 @@ function Graph({ topicTitle, topicThreshold, date}) {
     ],
   };
 
+  // chart visual options (i.e. scales, chart titles, data labels)
   const options = {
     interaction: {
       intersect: false,
@@ -83,12 +86,15 @@ function Graph({ topicTitle, topicThreshold, date}) {
     },
   };
 
+  // on-click function to set the selected date from graph
   const dateInputSelect = () => {
     const selectedDate1 = document.getElementById("startdate");
     setSelectedDate(selectedDate1.value);
     console.log(selectedDate1.value);
   }
 
+  // sends HTTP GET request to backend to get the data from selected topic and date
+  // sets the data response onto the chart
   const filterDataOnClick = () => {
     const url = "http://18.142.146.204:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + selectedDate;
 
@@ -110,7 +116,6 @@ function Graph({ topicTitle, topicThreshold, date}) {
     .catch((err) => {
       console.log(err);    
     });
-
   }
 
   // to get the current date in a formate of "YYYY-MM-DD"
@@ -126,6 +131,9 @@ function Graph({ topicTitle, topicThreshold, date}) {
     return [year, month, day].join("-");
   }
 
+  // initialise component function
+  // sends HTTP GET request on current date and current topic selecetd
+  // sets the data response onto the chart
   useEffect(() => {
     let status = false;
     const url = "http://18.142.146.204:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + currentDate();
@@ -157,7 +165,7 @@ function Graph({ topicTitle, topicThreshold, date}) {
     }
   }, [topicTitle]);
 
-  // to export the graph into image
+  // to export the current graph into a jpeg image
   const downloadGraph = useCallback(() => {
     const link = document.createElement("a");
     link.download = topicTitle + ".jpeg";

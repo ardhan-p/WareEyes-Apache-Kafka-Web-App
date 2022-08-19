@@ -8,11 +8,14 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import "./Sidebar.css";
 
+// sidebar component which contains all the links to the different web pages
 function Sidebar() {
   let navigate = useNavigate();
 
   let notificationCounter = window.localStorage.getItem("notificationCounter");
 
+  // checks whether or not the user is an admin
+  // if true, then sidebar would render the admin tools functionality
   function AdminTools() {
     const isAdmin = localStorage.getItem("isAdmin");
     if (isAdmin === "true") {

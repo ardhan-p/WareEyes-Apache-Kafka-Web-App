@@ -1,6 +1,8 @@
 import { createContext, useReducer } from "react";
 import DarkModeReducer from "./darkModeReducer";
 
+// check if dark mode is checked
+// will render app with different CSS rules to match a dark theme
 const INITIAL_STATE = {
   darkMode: false,
 };

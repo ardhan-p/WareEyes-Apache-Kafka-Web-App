@@ -7,9 +7,11 @@ import * as Yup from "yup";
 import { Formik, useFormik } from "formik";
 import "./AddKafkaTopic.css";
 
+// page that allows admin user to create new Kafka topic
 function AddKafkaTopic() {
   let navigate = useNavigate();
 
+  // format the HTML submission form into an HTTP POST request using Formik and Axios
   const formik = useFormik({
     initialValues: {
       name: "",

@@ -8,7 +8,10 @@ import "./Dashboard.css";
 import Widget from "../../Components/Widget/Widget";
 import axios from "axios";
 
+// main dashboard page
 function Dashboard() {
+
+  // useState variables which will be needed to render dynamic data onto dashboard
   const [topicList, setTopicList] = useState([]);
 
   const [topicCounter, setTopicCounter] = useState(0);
@@ -37,6 +40,7 @@ function Dashboard() {
 
   let status = false;
 
+  // renders the dashboard with data from backend using an HTTP GET request
   useEffect(() => {
     if (localStorage.getItem("notificationCounter") === null) {
       let newCounter = 0;

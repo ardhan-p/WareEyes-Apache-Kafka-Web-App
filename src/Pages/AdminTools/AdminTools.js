@@ -5,8 +5,10 @@ import Navbar from "../../Components/Navbar/Navbar";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import "./AdminTools.css";
 
+// page that contains options for admin users to manage accounts or manage current Kafka topics
 function AdminTools() {
-    let navigate = useNavigate();
+  let navigate = useNavigate();
+
   return (
     <div className="admin-page">
       <Sidebar />

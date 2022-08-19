@@ -9,13 +9,17 @@ import SockJsClient from 'react-stomp'
 
 ChartJS.register(...registerables, DataLabelsPlugin, StreamingPlugin);
 
+// dynamic chart component, receives constant stream of Kafka events through a web socket
 function RealTimeChart({ topicTitle, chartSpeed, setTopicData }) {
   const socketURL = 'http://18.142.146.204:8080/topic-endpoint';
   const [topicURL, setTopicURL] = useState("")
   const [chartDuration, setChartDuration] = useState(10000);
 
+  // consumer value is constantly updated via the data from the web socket
   let consumerValue = 0;
 
+  // chart component will re-render and reconnect to a new web socket 
+  // whenever the topic value changes in the arguments
   useEffect(() => {
     let status = false;
 
@@ -30,6 +34,8 @@ function RealTimeChart({ topicTitle, chartSpeed, setTopicData }) {
     };
   }, [topicTitle]);
 
+  // chart component will re-render and change the speed of the graph 
+  // whenever the chart speed value changes in the arguments
   useEffect(() => {
     let status = false;
 
@@ -43,6 +49,7 @@ function RealTimeChart({ topicTitle, chartSpeed, setTopicData }) {
     };
   }, [chartSpeed]);
 
+  // authentication info to connect to web socket
   const authHeaders = {
     username: "user",
     password: "password",
@@ -58,11 +65,13 @@ function RealTimeChart({ topicTitle, chartSpeed, setTopicData }) {
     console.log("Disconnected from Websocket");
   }
 
+  // updates the consumer value everytime a new value from the web socket is received
   const onMessageReceive = (msg) => {
     consumerValue = msg;
     setTopicData(consumerValue);
   };
 
+  // real-time chart properties, defines the x-axis with current time and y-axis with the consumer value
   const onRefresh = (chart) => {
     chart.data.datasets.forEach(dataset => {
       dataset.data.push({
@@ -72,6 +81,7 @@ function RealTimeChart({ topicTitle, chartSpeed, setTopicData }) {
     }); 
   };
 
+  // chart data properties
   const data = {
     datasets: [{
       label: topicTitle,
@@ -83,6 +93,7 @@ function RealTimeChart({ topicTitle, chartSpeed, setTopicData }) {
     }]
   };
 
+  // chart visual options (i.e. scales, chart titles, data labels)
   const options = {
     scales: {
       x: {
