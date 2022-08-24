@@ -5,6 +5,7 @@ import { Chart, registerables } from "chart.js";
 import "chartjs-adapter-date-fns";
 import DataLabelsPlugin from "chartjs-plugin-datalabels";
 import axios from "axios";
+import config from "../../Context/serverProperties.json";
 
 Chart.register(...registerables, DataLabelsPlugin);
 
@@ -96,7 +97,7 @@ function Graph({ topicTitle, topicThreshold, date}) {
   // sends HTTP GET request to backend to get the data from selected topic and date
   // sets the data response onto the chart
   const filterDataOnClick = () => {
-    const url = "http://18.142.146.204:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + selectedDate;
+    const url = config["backend-url"] + "/api/v1/notification/fetchTopicData/" + topicTitle + "/" + selectedDate;
 
     console.log(url);
     setGraphDate(selectedDate);
@@ -136,7 +137,7 @@ function Graph({ topicTitle, topicThreshold, date}) {
   // sets the data response onto the chart
   useEffect(() => {
     let status = false;
-    const url = "http://18.142.146.204:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + currentDate();
+    const url = config["backend-url"] + "/api/v1/notification/fetchTopicData/" + topicTitle + "/" + currentDate();
 
     setGraphDate(date);
     setSelectedDate(date);

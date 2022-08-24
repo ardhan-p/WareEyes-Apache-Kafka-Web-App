@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { Formik, useFormik } from "formik";
 import axios from "axios";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import config from "../../Context/serverProperties.json";
 
 function Settings() {
 
@@ -42,7 +43,7 @@ function Settings() {
       console.log(data);
 
       axios
-        .post("http://18.142.146.204:8080/api/v1/login/updateUser", data, {
+        .post(config["backend-url"] + "/api/v1/login/updateUser", data, {
           auth: {
             username: "user",
             password: "password",
@@ -72,7 +73,7 @@ function Settings() {
   useEffect(() => {
     let status = false;
 
-    const url = "http://18.142.146.204:8080/api/v1/login/getUser/" + window.localStorage.getItem("userID");
+    const url = config["backend-url"] + "/api/v1/login/getUser/" + window.localStorage.getItem("userID");
 
     console.log(url);
 

@@ -5,13 +5,14 @@ import 'chartjs-adapter-luxon';
 import StreamingPlugin from 'chartjs-plugin-streaming';
 import DataLabelsPlugin from "chartjs-plugin-datalabels";
 import "./Chart.css";
-import SockJsClient from 'react-stomp'
+import SockJsClient from 'react-stomp';
+import config from "../../Context/serverProperties.json";
 
 ChartJS.register(...registerables, DataLabelsPlugin, StreamingPlugin);
 
 // dynamic chart component, receives constant stream of Kafka events through a web socket
 function RealTimeChart({ topicTitle, chartSpeed, setTopicData }) {
-  const socketURL = 'http://18.142.146.204:8080/topic-endpoint';
+  const socketURL = config["backend-url"] + '/topic-endpoint';
   const [topicURL, setTopicURL] = useState("")
   const [chartDuration, setChartDuration] = useState(10000);
 

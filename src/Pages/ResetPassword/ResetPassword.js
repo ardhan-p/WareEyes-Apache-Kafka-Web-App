@@ -7,6 +7,7 @@ import "./ResetPassword.css";
 import { HiOutlineLockClosed } from "react-icons/hi";
 import axios from "axios";
 import { Helmet } from "react-helmet";
+import config from "../../Context/serverProperties.json";
 
 function togglePassword() {
   var x = document.getElementById("new-password");
@@ -86,7 +87,7 @@ function ResetPassword() {
       console.log(data);
 
       axios
-        .post("http://18.142.146.204:8080/api/v1/login/updatePassword", data, {
+        .post(config["backend-url"] + "/api/v1/login/updatePassword", data, {
           auth: {
             username: "user",
             password: "password",

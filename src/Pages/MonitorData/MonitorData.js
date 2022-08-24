@@ -5,6 +5,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
 import Graph from "../../Components/Chart/Chart";
 import "./MonitorData.css";
+import config from "../../Context/serverProperties.json";
 
 function MonitorData() {
   let navigate = useNavigate();
@@ -20,7 +21,7 @@ function MonitorData() {
     let status = false;
 
     axios
-    .get("http://18.142.146.204:8080/api/v1/kafka/get", {
+    .get(config["backend-url"] + "/api/v1/kafka/get", {
       auth: {
         username: "user",
         password: "password",

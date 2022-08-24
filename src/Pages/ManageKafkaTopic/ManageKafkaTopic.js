@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { Formik, useFormik } from "formik";
 import { DataGrid, gridColumnsTotalWidthSelector } from "@mui/x-data-grid";
 import "./ManageKafkatopic.css";
+import config from "../../Context/serverProperties.json";
 
 function ManageKafkaTopic() {
   let navigate = useNavigate();
@@ -26,7 +27,7 @@ function ManageKafkaTopic() {
     console.log("Awaiting Kafka Topic data from server...");
 
     axios
-      .get("http://18.142.146.204:8080/api/v1/kafka/get", {
+      .get(config["backend-url"] + "/api/v1/kafka/get", {
         auth: {
           username: "user",
           password: "password",
@@ -58,7 +59,7 @@ function ManageKafkaTopic() {
       } else {
         await axios
           .post(
-            "http://18.142.146.204:8080/api/v1/kafka/deleteTopic",
+            config["backend-url"] + "/api/v1/kafka/deleteTopic",
             selectedRows,
             {
               auth: {
@@ -120,7 +121,7 @@ function ManageKafkaTopic() {
 
       if (buttonAddPopup === true) {
         axios
-          .post("http://18.142.146.204:8080/api/v1/kafka/createTopic", data, {
+          .post(config["backend-url"] + "/api/v1/kafka/createTopic", data, {
             auth: {
               username: "user",
               password: "password",
@@ -139,7 +140,7 @@ function ManageKafkaTopic() {
       }
       if (buttonEditPopup === true) {
         axios
-          .post("http://18.142.146.204:8080/api/v1/kafka/modifyTopic", data, {
+          .post(config["backend-url"] + "/api/v1/kafka/modifyTopic", data, {
             auth: {
               username: "user",
               password: "password",

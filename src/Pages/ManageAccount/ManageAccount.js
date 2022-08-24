@@ -8,6 +8,7 @@ import axios from "axios";
 import * as Yup from "yup";
 import { Formik, useFormik } from "formik";
 import "./ManageAccount.css";
+import config from "../../Context/serverProperties.json";
 
 function ManageAccount() {
   let navigate = useNavigate();
@@ -36,7 +37,7 @@ function ManageAccount() {
 
         await axios
           .post(
-            "http://18.142.146.204:8080/api/v1/login/deleteUsers",
+            config["backend-url"] + "/api/v1/login/deleteUsers",
             selectedRows,
             {
               auth: {
@@ -92,7 +93,7 @@ function ManageAccount() {
       };
 
       axios
-        .post("http://18.142.146.204:8080/api/v1/login/addUser", data, {
+        .post(config["backend-url"] + "/api/v1/login/addUser", data, {
           auth: {
             username: "user",
             password: "password",
@@ -121,7 +122,7 @@ function ManageAccount() {
     console.log("Awaiting userlist data from server...");
 
     axios
-      .get("http://18.142.146.204:8080/api/v1/login/getUser", {
+      .get(config["backend-url"] + "/api/v1/login/getUser", {
         auth: {
           username: "user",
           password: "password",

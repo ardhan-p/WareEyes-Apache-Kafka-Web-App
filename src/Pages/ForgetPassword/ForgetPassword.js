@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import "./ForgetPassword.css";
 import { Helmet } from "react-helmet";
+import config from "../../Context/serverProperties.json";
 
 function ForgetPassword() {
 
@@ -43,7 +44,7 @@ function ForgetPassword() {
       };
 
       axios
-        .post("http://18.142.146.204:8080/api/v1/login/validateEmail", data, {
+        .post(config["backend-url"] + "/api/v1/login/validateEmail", data, {
           auth: {
             username: "user",
             password: "password",

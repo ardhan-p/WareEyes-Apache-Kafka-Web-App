@@ -6,6 +6,7 @@ import axios from "axios";
 import * as Yup from "yup";
 import { Field, Formik, useFormik } from "formik";
 import "./SetThreshold.css";
+import config from "../../Context/serverProperties.json";
 
 function SetThreshold() {
   let navigate = useNavigate();
@@ -36,7 +37,7 @@ function SetThreshold() {
       };
 
       axios
-        .post("http://18.142.146.204:8080/api/v1/kafka/modifyTopic", data, {
+        .post(config["backend-url"] + "/api/v1/kafka/modifyTopic", data, {
           auth: {
             username: "user",
             password: "password",
@@ -62,7 +63,7 @@ function SetThreshold() {
 
   useEffect(() => {
     axios
-    .get("http://18.142.146.204:8080/api/v1/kafka/get", {
+    .get(config["backend-url"] + "/api/v1/kafka/get", {
       auth: {
         username: "user",
         password: "password",

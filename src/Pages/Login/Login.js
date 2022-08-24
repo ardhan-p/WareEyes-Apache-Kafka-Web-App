@@ -7,6 +7,7 @@ import logo1 from "../../Images/app_icon.png";
 import logo2 from "../../Images/login_img.png";
 import { Helmet } from "react-helmet";
 import "./Login.css";
+import config from "../../Context/serverProperties.json";
 
 function togglePassword() {
   var x = document.getElementById("password");
@@ -66,7 +67,7 @@ function Login() {
 
       // to validate user login
       axios
-        .post("http://18.142.146.204:8080/api/v1/login/validateLogin", data, {
+        .post(config["backend-url"] + "/api/v1/login/validateLogin", data, {
           auth: {
             username: "user",
             password: "password",

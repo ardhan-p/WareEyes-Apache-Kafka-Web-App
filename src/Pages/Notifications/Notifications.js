@@ -23,6 +23,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import axios from "axios";
+import config from "../../Context/serverProperties.json";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -140,7 +141,7 @@ const EnhancedTableToolbar = (props) => {
     console.log("Deleting notifications...")
 
     const response = await axios
-    .post("http://18.142.146.204:8080/api/v1/notification/delete", selected, {
+    .post(config["backend-url"] + "/api/v1/notification/delete", selected, {
       auth: {
         username: "user",
         password: "password",
@@ -150,7 +151,7 @@ const EnhancedTableToolbar = (props) => {
       console.log("Notifications deleted!");
       console.log("Refreshing notification data from server...");
       axios
-        .get("http://18.142.146.204:8080/api/v1/notification/get", {
+        .get(config["backend-url"] + "/api/v1/notification/get", {
           auth: {
             username: "user",
             password: "password",
@@ -242,7 +243,7 @@ function Notifications() {
     console.log("Awaiting notification data from server...");
 
     axios
-    .get("http://18.142.146.204:8080/api/v1/notification/get", {
+    .get(config["backend-url"] + "/api/v1/notification/get", {
       auth: {
         username: "user",
         password: "password",

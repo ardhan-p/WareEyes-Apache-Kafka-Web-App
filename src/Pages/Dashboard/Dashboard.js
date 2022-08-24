@@ -7,6 +7,7 @@ import Popup from "../../Components/Popup/Popup";
 import "./Dashboard.css";
 import Widget from "../../Components/Widget/Widget";
 import axios from "axios";
+import config from "../../Context/serverProperties.json";
 
 // main dashboard page
 function Dashboard() {
@@ -48,7 +49,7 @@ function Dashboard() {
     }
 
     axios
-      .get("http://18.142.146.204:8080/api/v1/kafka/get", {
+      .get(config["backend-url"] + "/api/v1/kafka/get", {
         auth: {
           username: "user",
           password: "password",
@@ -303,7 +304,7 @@ function Dashboard() {
 
   function postNotification(data) {
     axios
-      .post("http://18.142.146.204:8080/api/v1/notification/post", data, {
+      .post(config["backend-url"] + "/api/v1/notification/post", data, {
         auth: {
           username: "user",
           password: "password",
