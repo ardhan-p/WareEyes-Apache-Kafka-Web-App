@@ -10,15 +10,18 @@ import { Formik, useFormik } from "formik";
 import "./ManageAccount.css";
 import config from "../../Context/serverProperties.json";
 
+// manage accounts page for admin users
 function ManageAccount() {
   let navigate = useNavigate();
 
+  // useState variables to manage the state of current page
   const [buttonPopup, setButtonPopup] = useState(false);
   const [popupSelect, setPopupSelect] = useState(false);
   const [deleteUsers, setDeleteUsers] = useState(false);
   const [rows, setRows] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
 
+  // function which deletes the users that has been selected by the admin
   const deleteUsersOnClick = async (event) => {
     try {
       if (selectedRows.length === 0) {
@@ -35,11 +38,10 @@ function ManageAccount() {
           }
         });
 
+        // sends an HTTP POST request with the selected user rows
         await axios
           .post(
-            config["backend-url"] + "/api/v1/login/deleteUsers",
-            selectedRows,
-            {
+            config["backend-url"] + "/api/v1/login/deleteUsers", selectedRows, {
               auth: {
                 username: "user",
                 password: "password",
@@ -61,12 +63,14 @@ function ManageAccount() {
     }
   };
 
+  // user table columns
   const columns = [
     { field: "name", headerName: "Name", width: 300 },
     { field: "email", headerName: "Email", width: 400 },
     { field: "admin", headerName: "Admin", width: 200 },
   ];
 
+  // form submission configurations
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -74,6 +78,8 @@ function ManageAccount() {
       password: "",
       admin: false,
     },
+
+    // checks if the user variables are allowed
     validationSchema: Yup.object().shape({
       name: Yup.string().required("Name is required"),
       email: Yup.string().email().required("Email is required"),
@@ -92,6 +98,7 @@ function ManageAccount() {
         admin: values.admin,
       };
 
+      // sends an HTTP POST request with the new user object to insert it into the database
       axios
         .post(config["backend-url"] + "/api/v1/login/addUser", data, {
           auth: {

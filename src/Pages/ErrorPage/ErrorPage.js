@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
 
+// error page will render if user goes to a non-routed webpage
 function ErrorPage() {
     let navigate = useNavigate();
     return (

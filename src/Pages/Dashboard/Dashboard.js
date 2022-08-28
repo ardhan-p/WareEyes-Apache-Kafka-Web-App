@@ -131,6 +131,7 @@ function Dashboard() {
       
   }, [status]);
 
+  // useEffect to publish a notification when the selected topic 1 has passed threshold
   useEffect(() => {
     const date = new Date();
     const today = date.toISOString().slice(0, 10);
@@ -161,6 +162,7 @@ function Dashboard() {
     };
   }, [topic1Data]);
 
+  // useEffect to publish a notification when the selected topic 2 has passed threshold
   useEffect(() => {
     const date = new Date();
     const today = date.toISOString().slice(0, 10);
@@ -191,6 +193,7 @@ function Dashboard() {
     };
   }, [topic2Data]);
 
+  // useEffect to publish a notification when the selected topic 3 has passed threshold
   useEffect(() => {
     const date = new Date();
     const today = date.toISOString().slice(0, 10);
@@ -221,6 +224,7 @@ function Dashboard() {
     };
   }, [topic3Data]);
 
+  // useEffect to publish a notification when the selected topic 4 has passed threshold
   useEffect(() => {
     const date = new Date();
     const today = date.toISOString().slice(0, 10);
@@ -251,6 +255,7 @@ function Dashboard() {
     };
   }, [topic4Data]);
 
+  // enables user to select new topic to monitor in topic slot 1
   const selectTopic1 = (event) => {
     const name = event.target[event.target.selectedIndex].id;
     const threshold = event.target.value;
@@ -262,6 +267,7 @@ function Dashboard() {
     window.localStorage.setItem("topic1Threshold", threshold);
   };
 
+  // enables user to select new topic to monitor in topic slot 2
   const selectTopic2 = (event) => {
     const name = event.target[event.target.selectedIndex].id;
     const threshold = event.target.value;
@@ -273,6 +279,7 @@ function Dashboard() {
     window.localStorage.setItem("topic2Threshold", threshold);
   };
 
+  // enables user to select new topic to monitor in topic slot 3
   const selectTopic3 = (event) => {
     const name = event.target[event.target.selectedIndex].id;
     const threshold = event.target.value;
@@ -284,6 +291,7 @@ function Dashboard() {
     window.localStorage.setItem("topic3Threshold", threshold);
   };
 
+  // enables user to select new topic to monitor in topic slot 4
   const selectTopic4 = (event) => {
     const name = event.target[event.target.selectedIndex].id;
     const threshold = event.target.value;
@@ -295,6 +303,7 @@ function Dashboard() {
     window.localStorage.setItem("topic4Threshold", threshold);
   };
 
+  // renders personal welcome message
   function Greeting() {
     const isLoggedIn = window.localStorage.getItem("isLoggedIn");
     if (isLoggedIn) {
@@ -302,6 +311,7 @@ function Dashboard() {
     }
   }
 
+  // publishs new notification using an HTTP POST request to the backend
   function postNotification(data) {
     axios
       .post(config["backend-url"] + "/api/v1/notification/post", data, {
@@ -318,11 +328,12 @@ function Dashboard() {
       .catch((err) => {
         console.log(err);
       });
-    const newCounter =
-      parseInt(window.localStorage.getItem("notificationCounter")) + 1;
+
+    const newCounter = parseInt(window.localStorage.getItem("notificationCounter")) + 1;
     window.localStorage.setItem("notificationCounter", newCounter.toString());
   }
 
+  // gets current name for local storage
   function UserName() {
     const name = window.localStorage.getItem("currentName");
     return "Welcome " + name + "!";

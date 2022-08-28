@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet";
 import "./Login.css";
 import config from "../../Context/serverProperties.json";
 
+// toggles password input to hide sensitive input
 function togglePassword() {
   var x = document.getElementById("password");
   var y = document.getElementById("eye-open");
@@ -25,6 +26,7 @@ function togglePassword() {
   }
 }
 
+// login page
 function Login() {
   const {
     handleSubmit,
@@ -65,7 +67,7 @@ function Login() {
         admin: values.admin,
       };
 
-      // to validate user login
+      // to validate user login, which uses an HTTP POST request to send login information
       axios
         .post(config["backend-url"] + "/api/v1/login/validateLogin", data, {
           auth: {
