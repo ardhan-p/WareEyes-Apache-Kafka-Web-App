@@ -7,9 +7,11 @@ import Graph from "../../Components/Chart/Chart";
 import "./MonitorData.css";
 import config from "../../Context/serverProperties.json";
 
+// monitor data page
 function MonitorData() {
   let navigate = useNavigate();
 
+  // useState variables to manage the state of current page
   const [searchTerm, setSearchTerm] = useState("");
   const [topicList, setTopicList] = useState([]);
   const [graphName, setGraphName] = useState("");
@@ -17,9 +19,11 @@ function MonitorData() {
   const [eachTopicThreshold, setEachTopicThreshold] = useState([]);
   const [selectedDate, setSelectedDate] = useState(currentDate());
 
+  // useEffect function invoke on page start
   useEffect(() => {
     let status = false;
 
+    // sends an HTTP GET request to get a list of Kafka topics
     axios
     .get(config["backend-url"] + "/api/v1/kafka/get", {
       auth: {
@@ -64,6 +68,7 @@ function MonitorData() {
     return [year, month, day].join("-");
   }
 
+  // topic button on click will change the graph data to the selected topic
   const handleTopicOnClick = (val) => {
     const index = topicList.indexOf(val);
     setGraphName(val);

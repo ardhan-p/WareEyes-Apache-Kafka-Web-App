@@ -10,9 +10,11 @@ import { DataGrid, gridColumnsTotalWidthSelector } from "@mui/x-data-grid";
 import "./ManageKafkatopic.css";
 import config from "../../Context/serverProperties.json";
 
+// kafka topic management page
 function ManageKafkaTopic() {
   let navigate = useNavigate();
 
+  // useState variables to manage the state of current page
   const [buttonAddPopup, setButtonAddPopup] = useState(false);
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
   const [popupSelect, setPopupSelect] = useState(false);
@@ -21,7 +23,7 @@ function ManageKafkaTopic() {
   const [selectedRows, setSelectedRows] = useState([]);
   const [topicList, setTopicList] = useState([]);
 
-  // fetch all topic data from backend server
+  // fetch all topic data from backend server using an HTTP GET request
   useEffect(() => {
     let status = false;
     console.log("Awaiting Kafka Topic data from server...");
@@ -52,6 +54,7 @@ function ManageKafkaTopic() {
     };
   }, [popupSelect, deleteUsers]);
 
+  // deletes the selected Kafka topic data using an HTTP POST request
   const deleteKafkaTopicOnClick = async (event) => {
     try {
       if (selectedRows.length === 0) {
@@ -83,17 +86,15 @@ function ManageKafkaTopic() {
     }
   };
 
+  // kafka topic table columns
   const columns = [
     { field: "name", headerName: "Topic", width: 400 },
     { field: "threshold", headerName: "Threshold", width: 400 },
     { field: "partitions", headerName: "Partitions", width: 200 },
-    {
-      field: "replicationFactor",
-      headerName: "Replication Factor",
-      width: 200,
-    },
+    { field: "replicationFactor", headerName: "Replication Factor", width: 200, },
   ];
 
+  // form submission configuration
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -101,6 +102,8 @@ function ManageKafkaTopic() {
       partitions: "",
       replicationFactor: "",
     },
+
+    // checks if the kafka topic variables are allowed
     validationSchema: Yup.object().shape({
       name: Yup.string().required("Topic name is required").matches(/^[a-zA-Z-]*$/, "Topic needs to be one word with no numbers! (Dashes are allowed)"),
       threshold: Yup.string().required("Threshold value is required"),
@@ -118,7 +121,8 @@ function ManageKafkaTopic() {
         partitions: values.partitions,
         replicationFactor: values.replicationFactor,
       };
-
+      
+      // sends an HTTP POST request to create a new topic in the Kafka server and database
       if (buttonAddPopup === true) {
         axios
           .post(config["backend-url"] + "/api/v1/kafka/createTopic", data, {
@@ -138,6 +142,8 @@ function ManageKafkaTopic() {
             resetForm();
           });
       }
+
+      // sends an HTTP POST request to edit existing topic from the Kafka server and database
       if (buttonEditPopup === true) {
         axios
           .post(config["backend-url"] + "/api/v1/kafka/modifyTopic", data, {
