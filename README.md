@@ -24,12 +24,12 @@ bin/zookeeper-server-start.sh config/zookeeper.properties
 bin/kafka-server-start.sh config/server.properties
 ```
 
-4. Run the backend program from the jar file with the following command:
+5. Run the backend program from the jar file with the following command:
 ```
 java -jar app.jar
 ```
 
-5. Run the frontend program with following command:
+6. Run the frontend program with following command:
 ```
 npm start
 ```
