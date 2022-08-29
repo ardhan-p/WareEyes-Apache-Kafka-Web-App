@@ -1,9 +1,40 @@
 # WareEyes-ReactJS-Frontend
 A web application built using React framework that monitors an inventory system in real-time using Apache Kafka.
 
-This repository contains the frontend section.
+This repository contains the frontend section. For backend section, refer to https://github.com/ardhan-p/wareeyes-springboot-backend
 
-# Application Images
+## Offline Installation
+1. Ensure that Node.JS and Node Package Manager installed.
+
+2. Ensure that Kafka and backend application is installed. [(backend repository link)](https://github.com/ardhan-p/wareeyes-springboot-backend)
+
+2. Clone this repository to a local directory.
+
+3. Inside the respository, install the dependencies with following command:
+```
+npm install --save --legacy-peer-deps
+```
+
+4. Create a new Kafka zookeeper instance and Kafka server instance with the following commands:
+```
+bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+
+```
+bin/kafka-server-start.sh config/server.properties
+```
+
+4. Run the backend program from the jar file with the following command:
+```
+java -jar app.jar
+```
+
+5. Run the frontend program with following command:
+```
+npm start
+```
+
+## Application Images
 
 ![Screenshot 2022-08-26 at 8 56 00 PM](https://user-images.githubusercontent.com/49318134/186909694-2b127006-e553-4678-b473-a5ef4207ae16.png)
 
