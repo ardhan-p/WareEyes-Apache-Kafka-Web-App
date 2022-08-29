@@ -8,12 +8,15 @@ import axios from "axios";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import config from "../../Context/serverProperties.json";
 
+// profile settings page
 function Settings() {
 
+  // useState variables for the profile variables
   const [nameUser, setName] = useState("");
   const [emailUser, setEmail] = useState("");
   const [adminUser, setAdmin] = useState("");
 
+  // form submission configuration
   const formik = useFormik({
     initialValues: {
       id: window.localStorage.getItem("userID"),
@@ -42,6 +45,7 @@ function Settings() {
 
       console.log(data);
 
+      // sends an HTTP POST for new profile values inputted by user
       axios
         .post(config["backend-url"] + "/api/v1/login/updateUser", data, {
           auth: {
@@ -70,6 +74,7 @@ function Settings() {
     },
   });
 
+  // useEffect function to initialise the profile variables from database
   useEffect(() => {
     let status = false;
 
@@ -77,6 +82,7 @@ function Settings() {
 
     console.log(url);
 
+    // sends an HTTP GET request to fetch the user profile info
     axios
     .get(url, {
       auth: {

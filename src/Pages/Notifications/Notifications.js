@@ -25,6 +25,7 @@ import { visuallyHidden } from "@mui/utils";
 import axios from "axios";
 import config from "../../Context/serverProperties.json";
 
+// checks if current order of notifications are ordered differently
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -35,12 +36,14 @@ function descendingComparator(a, b, orderBy) {
   return 0;
 }
 
+// changes the order the notification list
 function getComparator(order, orderBy) {
   return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
+// table header config
 const headCells = [
   {
     id: "id",
@@ -68,6 +71,7 @@ const headCells = [
   },
 ];
 
+// function to create the top header for the notification table
 function EnhancedTableHead(props) {
   const {
     onSelectAllClick,
@@ -134,12 +138,15 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
+// function to create the toolbar for the notification table
+// toolbar contains the functions such as delete notifications
 const EnhancedTableToolbar = (props) => {
-  const { numSelected, selected, rows, setRows} = props;
+  const { numSelected, selected, rows, setRows } = props;
 
   const handleOnClickDelete = async (event) => {
     console.log("Deleting notifications...")
 
+    // sends an HTTP POST request to delete the selected notification list
     const response = await axios
     .post(config["backend-url"] + "/api/v1/notification/delete", selected, {
       auth: {
@@ -230,6 +237,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
+// notifications page
 function Notifications() {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("date");
@@ -238,10 +246,12 @@ function Notifications() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
 
+  // initialises the notification data from the server using a useEffect function
   useEffect(() => {
     let status = false;
     console.log("Awaiting notification data from server...");
 
+    // sends an HTTP GET request to get current notification list
     axios
     .get(config["backend-url"] + "/api/v1/notification/get", {
       auth: {
@@ -266,12 +276,14 @@ function Notifications() {
     };
   }, []);
 
+  // changes sorting order
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
+  // selects all notifications in the table
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelecteds = rows.map((n) => n);
@@ -281,6 +293,7 @@ function Notifications() {
     setSelected([]);
   };
 
+  // onClick function that stores selected notification in an array
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
@@ -312,9 +325,9 @@ function Notifications() {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  // avoid a layout jump when reaching the last page with empty rows
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
   return (
     <div className="notification-log">
       <Sidebar />

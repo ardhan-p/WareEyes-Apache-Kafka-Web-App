@@ -14,10 +14,12 @@ import { DarkModeContext } from './Context/darkModeContext';
 import ManageAccount from "./Pages/ManageAccount/ManageAccount";
 import ManageKafkaTopic from "./Pages/ManageKafkaTopic/ManageKafkaTopic";
 
+// main app function
 function App() {
   const{darkMode} = useContext(DarkModeContext);
   const loggedIn = window.localStorage.getItem("isLoggedIn");
 
+  // each of the pages are routed using React hashrouter
   return (
     <div className={darkMode ? "app dark" : "app"}>
     <HashRouter>
