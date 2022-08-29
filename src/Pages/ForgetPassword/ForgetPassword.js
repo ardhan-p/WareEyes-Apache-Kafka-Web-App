@@ -6,9 +6,10 @@ import * as Yup from "yup";
 import axios from "axios";
 import "./ForgetPassword.css";
 import { Helmet } from "react-helmet";
+import config from "../../Context/serverProperties.json";
 
+// forget password page
 function ForgetPassword() {
-
   const {
     values,
     handleSubmit,
@@ -23,10 +24,12 @@ function ForgetPassword() {
       email: "",
     },
 
+    // validate user submission to check if email has been inputted
     validationSchema: Yup.object().shape({
       email: Yup.string().email().required("Email is required"),
     }),
 
+    // on form submit function
     onSubmit(values, { resetForm, setSubmitting }) {
       console.log("Submitting");
       console.log(values);
@@ -34,16 +37,14 @@ function ForgetPassword() {
         resetForm();
         setSubmitting(false);
       }, 2000);
-      // alert('SUCCESS!! :-)\n\n' + JSON.stringify(values, null, 1));
-
-      //navigate("/ResetPassword");
 
       const data = {
         email: values.email,
       };
 
+      // sends an HTTP POST request with email data to validate if user is found in database
       axios
-        .post("http://localhost:8080/api/v1/login/validateEmail", data, {
+        .post(config["backend-url"] + "/api/v1/login/validateEmail", data, {
           auth: {
             username: "user",
             password: "password",

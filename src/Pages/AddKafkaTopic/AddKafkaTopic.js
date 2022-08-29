@@ -6,10 +6,13 @@ import axios from "axios";
 import * as Yup from "yup";
 import { Formik, useFormik } from "formik";
 import "./AddKafkaTopic.css";
+import config from "../../Context/serverProperties.json";
 
+// page that allows admin user to create new Kafka topic
 function AddKafkaTopic() {
   let navigate = useNavigate();
 
+  // format the HTML submission form into an HTTP POST request using Formik and Axios
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -34,7 +37,7 @@ function AddKafkaTopic() {
       };
 
       axios
-        .post("http://localhost:8080/api/v1/kafka/createTopic", data, {
+        .post(config["backend-url"] + "/api/v1/kafka/createTopic", data, {
           auth: {
             username: "user",
             password: "password",

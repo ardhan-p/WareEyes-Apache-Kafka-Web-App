@@ -8,22 +8,27 @@ import axios from "axios";
 import * as Yup from "yup";
 import { Formik, useFormik } from "formik";
 import "./ManageAccount.css";
+import config from "../../Context/serverProperties.json";
 
+// manage accounts page for admin users
 function ManageAccount() {
   let navigate = useNavigate();
 
+  // useState variables to manage the state of current page
   const [buttonPopup, setButtonPopup] = useState(false);
+  const [popupSelect, setPopupSelect] = useState(false);
   const [deleteUsers, setDeleteUsers] = useState(false);
   const [rows, setRows] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
 
+  // function which deletes the users that has been selected by the admin
   const deleteUsersOnClick = async (event) => {
     try {
       if (selectedRows.length === 0) {
         alert("No users selected, please select users to delete!");
       } else {
-        selectedRows.map( (user) => {
-          console.log("123")
+        selectedRows.map((user) => {
+          console.log("123");
           if (user.admin === "Yes") {
             return (user.admin = true);
           }
@@ -33,13 +38,16 @@ function ManageAccount() {
           }
         });
 
+        // sends an HTTP POST request with the selected user rows
         await axios
-          .post("http://localhost:8080/api/v1/login/deleteUsers", selectedRows, {
-            auth: {
-              username: "user",
-              password: "password",
-            },
-          })
+          .post(
+            config["backend-url"] + "/api/v1/login/deleteUsers", selectedRows, {
+              auth: {
+                username: "user",
+                password: "password",
+              },
+            }
+          )
           .then((res) => {
             console.log("Result: " + res.data + " - deleted sucessfully");
             //alert("Deleted successfully!");
@@ -55,12 +63,14 @@ function ManageAccount() {
     }
   };
 
+  // user table columns
   const columns = [
     { field: "name", headerName: "Name", width: 300 },
     { field: "email", headerName: "Email", width: 400 },
     { field: "admin", headerName: "Admin", width: 200 },
   ];
 
+  // form submission configurations
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -68,6 +78,8 @@ function ManageAccount() {
       password: "",
       admin: false,
     },
+
+    // checks if the user variables are allowed
     validationSchema: Yup.object().shape({
       name: Yup.string().required("Name is required"),
       email: Yup.string().email().required("Email is required"),
@@ -86,16 +98,21 @@ function ManageAccount() {
         admin: values.admin,
       };
 
+      // sends an HTTP POST request with the new user object to insert it into the database
       axios
-        .post("http://localhost:8080/api/v1/login/addUser", data, {
+        .post(config["backend-url"] + "/api/v1/login/addUser", data, {
           auth: {
             username: "user",
             password: "password",
           },
         })
         .then((res) => {
-          console.log(res);
-          alert(values.name + " has been added successfully!");
+          if (res.data === 0) {
+            alert("User already exists!");
+          } else {
+            console.log(res);
+            alert(values.name + " has been added successfully!");
+          }
           resetForm();
         })
         .catch((err) => {
@@ -108,33 +125,38 @@ function ManageAccount() {
 
   // fetch all user data from backend server
   useEffect(() => {
+    let status = false;
     console.log("Awaiting userlist data from server...");
 
     axios
-      .get("http://localhost:8080/api/v1/login/getUser", {
+      .get(config["backend-url"] + "/api/v1/login/getUser", {
         auth: {
           username: "user",
           password: "password",
         },
       })
       .then((res) => {
-        console.log("Users set!");
-        res.data?.map((user) => {
-          // console.log(user)
-          if (user.admin === true) {
-            return (user.admin = "Yes");
-          }
-          if (user.admin === false) {
-            return (user.admin = "No");
-          }
-        });
-
-        setRows(res.data);
+        if (!status) {
+          console.log("Users set!");
+          res.data?.map((user) => {
+            if (user.admin === true) {
+              return (user.admin = "Yes");
+            }
+            if (user.admin === false) {
+              return (user.admin = "No");
+            }
+          });
+          setRows(res.data);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [buttonPopup, deleteUsers]);
+
+    return () => {
+      status = true;
+    };
+  }, [popupSelect, deleteUsers]);
 
   return (
     <div className="manageAcc-page">
@@ -177,10 +199,11 @@ function ManageAccount() {
           style={{ height: 476, width: "90%", marginLeft: 50, marginTop: 20 }}
         >
           <DataGrid
+            className="manage-account-table"
             rows={rows}
             columns={columns}
             pageSize={7}
-            rowsPerPageOptions={[5]}
+            rowsPerPageOptions={[7]}
             checkboxSelection
             onSelectionModelChange={(items) => {
               const selectedItems = new Set(items);
@@ -256,6 +279,9 @@ function ManageAccount() {
                   <button
                     className="create-account-btn"
                     type="submit"
+                    onClick={() => {
+                      setPopupSelect((current) => !current);
+                    }}
                   >
                     + Create
                   </button>

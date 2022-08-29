@@ -1,6 +1,7 @@
 import React from "react";
 import "./widget.css";
 
+// widget component to display topic title
 function Widget({topicTitle, counter, name}) {
 
   return (

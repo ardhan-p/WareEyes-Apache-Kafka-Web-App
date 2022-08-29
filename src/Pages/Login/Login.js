@@ -7,7 +7,9 @@ import logo1 from "../../Images/app_icon.png";
 import logo2 from "../../Images/login_img.png";
 import { Helmet } from "react-helmet";
 import "./Login.css";
+import config from "../../Context/serverProperties.json";
 
+// toggles password input to hide sensitive input
 function togglePassword() {
   var x = document.getElementById("password");
   var y = document.getElementById("eye-open");
@@ -24,6 +26,7 @@ function togglePassword() {
   }
 }
 
+// login page
 function Login() {
   const {
     handleSubmit,
@@ -64,9 +67,9 @@ function Login() {
         admin: values.admin,
       };
 
-      // to validate user login
+      // to validate user login, which uses an HTTP POST request to send login information
       axios
-        .post("http://localhost:8080/api/v1/login/validateLogin", data, {
+        .post(config["backend-url"] + "/api/v1/login/validateLogin", data, {
           auth: {
             username: "user",
             password: "password",
@@ -75,10 +78,13 @@ function Login() {
         .then((res) => {
           console.log(res);
           // check if the data return from database
-          if (res.data === true) {
+          if (res.data != '') {
+            console.log(res.data);
             window.localStorage.setItem("isLoggedIn", true);
-            window.localStorage.setItem("isAdmin", data.admin);
-            window.localStorage.setItem("currentEmail", data.email);
+            window.localStorage.setItem("userID", res.data.id);
+            window.localStorage.setItem("currentEmail", res.data.email);
+            window.localStorage.setItem("currentName", res.data.name);
+            window.localStorage.setItem("isAdmin", res.data.admin);
             navigate("/DashBoard");
           } else {
             alert("Wrong account credentials, Please try again!");
@@ -112,7 +118,7 @@ function Login() {
           <form onSubmit={handleSubmit}>
             <label id="admin-toggle">Admin Login</label>
             <label class="switch">
-              <input name="admin" type="checkbox" onChange={handleChange} />
+              <input name="admin" id="admin" type="checkbox" onChange={handleChange} />
               <span class="slider round"></span>
             </label>
             <label id="user-pwd" htmlFor="username">

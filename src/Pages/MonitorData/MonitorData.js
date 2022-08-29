@@ -5,21 +5,27 @@ import Navbar from "../../Components/Navbar/Navbar";
 import axios from "axios";
 import Graph from "../../Components/Chart/Chart";
 import "./MonitorData.css";
+import config from "../../Context/serverProperties.json";
 
+// monitor data page
 function MonitorData() {
   let navigate = useNavigate();
 
+  // useState variables to manage the state of current page
   const [searchTerm, setSearchTerm] = useState("");
   const [topicList, setTopicList] = useState([]);
   const [graphName, setGraphName] = useState("");
   const [topicThreshold, setTopicThreshold] = useState(0);
   const [eachTopicThreshold, setEachTopicThreshold] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(currentDate());
 
+  // useEffect function invoke on page start
   useEffect(() => {
     let status = false;
 
+    // sends an HTTP GET request to get a list of Kafka topics
     axios
-    .get("http://localhost:8080/api/v1/kafka/get", {
+    .get(config["backend-url"] + "/api/v1/kafka/get", {
       auth: {
         username: "user",
         password: "password",
@@ -49,10 +55,26 @@ function MonitorData() {
 
   }, []);
 
+  // to get the current date in a formate of "YYYY-MM-DD"
+  function currentDate() {
+    var d = new Date(),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  }
+
+  // topic button on click will change the graph data to the selected topic
   const handleTopicOnClick = (val) => {
     const index = topicList.indexOf(val);
     setGraphName(val);
     setTopicThreshold(eachTopicThreshold[index]);
+    setSelectedDate(currentDate());
+    console.log(selectedDate + " - from MonitorData.js");
   };
 
   return (
@@ -123,6 +145,7 @@ function MonitorData() {
                       <Graph
                         topicTitle={graphName}
                         topicThreshold={topicThreshold}
+                        date={selectedDate}
                       />
                     </>
                   )}

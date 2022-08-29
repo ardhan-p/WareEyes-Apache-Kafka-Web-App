@@ -1,6 +1,7 @@
 import React from "react";
 import './Popup.css';
 
+// popup component (for adding new user, adding new Kafka topic, selecting monitored topic etc.)
 function Popup(props) {
   return (props.trigger) ? (
     <div className="popup">

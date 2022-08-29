@@ -5,17 +5,20 @@ import { Chart, registerables } from "chart.js";
 import "chartjs-adapter-date-fns";
 import DataLabelsPlugin from "chartjs-plugin-datalabels";
 import axios from "axios";
+import config from "../../Context/serverProperties.json";
 
 Chart.register(...registerables, DataLabelsPlugin);
 
-function Graph({ topicTitle, topicThreshold }) {
+// static chart component, displays Kafka event data on a selected date
+function Graph({ topicTitle, topicThreshold, date}) {
   let ref = useRef(null);
   const controller = new AbortController();
 
-  const [selectedDate, setSelectedDate] = useState(currentDate());
-  const [graphDate, setGraphDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(date);
+  const [graphDate, setGraphDate] = useState(date);
   const [dataPoints, setDataPoints] = useState([]);
 
+  // chart data attributes
   const data = {
     datasets: [
       {
@@ -30,6 +33,7 @@ function Graph({ topicTitle, topicThreshold }) {
     ],
   };
 
+  // chart visual options (i.e. scales, chart titles, data labels)
   const options = {
     interaction: {
       intersect: false,
@@ -83,14 +87,17 @@ function Graph({ topicTitle, topicThreshold }) {
     },
   };
 
+  // on-click function to set the selected date from graph
   const dateInputSelect = () => {
     const selectedDate1 = document.getElementById("startdate");
     setSelectedDate(selectedDate1.value);
     console.log(selectedDate1.value);
   }
 
+  // sends HTTP GET request to backend to get the data from selected topic and date
+  // sets the data response onto the chart
   const filterDataOnClick = () => {
-    const url = "http://localhost:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + selectedDate;
+    const url = config["backend-url"] + "/api/v1/notification/fetchTopicData/" + topicTitle + "/" + selectedDate;
 
     console.log(url);
     setGraphDate(selectedDate);
@@ -110,7 +117,6 @@ function Graph({ topicTitle, topicThreshold }) {
     .catch((err) => {
       console.log(err);    
     });
-
   }
 
   // to get the current date in a formate of "YYYY-MM-DD"
@@ -126,11 +132,15 @@ function Graph({ topicTitle, topicThreshold }) {
     return [year, month, day].join("-");
   }
 
+  // initialise component function
+  // sends HTTP GET request on current date and current topic selecetd
+  // sets the data response onto the chart
   useEffect(() => {
     let status = false;
-    const url = "http://localhost:8080/api/v1/notification/fetchTopicData/" + topicTitle + "/" + currentDate();
+    const url = config["backend-url"] + "/api/v1/notification/fetchTopicData/" + topicTitle + "/" + currentDate();
 
-    setGraphDate(selectedDate);
+    setGraphDate(date);
+    setSelectedDate(date);
 
     axios
     .get(url, {
@@ -149,13 +159,14 @@ function Graph({ topicTitle, topicThreshold }) {
       console.log(err);
     });
 
+
     return () => {
       console.log("Cancelled!")
       status = true;
     }
   }, [topicTitle]);
 
-  // to export the graph into image
+  // to export the current graph into a jpeg image
   const downloadGraph = useCallback(() => {
     const link = document.createElement("a");
     link.download = topicTitle + ".jpeg";

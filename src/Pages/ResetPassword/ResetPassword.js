@@ -7,7 +7,9 @@ import "./ResetPassword.css";
 import { HiOutlineLockClosed } from "react-icons/hi";
 import axios from "axios";
 import { Helmet } from "react-helmet";
+import config from "../../Context/serverProperties.json";
 
+// toggles visibility of current password input
 function togglePassword() {
   var x = document.getElementById("new-password");
   var y = document.getElementById("eye-open");
@@ -24,6 +26,7 @@ function togglePassword() {
   }
 }
 
+// toggles visibility of password confirmation input
 function toggleConfirmPassword() {
   var x = document.getElementById("confirm-password");
   var y = document.getElementById("eye-open1");
@@ -40,6 +43,7 @@ function toggleConfirmPassword() {
   }
 }
 
+// password reset page
 function ResetPassword() {
   const location = useLocation();
 
@@ -59,6 +63,7 @@ function ResetPassword() {
       email: location.state.email,
     },
 
+    // validates whether the password inputs conform to the matching criteria
     validationSchema: Yup.object().shape({
       newPassword: Yup.string()
         .required("Password is required")
@@ -71,8 +76,8 @@ function ResetPassword() {
         .oneOf([Yup.ref("newPassword")], "Password must match"),
     }),
 
+    // onSubmit function
     onSubmit(values, { resetForm, setSubmitting }) {
-      //console.log(values);
       setTimeout(() => {
         resetForm();
         setSubmitting(false);
@@ -85,8 +90,9 @@ function ResetPassword() {
 
       console.log(data);
 
+      // sends an HTTP POST request with the new password confirmation
       axios
-        .post("http://localhost:8080/api/v1/login/updatePassword", data, {
+        .post(config["backend-url"] + "/api/v1/login/updatePassword", data, {
           auth: {
             username: "user",
             password: "password",

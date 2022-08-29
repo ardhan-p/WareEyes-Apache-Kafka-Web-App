@@ -5,8 +5,10 @@ import Navbar from "../../Components/Navbar/Navbar";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import "./AdminTools.css";
 
+// page that contains options for admin users to manage accounts or manage current Kafka topics
 function AdminTools() {
-    let navigate = useNavigate();
+  let navigate = useNavigate();
+
   return (
     <div className="admin-page">
       <Sidebar />
@@ -17,9 +19,8 @@ function AdminTools() {
           <AdminPanelSettingsIcon fontSize="large" className="admin-icon" />
         </div>
         <div className="feature-container">
-          <div className="feature"><button onClick={() => {navigate("/ManageAccount")}} className="manage-account">Manage Account</button></div>
-          <div className="feature"><button onClick={() => {navigate("/AddKafkaTopic")}} className="new-kafkatopic">Add New Kafka Topic</button></div>
-          <div className="feature"><button onClick={() => {navigate("/SetThreshold")}}className="set-threshold">Set Threshold</button></div>
+          <div className="feature"><button onClick={() => {navigate("/ManageAccount")}} className="manage-account">Manage Accounts</button></div>
+          <div className="feature"><button onClick={() => {navigate("/ManageKafkaTopic")}} className="new-kafkatopic">Manage Kafka Topics</button></div>
         </div>
       </div>
     </div>
